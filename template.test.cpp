@@ -1,4 +1,3 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/many_aplusb"
 // #define Q__OPTIMIZE
 // #define Q__INCLUDE_ATCODER_LIB
 // #define Q__INTERACTIVE
@@ -8,11 +7,7 @@
 
 struct Solver {
   void solve() {
-    INT(t);
-    REP(t) {
-      LL(a,b);
-      print(a+b);
-    }
+
   }
 } solver;
 
