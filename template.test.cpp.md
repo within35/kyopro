@@ -3,34 +3,31 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/many_aplusb
-    links:
-    - https://judge.yosupo.jp/problem/many_aplusb
-  bundledCode: "#line 1 \"template.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\
-    \n// #define Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n\
-    #if !__INCLUDE_LEVEL__\n#include __FILE__\n\n\nstruct Solver {\n  void solve()\
-    \ {\n    INT(t);\n    REP(t) {\n      LL(a,b);\n      print(a+b);\n    }\n  }\n\
-    } solver;\n\n\n\nsigned main(void){\n  NO_SYNC_STD;\n  V<string> options;\n#ifdef\
-    \ Q__OPTIMIZE\n  options.push_back(\"OPTIMIZE\");\n#endif\n#ifdef Q__INTERACTIVE\n\
-    \  options.push_back(\"INTERACTIVE\");\n#endif\n#ifdef Q__INCLUDE_ATCODER_LIB\n\
-    \  options.push_back(\"INCLUDE_ATCODER_LIB\");\n#endif\n  DUMP(options);\n  solver.solve();\n\
-    \  return 0;\n}\n\n#else\n#define _GLIBCXX_DEQUE_BUF_SIZE 64\n#ifdef Q__OPTIMIZE\n\
-    #pragma GCC target(\"avx\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"\
-    unroll-loops\")\n#endif\n#include <bits/stdc++.h>\n#ifdef Q__INCLUDE_ATCODER_LIB\n\
-    #include <atcoder/all>\nusing namespace atcoder;\nusing mint = modint1000000007;\n\
-    // using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
-    \ a) { int tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
-    \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
-    #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
+    links: []
+  bundledCode: "#line 1 \"template.test.cpp\"\n// #define Q__OPTIMIZE\n// #define\
+    \ Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n#if !__INCLUDE_LEVEL__\n\
+    #include __FILE__\n\n\nstruct Solver {\n  void solve() {\n\n  }\n} solver;\n\n\
+    \n\nsigned main(void){\n  NO_SYNC_STD;\n  V<string> options;\n#ifdef Q__OPTIMIZE\n\
+    \  options.push_back(\"OPTIMIZE\");\n#endif\n#ifdef Q__INTERACTIVE\n  options.push_back(\"\
+    INTERACTIVE\");\n#endif\n#ifdef Q__INCLUDE_ATCODER_LIB\n  options.push_back(\"\
+    INCLUDE_ATCODER_LIB\");\n#endif\n  DUMP(options);\n  solver.solve();\n  return\
+    \ 0;\n}\n\n#else\n#define _GLIBCXX_DEQUE_BUF_SIZE 64\n#ifdef Q__OPTIMIZE\n#pragma\
+    \ GCC target(\"avx\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"unroll-loops\"\
+    )\n#endif\n#include <bits/stdc++.h>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\n\
+    using namespace atcoder;\nusing mint = modint1000000007;\n// using mint = modint998244353;\n\
+    std::istream &operator>>(std::istream& is, mint& a) { int tmp; is >> tmp; a =\
+    \ tmp; return is; }\nstd::ostream &operator<<(std::ostream& os, const mint& a)\
+    \ {os << a.val(); return os;}\n#endif\nusing namespace std;\n#define OVERLOAD4(a,\
+    \ b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a) i = 0, i##_len\
+    \ = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a) i = 0, i##_len\
+    \ = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b) i = (a),\
+    \ i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b) i\
+    \ = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
     \ REP4, REP3, REP2, REP1)(__VA_ARGS__)\n#define RREP1(a)          for(decltype(a)\
     \ i = (a); i--;)\n#define RREP2(i, a)       for(decltype(a) i = (a); i--;)\n#define\
     \ RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)\n\
@@ -40,11 +37,12 @@ data:
     #define RALL(x) (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n\
     #define POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n))\
     \ & 1)\n#define INF ((1 << 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION\
-    \ std::setprecision(16)\n#define INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n\
-    #define LL(...)  ll __VA_ARGS__;     input(__VA_ARGS__)\n#define STR(...) string\
-    \ __VA_ARGS__; input(__VA_ARGS__)\n#define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n\
-    #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
-    #define NO_SYNC_STD\n#define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
+    \ std::setprecision(16)\n#define THE_WORLD std::this_thread::sleep_for(30s)\n\
+    #define INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;\
+    \     input(__VA_ARGS__)\n#define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n#define VEC(type, name,\
+    \ size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n\
+    #define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
     #define ENDL \"\\n\"\n#endif\n#ifdef Q__LOCAL\n#include <dump.hpp>\n#define DUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl ,dump_func(__VA_ARGS__)\n#define VDUMP(...)\
@@ -98,12 +96,10 @@ data:
     \ dy4[4] = {0, 1, 0, -1};\nconst int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int\
     \ dy6[6] = {0, 1, 0, -1, 1, -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1,\
     \ 1};\nconst int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n#endif\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\n// #define\
-    \ Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n\
+  code: "// #define Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n\
     #if !__INCLUDE_LEVEL__\n#include __FILE__\n\n\nstruct Solver {\n  void solve()\
-    \ {\n    INT(t);\n    REP(t) {\n      LL(a,b);\n      print(a+b);\n    }\n  }\n\
-    } solver;\n\n\n\nsigned main(void){\n  NO_SYNC_STD;\n  V<string> options;\n#ifdef\
-    \ Q__OPTIMIZE\n  options.push_back(\"OPTIMIZE\");\n#endif\n#ifdef Q__INTERACTIVE\n\
+    \ {\n\n  }\n} solver;\n\n\n\nsigned main(void){\n  NO_SYNC_STD;\n  V<string> options;\n\
+    #ifdef Q__OPTIMIZE\n  options.push_back(\"OPTIMIZE\");\n#endif\n#ifdef Q__INTERACTIVE\n\
     \  options.push_back(\"INTERACTIVE\");\n#endif\n#ifdef Q__INCLUDE_ATCODER_LIB\n\
     \  options.push_back(\"INCLUDE_ATCODER_LIB\");\n#endif\n  DUMP(options);\n  solver.solve();\n\
     \  return 0;\n}\n\n#else\n#define _GLIBCXX_DEQUE_BUF_SIZE 64\n#ifdef Q__OPTIMIZE\n\
@@ -127,11 +123,12 @@ data:
     #define RALL(x) (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n\
     #define POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n))\
     \ & 1)\n#define INF ((1 << 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION\
-    \ std::setprecision(16)\n#define INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n\
-    #define LL(...)  ll __VA_ARGS__;     input(__VA_ARGS__)\n#define STR(...) string\
-    \ __VA_ARGS__; input(__VA_ARGS__)\n#define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n\
-    #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
-    #define NO_SYNC_STD\n#define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
+    \ std::setprecision(16)\n#define THE_WORLD std::this_thread::sleep_for(30s)\n\
+    #define INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;\
+    \     input(__VA_ARGS__)\n#define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n#define VEC(type, name,\
+    \ size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n\
+    #define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
     #define ENDL \"\\n\"\n#endif\n#ifdef Q__LOCAL\n#include <dump.hpp>\n#define DUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl ,dump_func(__VA_ARGS__)\n#define VDUMP(...)\
@@ -189,8 +186,8 @@ data:
   isVerificationFile: true
   path: template.test.cpp
   requiredBy: []
-  timestamp: '2023-09-02 19:19:48+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-09-03 15:48:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: template.test.cpp
 layout: document

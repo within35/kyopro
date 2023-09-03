@@ -7,7 +7,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: example.test.cpp
       title: example.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: template.test.cpp
       title: template.test.cpp
 layout: toppage
