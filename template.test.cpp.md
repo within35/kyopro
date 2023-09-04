@@ -76,12 +76,54 @@ data:
     template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto\
     \ mid=ng+(ok-ng)/2;if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}\ntemplate<class\
     \ T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}\ntemplate<class T> constexpr\
-    \ bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T> inline V<T>\
-    \ transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
-    \ tA;}\ntemplate<class T> constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
+    \ bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T> constexpr T\
+    \ pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
     \ y*w+x;}\ntemplate<class T> constexpr pair<T,T> pos2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}\n\
-    template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\nconstexpr\
-    \ ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
+    template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\ntemplate<class\
+    \ T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
+    \ tA;}\ntemplate<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret),\
+    \ ret.begin(), 0);return ret;}\ntemplate<class T> inline V<T> kaisa(V<T>& a){V<T>\
+    \ ret(a.size());adjacent_difference(ALL(a), ret.begin());return ret;}\ntemplate<class\
+    \ T> inline int g_index(V<T> &s, T x) {\n  if (s.empty()) return -2;\n  auto it\
+    \ = upper_bound(ALL(s), x);\n  if (it == s.end()) return -1;\n  return (int)distance(s.begin(),\
+    \ it);\n}\ntemplate<class T> inline int ge_index(V<T> &s, T x) {\n  if (s.empty())\
+    \ return -2;\n  auto it = lower_bound(ALL(s), x);\n  if (it == s.end()) return\
+    \ -1;\n  return (int)distance(s.begin(), it);\n}\ntemplate<class T> inline int\
+    \ l_index(V<T> &s, T x) {\n  if (s.empty()) return -2;\n  auto it = lower_bound(ALL(s),\
+    \ x);\n  if (it == s.begin()) return -1;\n  return (int)distance(s.begin(), prev(it));\n\
+    }\ntemplate<class T> inline int le_index(V<T> &s, T x) {\n  if (s.empty()) return\
+    \ -2;\n  auto it = upper_bound(ALL(s), x);\n  if (it == s.begin()) return -1;\n\
+    \  return (int)distance(s.begin(), prev(it));\n}\ntemplate<class T> inline pair<typename\
+    \ set<T>::iterator,bool> g_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(),\
+    \ false};\n  auto it = s.upper_bound(x);\n  if (it == s.end()) return {it, false};\n\
+    \  return {it, true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool>\
+    \ ge_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it\
+    \ = s.lower_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
+    \ true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool> l_it(set<T>\
+    \ &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
+    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline pair<typename set<T>::iterator,bool> le_it(set<T> &s, T x) {\n  if\
+    \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
+    \ == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline V<T> it_range(set<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
+    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
+    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> inline\
+    \ pair<typename multiset<T>::iterator,bool> g_it(multiset<T> &s, T x) {\n  if\
+    \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
+    \ == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class T>\
+    \ inline pair<typename multiset<T>::iterator,bool> ge_it(multiset<T> &s, T x)\
+    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
+    \  if (it == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class\
+    \ T> inline pair<typename multiset<T>::iterator,bool> l_it(multiset<T> &s, T x)\
+    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
+    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline pair<typename multiset<T>::iterator,bool> le_it(multiset<T> &s, T\
+    \ x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n\
+    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline V<T> it_range(multiset<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
+    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
+    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\nconstexpr ll modpow(ll\
+    \ x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
     \ ret;}\nconstexpr ll safe_mod(ll x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr\
     \ ll keta(ll n, ll base = 10LL) {ll ret = 0; while(n > 0) {n /= base, ret++;}\
     \ return ret;}\nconstexpr int pcnt(ll x) {return __builtin_popcountll(x);}\nconstexpr\
@@ -92,10 +134,13 @@ data:
     \ ret(l, r);return ret(rnd_engine);}\ninline ld lrand(ld l, ld r) {uniform_real_distribution<>\
     \ ret(l, r);return ret(rnd_engine);}\ninline ld nrand(ld ave, ld var) {normal_distribution<>\
     \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
-    \ (cond?\"Yes\":\"No\") << ENDL;}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int\
-    \ dy4[4] = {0, 1, 0, -1};\nconst int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int\
-    \ dy6[6] = {0, 1, 0, -1, 1, -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1,\
-    \ 1};\nconst int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n#endif\n"
+    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
+    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
+    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
+    \ + t;}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\n\
+    const int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1,\
+    \ -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0,\
+    \ 1, 0, -1, 1, 1, -1, -1};\n#endif\n"
   code: "// #define Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n\
     #if !__INCLUDE_LEVEL__\n#include __FILE__\n\n\nstruct Solver {\n  void solve()\
     \ {\n\n  }\n} solver;\n\n\n\nsigned main(void){\n  NO_SYNC_STD;\n  V<string> options;\n\
@@ -162,12 +207,54 @@ data:
     template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto\
     \ mid=ng+(ok-ng)/2;if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}\ntemplate<class\
     \ T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}\ntemplate<class T> constexpr\
-    \ bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T> inline V<T>\
-    \ transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
-    \ tA;}\ntemplate<class T> constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
+    \ bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T> constexpr T\
+    \ pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
     \ y*w+x;}\ntemplate<class T> constexpr pair<T,T> pos2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}\n\
-    template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\nconstexpr\
-    \ ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
+    template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\ntemplate<class\
+    \ T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
+    \ tA;}\ntemplate<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret),\
+    \ ret.begin(), 0);return ret;}\ntemplate<class T> inline V<T> kaisa(V<T>& a){V<T>\
+    \ ret(a.size());adjacent_difference(ALL(a), ret.begin());return ret;}\ntemplate<class\
+    \ T> inline int g_index(V<T> &s, T x) {\n  if (s.empty()) return -2;\n  auto it\
+    \ = upper_bound(ALL(s), x);\n  if (it == s.end()) return -1;\n  return (int)distance(s.begin(),\
+    \ it);\n}\ntemplate<class T> inline int ge_index(V<T> &s, T x) {\n  if (s.empty())\
+    \ return -2;\n  auto it = lower_bound(ALL(s), x);\n  if (it == s.end()) return\
+    \ -1;\n  return (int)distance(s.begin(), it);\n}\ntemplate<class T> inline int\
+    \ l_index(V<T> &s, T x) {\n  if (s.empty()) return -2;\n  auto it = lower_bound(ALL(s),\
+    \ x);\n  if (it == s.begin()) return -1;\n  return (int)distance(s.begin(), prev(it));\n\
+    }\ntemplate<class T> inline int le_index(V<T> &s, T x) {\n  if (s.empty()) return\
+    \ -2;\n  auto it = upper_bound(ALL(s), x);\n  if (it == s.begin()) return -1;\n\
+    \  return (int)distance(s.begin(), prev(it));\n}\ntemplate<class T> inline pair<typename\
+    \ set<T>::iterator,bool> g_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(),\
+    \ false};\n  auto it = s.upper_bound(x);\n  if (it == s.end()) return {it, false};\n\
+    \  return {it, true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool>\
+    \ ge_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it\
+    \ = s.lower_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
+    \ true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool> l_it(set<T>\
+    \ &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
+    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline pair<typename set<T>::iterator,bool> le_it(set<T> &s, T x) {\n  if\
+    \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
+    \ == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline V<T> it_range(set<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
+    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
+    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> inline\
+    \ pair<typename multiset<T>::iterator,bool> g_it(multiset<T> &s, T x) {\n  if\
+    \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
+    \ == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class T>\
+    \ inline pair<typename multiset<T>::iterator,bool> ge_it(multiset<T> &s, T x)\
+    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
+    \  if (it == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class\
+    \ T> inline pair<typename multiset<T>::iterator,bool> l_it(multiset<T> &s, T x)\
+    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
+    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline pair<typename multiset<T>::iterator,bool> le_it(multiset<T> &s, T\
+    \ x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n\
+    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline V<T> it_range(multiset<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
+    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
+    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\nconstexpr ll modpow(ll\
+    \ x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
     \ ret;}\nconstexpr ll safe_mod(ll x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr\
     \ ll keta(ll n, ll base = 10LL) {ll ret = 0; while(n > 0) {n /= base, ret++;}\
     \ return ret;}\nconstexpr int pcnt(ll x) {return __builtin_popcountll(x);}\nconstexpr\
@@ -178,15 +265,18 @@ data:
     \ ret(l, r);return ret(rnd_engine);}\ninline ld lrand(ld l, ld r) {uniform_real_distribution<>\
     \ ret(l, r);return ret(rnd_engine);}\ninline ld nrand(ld ave, ld var) {normal_distribution<>\
     \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
-    \ (cond?\"Yes\":\"No\") << ENDL;}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int\
-    \ dy4[4] = {0, 1, 0, -1};\nconst int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int\
-    \ dy6[6] = {0, 1, 0, -1, 1, -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1,\
-    \ 1};\nconst int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n#endif"
+    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
+    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
+    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
+    \ + t;}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\n\
+    const int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1,\
+    \ -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0,\
+    \ 1, 0, -1, 1, 1, -1, -1};\n#endif"
   dependsOn: []
   isVerificationFile: true
   path: template.test.cpp
   requiredBy: []
-  timestamp: '2023-09-03 15:48:52+09:00'
+  timestamp: '2023-09-04 23:07:03+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: template.test.cpp
