@@ -112,10 +112,94 @@ template<class T> inline bool chmin(T& a,T b){if(a>b){a=b;return 1;} return 0;}
 template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto mid=ng+(ok-ng)/2;if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}
 template<class T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}
 template<class T> constexpr bool between(T a,T x,T b){return(a<=x&&x<b);}
-template<class T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return tA;}
 template<class T> constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return y*w+x;}
 template<class T> constexpr pair<T,T> pos2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}
 template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}
+template<class T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return tA;}
+template<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret), ret.begin(), 0);return ret;}
+template<class T> inline V<T> kaisa(V<T>& a){V<T> ret(a.size());adjacent_difference(ALL(a), ret.begin());return ret;}
+template<class T> inline int g_index(V<T> &s, T x) {
+  if (s.empty()) return -2;
+  auto it = upper_bound(ALL(s), x);
+  if (it == s.end()) return -1;
+  return (int)distance(s.begin(), it);
+}
+template<class T> inline int ge_index(V<T> &s, T x) {
+  if (s.empty()) return -2;
+  auto it = lower_bound(ALL(s), x);
+  if (it == s.end()) return -1;
+  return (int)distance(s.begin(), it);
+}
+template<class T> inline int l_index(V<T> &s, T x) {
+  if (s.empty()) return -2;
+  auto it = lower_bound(ALL(s), x);
+  if (it == s.begin()) return -1;
+  return (int)distance(s.begin(), prev(it));
+}
+template<class T> inline int le_index(V<T> &s, T x) {
+  if (s.empty()) return -2;
+  auto it = upper_bound(ALL(s), x);
+  if (it == s.begin()) return -1;
+  return (int)distance(s.begin(), prev(it));
+}
+template<class T> inline pair<typename set<T>::iterator,bool> g_it(set<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.upper_bound(x);
+  if (it == s.end()) return {it, false};
+  return {it, true};
+}
+template<class T> inline pair<typename set<T>::iterator,bool> ge_it(set<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.lower_bound(x);
+  if (it == s.end()) return {it, false};
+  return {it, true};
+}
+template<class T> inline pair<typename set<T>::iterator,bool> l_it(set<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.lower_bound(x);
+  if (it == s.begin()) return {it, false};
+  return {prev(it), true};
+}
+template<class T> inline pair<typename set<T>::iterator,bool> le_it(set<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.upper_bound(x);
+  if (it == s.begin()) return {it, false};
+  return {prev(it), true};
+}
+template<class T> inline V<T> it_range(set<T> &st, int l, int r) {
+  auto startIt = st.lower_bound(l); auto endIt = st.upper_bound(r); V<T> ret;
+  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);
+  return ret;
+}
+template<class T> inline pair<typename multiset<T>::iterator,bool> g_it(multiset<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.upper_bound(x);
+  if (it == s.end()) return {it, false};
+  return {it, true};
+}
+template<class T> inline pair<typename multiset<T>::iterator,bool> ge_it(multiset<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.lower_bound(x);
+  if (it == s.end()) return {it, false};
+  return {it, true};
+}
+template<class T> inline pair<typename multiset<T>::iterator,bool> l_it(multiset<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.lower_bound(x);
+  if (it == s.begin()) return {it, false};
+  return {prev(it), true};
+}
+template<class T> inline pair<typename multiset<T>::iterator,bool> le_it(multiset<T> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.upper_bound(x);
+  if (it == s.begin()) return {it, false};
+  return {prev(it), true};
+}
+template<class T> inline V<T> it_range(multiset<T> &st, int l, int r) {
+  auto startIt = st.lower_bound(l); auto endIt = st.upper_bound(r); V<T> ret;
+  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);
+  return ret;
+}
 constexpr ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}
 constexpr ll safe_mod(ll x, ll m) {x%=m;if(x<0)x+=m;return x;}
 constexpr ll keta(ll n, ll base = 10LL) {ll ret = 0; while(n > 0) {n /= base, ret++;} return ret;}
@@ -129,6 +213,8 @@ inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(r
 inline ld lrand(ld l, ld r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}
 inline ld nrand(ld ave, ld var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}
 inline void yes(bool cond) {cout << (cond?"Yes":"No") << ENDL;}
+inline bool is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}
+inline string make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s + t;}
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, 1, 0, -1};
 const int dx6[6] = {1, 0, -1, 0, 1, -1};
