@@ -3,22 +3,21 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
-  bundledCode: "#line 1 \"template.test.cpp\"\n// #define Q__OPTIMIZE\n// #define\
-    \ Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n#if !__INCLUDE_LEVEL__\n\
-    #include __FILE__\n\n\nstruct Solver {\n  void solve() {\n\n  }\n} solver;\n\n\
-    \n\nsigned main(void){\n  NO_SYNC_STD;\n  V<string> options;\n#ifdef Q__OPTIMIZE\n\
-    \  options.push_back(\"OPTIMIZE\");\n#endif\n#ifdef Q__INTERACTIVE\n  options.push_back(\"\
-    INTERACTIVE\");\n#endif\n#ifdef Q__INCLUDE_ATCODER_LIB\n  options.push_back(\"\
-    INCLUDE_ATCODER_LIB\");\n#endif\n  DUMP(options);\n  solver.solve();\n  return\
-    \ 0;\n}\n\n#else\n#define _GLIBCXX_DEQUE_BUF_SIZE 64\n#ifdef Q__OPTIMIZE\n#pragma\
-    \ GCC target(\"avx\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"unroll-loops\"\
-    )\n#endif\n#include <bits/stdc++.h>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\n\
+  bundledCode: "#line 1 \"template.cpp\"\n// #define Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n\
+    // #define Q__INTERACTIVE\n#if !__INCLUDE_LEVEL__\n#include __FILE__\n\n\nstruct\
+    \ Solver {\n  void solve() {\n\n  }\n} solver;\n\n\n\nsigned main(void){\n  NO_SYNC_STD;\n\
+    \  V<string> options;\n#ifdef Q__OPTIMIZE\n  options.push_back(\"OPTIMIZE\");\n\
+    #endif\n#ifdef Q__INTERACTIVE\n  options.push_back(\"INTERACTIVE\");\n#endif\n\
+    #ifdef Q__INCLUDE_ATCODER_LIB\n  options.push_back(\"INCLUDE_ATCODER_LIB\");\n\
+    #endif\n  DUMP(options);\n  solver.solve();\n  return 0;\n}\n\n#else\n#define\
+    \ _GLIBCXX_DEQUE_BUF_SIZE 64\n#ifdef Q__OPTIMIZE\n#pragma GCC target(\"avx\")\n\
+    #pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"unroll-loops\")\n#endif\n\
+    #include <bits/stdc++.h>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\n\
     using namespace atcoder;\nusing mint = modint1000000007;\n// using mint = modint998244353;\n\
     std::istream &operator>>(std::istream& is, mint& a) { int tmp; is >> tmp; a =\
     \ tmp; return is; }\nstd::ostream &operator<<(std::ostream& os, const mint& a)\
@@ -273,16 +272,16 @@ data:
     \ -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0,\
     \ 1, 0, -1, 1, 1, -1, -1};\n#endif"
   dependsOn: []
-  isVerificationFile: true
-  path: template.test.cpp
+  isVerificationFile: false
+  path: template.cpp
   requiredBy: []
-  timestamp: '2023-09-04 23:07:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-05 08:27:27+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template.test.cpp
+documentation_of: template.cpp
 layout: document
 redirect_from:
-- /verify/template.test.cpp
-- /verify/template.test.cpp.html
-title: template.test.cpp
+- /library/template.cpp
+- /library/template.cpp.html
+title: template.cpp
 ---
