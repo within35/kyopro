@@ -9,6 +9,10 @@ struct Solver {
   void solve() {
 
   }
+
+  void naive() {
+
+  }
 } solver;
 
 
@@ -26,7 +30,12 @@ signed main(void){
   options.push_back("INCLUDE_ATCODER_LIB");
 #endif
   DUMP(options);
+#ifndef Q__NAIVE
   solver.solve();
+#else
+  DUMP("naive");
+  solver.naive();
+#endif
   return 0;
 }
 
@@ -58,6 +67,12 @@ using namespace std;
 #define RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)
 #define RREP4(i, a, b, c) for(decltype(a) i = (a)+((b)-(a)-1)/(c)*(c), i##_len = (a); i >= i##_len; i -= c)
 #define RREP(...) OVERLOAD4(__VA_ARGS__, RREP4, RREP3, RREP2, RREP1)(__VA_ARGS__)
+#define MREP(v,...) for(auto v:make_enum_vec({__VA_ARGS__}))
+#define QREP(q, l, r, n) for (ll q = 1, l = n / (q + 1) + 1, r = n / q + 1; q <= n; q = (q == n ? n + 1 : n / (n / (q + 1))), l = n / (q + 1) + 1, r = n / q + 1)
+#define COMB_REP(i,n,k) for (ll t, i = POW2(k) - 1; i < POW2(n); t=i|(i-1), i = (t+1)|(((~t & - ~t)-1) >> (__builtin_ctzll(i)+1)))
+#define SUBSET_ENUM_REP(i,s) for (ll i = (1LL << 60) - 1; i >= 0, i &= s; --i)
+#define SUBSET_INCLUDE_REP(i,n,s) for (int i = s; i < POW2(n); i=(++i)|s)
+#define POPONLY_REP(i,s) for (ll i=s&-s; i; i=s&(~s+(i << 1)))
 #define ALL(x)  (x).begin(), (x).end()
 #define RALL(x) (x).rbegin(), (x).rend()
 #define SZ(x)   ((int)(x).size())
@@ -215,6 +230,13 @@ inline ld nrand(ld ave, ld var) {normal_distribution<> ret(ave, var);return ret(
 inline void yes(bool cond) {cout << (cond?"Yes":"No") << ENDL;}
 inline bool is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}
 inline string make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s + t;}
+VV<int> make_enum_vec(V<int> v){
+  if(v.empty()) return VV<int>(1,V<int>());
+  int n=v.back(); v.pop_back();
+  VV<int> ret,tmp=make_enum_vec(v);
+  for(auto e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}
+  return ret;
+}
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, 1, 0, -1};
 const int dx6[6] = {1, 0, -1, 0, 1, -1};
