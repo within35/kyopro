@@ -147,10 +147,13 @@ data:
     \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
-    \ ret;\n}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\n\
-    const int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1,\
-    \ -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0,\
-    \ 1, 0, -1, 1, 1, -1, -1};\n#endif\n"
+    \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
+    \  V<int> ret;\n  int x = goal;\n  while(x >= 0) {\n    ret.push_back(x);\n  \
+    \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
+    \ e++;\n  return ret;\n}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4]\
+    \ = {0, 1, 0, -1};\nconst int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6]\
+    \ = {0, 1, 0, -1, 1, -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst\
+    \ int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n#endif\n"
   code: "// #define Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n\
     #if !__INCLUDE_LEVEL__\n#include __FILE__\n\n\nstruct Solver {\n  void solve()\
     \ {\n\n  }\n\n  void naive() {\n\n  }\n} solver;\n\n\n\nsigned main(void){\n \
@@ -290,15 +293,18 @@ data:
     \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
-    \ ret;\n}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\n\
-    const int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1,\
-    \ -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0,\
-    \ 1, 0, -1, 1, 1, -1, -1};\n#endif"
+    \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
+    \  V<int> ret;\n  int x = goal;\n  while(x >= 0) {\n    ret.push_back(x);\n  \
+    \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
+    \ e++;\n  return ret;\n}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4]\
+    \ = {0, 1, 0, -1};\nconst int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6]\
+    \ = {0, 1, 0, -1, 1, -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst\
+    \ int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n#endif"
   dependsOn: []
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2023-09-05 22:49:56+09:00'
+  timestamp: '2023-09-12 23:23:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
