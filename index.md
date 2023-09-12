@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: cpp/include
+    pages:
+    - icon: ':warning:'
+      path: cpp/include/dump.hpp
+      title: cpp/include/dump.hpp
   - name: .
     pages:
     - icon: ':warning:'
