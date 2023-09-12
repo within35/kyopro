@@ -1,0 +1,15 @@
+# third-party directory and file
+/cpp/include/ac-library
+/cpp/include/atcoder
+
+# temporary file
+main.cpp
+
+# old file
+*.old
+
+# build file
+*.out
+
+
+!.gitkeep
