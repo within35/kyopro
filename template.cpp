@@ -237,6 +237,17 @@ VV<int> make_enum_vec(V<int> v){
   for(auto e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}
   return ret;
 }
+V<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {
+  V<int> ret;
+  int x = goal;
+  while(x >= 0) {
+    ret.push_back(x);
+    x = to[x];
+  }
+  reverse(ALL(ret));
+  if (to1indexed) for(auto&& e: ret) e++;
+  return ret;
+}
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, 1, 0, -1};
 const int dx6[6] = {1, 0, -1, 0, 1, -1};
