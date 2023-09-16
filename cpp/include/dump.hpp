@@ -3,51 +3,10 @@ using namespace std;
 
 #define DUMPOUT std::cerr
 
-// pair
-template <class T, class U>
-ostream &operator<<(ostream &os, const pair<T, U> &vec)
-{
-  os << "(" << vec.first << ", " << vec.second << ")";
-  return os;
-}
-// tuple<T,U,V>
-template <class T, class U, class V>
-ostream &operator<<(ostream &os, const tuple<T, U, V> &vec)
-{
-  os << "(" << get<0>(vec) << ", " << get<1>(vec) << ", " << get<2>(vec) << ")";
-  return os;
-}
-// array
-template <class T, size_t n>
-ostream &operator<<(ostream &os, const array<T, n> &vec)
-{
-  if (vec.empty())
-    return os << "{}";
-  stringstream ss;
-  os << "(";
-  for (size_t i = 0; i < n; ++i)
-    ss << "," << vec[i];
-  os << ss.str().substr(1) << ")";
-  return os;
-}
-// vector
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &vec)
 {
   if (vec.empty())
-    return os << "{}";
-  stringstream ss;
-  os << "{";
-  for (auto e : vec)
-    ss << "," << e;
-  os << ss.str().substr(1) << "}";
-  return os;
-}
-// valarray
-template <class T>
-ostream &operator<<(ostream &os, const valarray<T> &vec)
-{
-  if (vec.size() == 0)
     return os << "{}";
   stringstream ss;
   os << "{";
@@ -94,7 +53,75 @@ ostream &operator<<(ostream &os, const vector<long long> &vec)
   os << ss.str().substr(1) << "}";
   return os;
 }
-// stack
+
+template <class T, size_t n>
+ostream &operator<<(ostream &os, const array<T, n> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "(";
+  for (size_t i = 0; i < n; ++i)
+    ss << "," << vec[i];
+  os << ss.str().substr(1) << ")";
+  return os;
+}
+
+template <class T>
+ostream &operator<<(ostream &os, const valarray<T> &vec)
+{
+  if (vec.size() == 0)
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto e : vec)
+    ss << "," << e;
+  os << ss.str().substr(1) << "}";
+  return os;
+}
+
+template <class T, class U>
+ostream &operator<<(ostream &os, const pair<T, U> &vec)
+{
+  os << "(" << vec.first << ", " << vec.second << ")";
+  return os;
+}
+template <class T, class U>
+ostream &operator<<(ostream &os, const vector<pair<T, U>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto itr : vec)
+  {
+    ss << "," << itr;
+  }
+  os << ss.str().substr(1) << "}";
+  return os;
+}
+
+template <class T, class U, class V>
+ostream &operator<<(ostream &os, const tuple<T, U, V> &vec)
+{
+  os << "(" << get<0>(vec) << ", " << get<1>(vec) << ", " << get<2>(vec) << ")";
+  return os;
+}
+template <class T, class U, class V>
+ostream &operator<<(ostream &os, const vector<tuple<T, U, V>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto itr : vec)
+  {
+    ss << "," << itr;
+  }
+  os << ss.str().substr(1) << "}";
+  return os;
+}
+
 template <class T>
 ostream &operator<<(ostream &os, queue<T> que)
 {
@@ -110,7 +137,7 @@ ostream &operator<<(ostream &os, queue<T> que)
   os << ss.str().substr(1) << "}";
   return os;
 }
-// stack
+
 template <class T>
 ostream &operator<<(ostream &os, stack<T> que)
 {
@@ -126,7 +153,7 @@ ostream &operator<<(ostream &os, stack<T> que)
   os << ss.str().substr(1) << "}";
   return os;
 }
-// priority_queue
+
 template <class T>
 ostream &operator<<(ostream &os, priority_queue<T> que)
 {
@@ -142,37 +169,23 @@ ostream &operator<<(ostream &os, priority_queue<T> que)
   os << ss.str().substr(1) << "}";
   return os;
 }
-// vector for pair
-template <class T, class U>
-ostream &operator<<(ostream &os, const vector<pair<T, U>> &vec)
+
+template <class T>
+ostream &operator<<(ostream &os, priority_queue<T, vector<T>, greater<T>> que)
 {
-  if (vec.empty())
+  if (que.empty())
     return os << "{}";
   stringstream ss;
   os << "{";
-  for (auto itr : vec)
+  while (!que.empty())
   {
-    ss << "," << itr;
+    ss << "," << que.top();
+    que.pop();
   }
   os << ss.str().substr(1) << "}";
   return os;
 }
-// vector for tuple
-template <class T, class U, class V>
-ostream &operator<<(ostream &os, const vector<tuple<T, U, V>> &vec)
-{
-  if (vec.empty())
-    return os << "{}";
-  stringstream ss;
-  os << "{";
-  for (auto itr : vec)
-  {
-    ss << "," << itr;
-  }
-  os << ss.str().substr(1) << "}";
-  return os;
-}
-// deque
+
 template <class T>
 ostream &operator<<(ostream &os, const deque<T> &vec)
 {
@@ -187,37 +200,62 @@ ostream &operator<<(ostream &os, const deque<T> &vec)
   os << ss.str().substr(1) << "}";
   return os;
 }
-// map
+
 template <class T, class U>
 ostream &operator<<(ostream &os, const map<T, U> &vec)
 {
   if (vec.empty())
     return os << "{}";
   stringstream ss;
-  os << "{";
-  for (auto itr : vec)
+  for (auto [key,e] : vec)
   {
-    ss << "," << itr;
+    ss << "\n" << key << ":" << e;
   }
-  os << ss.str().substr(1) << "}";
+  os << ss.str().substr(1);
   return os;
 }
-// unordered_map
+
+template <class T, class U>
+ostream &operator<<(ostream &os, const map<T, vector<U>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  for (auto [key,e] : vec)
+  {
+    ss << "\n" << key << ":" << e;
+  }
+  os << ss.str().substr(1);
+  return os;
+}
+
 template <class T, class U>
 ostream &operator<<(ostream &os, const unordered_map<T, U> &vec)
 {
   if (vec.empty())
     return os << "{}";
   stringstream ss;
-  os << "{";
-  for (auto itr : vec)
+  for (auto [key,e] : vec)
   {
-    ss << "," << itr;
+    ss << "\n" << key << ":" << e;
   }
-  os << ss.str().substr(1) << "}";
+  os << ss.str().substr(1);
   return os;
 }
-// set
+template <class T, class U>
+ostream &operator<<(ostream &os, const unordered_map<T, vector<U>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  for (auto [key,e] : vec)
+  {
+    ss << "\n" << key << ":" << e;
+  }
+  os << ss.str().substr(1);
+  return os;
+}
+
 template <class T>
 ostream &operator<<(ostream &os, const set<T> &vec)
 {
@@ -232,7 +270,6 @@ ostream &operator<<(ostream &os, const set<T> &vec)
   os << ss.str().substr(1) << "}";
   return os;
 }
-// set
 template <class T, class U>
 ostream &operator<<(ostream &os, const set<pair<T, U>> &vec)
 {
@@ -247,7 +284,21 @@ ostream &operator<<(ostream &os, const set<pair<T, U>> &vec)
   os << ss.str().substr(1) << "}";
   return os;
 }
-// multiset
+template <class T>
+ostream &operator<<(ostream &os, const set<vector<T>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto itr : vec)
+  {
+    ss << "," << itr;
+  }
+  os << ss.str().substr(1) << "}";
+  return os;
+}
+
 template <class T>
 ostream &operator<<(ostream &os, const multiset<T> &vec)
 {
@@ -262,6 +313,35 @@ ostream &operator<<(ostream &os, const multiset<T> &vec)
   os << ss.str().substr(1) << "}";
   return os;
 }
+template <class T, class U>
+ostream &operator<<(ostream &os, const multiset<pair<T, U>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto itr : vec)
+  {
+    ss << "," << itr;
+  }
+  os << ss.str().substr(1) << "}";
+  return os;
+}
+template <class T>
+ostream &operator<<(ostream &os, const multiset<vector<T>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto itr : vec)
+  {
+    ss << "," << itr;
+  }
+  os << ss.str().substr(1) << "}";
+  return os;
+}
+
 template <class T>
 ostream &operator<<(ostream &os, const complex<T> &var)
 {
