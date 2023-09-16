@@ -3,7 +3,7 @@
 /cpp/include/atcoder
 
 # temporary file
-main.cpp
+main*.cpp
 
 # old file
 *.old
