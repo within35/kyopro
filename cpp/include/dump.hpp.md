@@ -26,13 +26,22 @@ data:
     \ os;\n}\n\ntemplate <class T, size_t n>\nostream &operator<<(ostream &os, const\
     \ array<T, n> &vec)\n{\n  if (vec.empty())\n    return os << \"{}\";\n  stringstream\
     \ ss;\n  os << \"(\";\n  for (size_t i = 0; i < n; ++i)\n    ss << \",\" << vec[i];\n\
-    \  os << ss.str().substr(1) << \")\";\n  return os;\n}\n\ntemplate <class T>\n\
-    ostream &operator<<(ostream &os, const valarray<T> &vec)\n{\n  if (vec.size()\
-    \ == 0)\n    return os << \"{}\";\n  stringstream ss;\n  os << \"{\";\n  for (auto\
-    \ e : vec)\n    ss << \",\" << e;\n  os << ss.str().substr(1) << \"}\";\n  return\
-    \ os;\n}\n\ntemplate <class T, class U>\nostream &operator<<(ostream &os, const\
-    \ pair<T, U> &vec)\n{\n  os << \"(\" << vec.first << \", \" << vec.second << \"\
-    )\";\n  return os;\n}\ntemplate <class T, class U>\nostream &operator<<(ostream\
+    \  os << ss.str().substr(1) << \")\";\n  return os;\n}\ntemplate <size_t n>\n\
+    ostream &operator<<(ostream &os, const array<long long, n> &vec)\n{\n  if (vec.empty())\n\
+    \    return os << \"{}\";\n  stringstream ss;\n  os << \"{\";\n  for (auto &e\
+    \ : vec)\n  {\n    ss << \",\";\n    if (e >= 152921504606846976 - 100)\n    \
+    \  ss << \"\u221E\";\n    else if (e <= -1152921504606846976 + 100)\n      ss\
+    \ << \"-\u221E\";\n    else\n      ss << e;\n  }\n  os << ss.str().substr(1) <<\
+    \ \"}\";\n  return os;\n}\ntemplate <class T, size_t n>\nostream &operator<<(ostream\
+    \ &os, const vector<array<T, n>> &vec)\n{\n  if (vec.empty())\n    return os <<\
+    \ \"{}\";\n  stringstream ss;\n  os << \"{\";\n  for (auto itr : vec)\n  {\n \
+    \   ss << \",\" << itr;\n  }\n  os << ss.str().substr(1) << \"}\";\n  return os;\n\
+    }\n\ntemplate <class T>\nostream &operator<<(ostream &os, const valarray<T> &vec)\n\
+    {\n  if (vec.size() == 0)\n    return os << \"{}\";\n  stringstream ss;\n  os\
+    \ << \"{\";\n  for (auto e : vec)\n    ss << \",\" << e;\n  os << ss.str().substr(1)\
+    \ << \"}\";\n  return os;\n}\n\ntemplate <class T, class U>\nostream &operator<<(ostream\
+    \ &os, const pair<T, U> &vec)\n{\n  os << \"(\" << vec.first << \", \" << vec.second\
+    \ << \")\";\n  return os;\n}\ntemplate <class T, class U>\nostream &operator<<(ostream\
     \ &os, const vector<pair<T, U>> &vec)\n{\n  if (vec.empty())\n    return os <<\
     \ \"{}\";\n  stringstream ss;\n  os << \"{\";\n  for (auto itr : vec)\n  {\n \
     \   ss << \",\" << itr;\n  }\n  os << ss.str().substr(1) << \"}\";\n  return os;\n\
@@ -172,7 +181,16 @@ data:
     \ &os, const array<T, n> &vec)\n{\n  if (vec.empty())\n    return os << \"{}\"\
     ;\n  stringstream ss;\n  os << \"(\";\n  for (size_t i = 0; i < n; ++i)\n    ss\
     \ << \",\" << vec[i];\n  os << ss.str().substr(1) << \")\";\n  return os;\n}\n\
-    \ntemplate <class T>\nostream &operator<<(ostream &os, const valarray<T> &vec)\n\
+    template <size_t n>\nostream &operator<<(ostream &os, const array<long long, n>\
+    \ &vec)\n{\n  if (vec.empty())\n    return os << \"{}\";\n  stringstream ss;\n\
+    \  os << \"{\";\n  for (auto &e : vec)\n  {\n    ss << \",\";\n    if (e >= 152921504606846976\
+    \ - 100)\n      ss << \"\u221E\";\n    else if (e <= -1152921504606846976 + 100)\n\
+    \      ss << \"-\u221E\";\n    else\n      ss << e;\n  }\n  os << ss.str().substr(1)\
+    \ << \"}\";\n  return os;\n}\ntemplate <class T, size_t n>\nostream &operator<<(ostream\
+    \ &os, const vector<array<T, n>> &vec)\n{\n  if (vec.empty())\n    return os <<\
+    \ \"{}\";\n  stringstream ss;\n  os << \"{\";\n  for (auto itr : vec)\n  {\n \
+    \   ss << \",\" << itr;\n  }\n  os << ss.str().substr(1) << \"}\";\n  return os;\n\
+    }\n\ntemplate <class T>\nostream &operator<<(ostream &os, const valarray<T> &vec)\n\
     {\n  if (vec.size() == 0)\n    return os << \"{}\";\n  stringstream ss;\n  os\
     \ << \"{\";\n  for (auto e : vec)\n    ss << \",\" << e;\n  os << ss.str().substr(1)\
     \ << \"}\";\n  return os;\n}\n\ntemplate <class T, class U>\nostream &operator<<(ostream\
@@ -303,7 +321,7 @@ data:
   isVerificationFile: false
   path: cpp/include/dump.hpp
   requiredBy: []
-  timestamp: '2023-09-17 00:11:45+09:00'
+  timestamp: '2023-09-17 21:06:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: cpp/include/dump.hpp
