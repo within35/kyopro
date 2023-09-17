@@ -52,7 +52,7 @@ signed main(void){
 using namespace atcoder;
 using mint = modint1000000007;
 // using mint = modint998244353;
-std::istream &operator>>(std::istream& is, mint& a) { int tmp; is >> tmp; a = tmp; return is; }
+std::istream &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp; a = tmp; return is; }
 std::ostream &operator<<(std::ostream& os, const mint& a) {os << a.val(); return os;}
 #endif
 using namespace std;
