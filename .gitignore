@@ -2,14 +2,22 @@
 /cpp/include/ac-library
 /cpp/include/atcoder
 
+# temporary directory
+/tmp
+/test
+
 # temporary file
-main*.cpp
+main.cpp
+main.py
 
 # old file
 *.old
 
 # build file
 *.out
+
+# log file
+geckodriver.log
 
 
 !.gitkeep
