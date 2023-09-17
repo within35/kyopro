@@ -66,6 +66,40 @@ ostream &operator<<(ostream &os, const array<T, n> &vec)
   os << ss.str().substr(1) << ")";
   return os;
 }
+template <size_t n>
+ostream &operator<<(ostream &os, const array<long long, n> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto &e : vec)
+  {
+    ss << ",";
+    if (e >= 152921504606846976 - 100)
+      ss << "∞";
+    else if (e <= -1152921504606846976 + 100)
+      ss << "-∞";
+    else
+      ss << e;
+  }
+  os << ss.str().substr(1) << "}";
+  return os;
+}
+template <class T, size_t n>
+ostream &operator<<(ostream &os, const vector<array<T, n>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for (auto itr : vec)
+  {
+    ss << "," << itr;
+  }
+  os << ss.str().substr(1) << "}";
+  return os;
+}
 
 template <class T>
 ostream &operator<<(ostream &os, const valarray<T> &vec)
