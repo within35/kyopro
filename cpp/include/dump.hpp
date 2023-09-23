@@ -432,7 +432,7 @@ void vdump_func(vector<int> &grid, int h, int w, int inf = 1073741823, int paddi
 }
 
 // グリッド可視化(一次元化 long long用)
-void vdump_func(vector<long long> &grid, int h, int w, ll inf = 152921504606846976LL, int padding_length = 2)
+void vdump_func(vector<long long> &grid, int h, int w, long long inf = 152921504606846976LL, int padding_length = 2)
 {
   for (int i = 0; i < h; i++)
   {
@@ -500,7 +500,7 @@ void vdump_func(vector<vector<int>> &grid, vector<vector<int>> &colors, int inf 
 }
 
 // グリッド可視化(二次元 long long用)
-void vdump_func(vector<vector<long long>> &grid, ll inf = 152921504606846976LL, int padding_length = 2)
+void vdump_func(vector<vector<long long>> &grid, long long inf = 152921504606846976LL, int padding_length = 2)
 {
   if (grid.size() == 0)
     return;
