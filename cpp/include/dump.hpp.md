@@ -124,7 +124,7 @@ data:
     \     ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i\
     \ * w + j];\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n}\n\n// \u30B0\
     \u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E00\u6B21\u5143\u5316 long long\u7528\
-    )\nvoid vdump_func(vector<long long> &grid, int h, int w, ll inf = 152921504606846976LL,\
+    )\nvoid vdump_func(vector<long long> &grid, int h, int w, long long inf = 152921504606846976LL,\
     \ int padding_length = 2)\n{\n  for (int i = 0; i < h; i++)\n  {\n    stringstream\
     \ ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \",\";\n      if (grid[i\
     \ * w + j] >= inf - 100)\n        ss << string(padding_length - 1, ' ') << \"\u221E\
@@ -152,27 +152,28 @@ data:
     \ << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];\n\
     \      ss << \"\\e[0m\";\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n\
     \  }\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E8C\u6B21\u5143 long\
-    \ long\u7528)\nvoid vdump_func(vector<vector<long long>> &grid, ll inf = 152921504606846976LL,\
-    \ int padding_length = 2)\n{\n  if (grid.size() == 0)\n    return;\n  int h =\
-    \ grid.size(), w = grid[0].size();\n  for (int i = 0; i < h; i++)\n  {\n    stringstream\
-    \ ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \",\";\n      if (grid[i][j]\
-    \ >= inf - 100)\n        ss << string(padding_length - 1, ' ') << \"\u221E\";\n\
-    \      else if (grid[i][j] <= -inf + 100)\n        ss << string(padding_length\
-    \ - 2, ' ') << \"-\u221E\";\n      else\n        ss << std::right << std::setw(padding_length)\
-    \ << std::setfill(' ') << grid[i][j];\n    }\n    DUMPOUT << ss.str().substr(1)\
-    \ << endl;\n  }\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E8C\u6B21\
-    \u5143 long double\u7528)\nvoid vdump_func(vector<vector<long double>> &grid,\
-    \ int padding_length = 8)\n{\n  if (grid.size() == 0)\n    return;\n  int h =\
-    \ grid.size(), w = grid[0].size();\n  for (int i = 0; i < h; i++)\n  {\n    stringstream\
-    \ ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \",\";\n      if (grid[i][j]\
-    \ >= 152921504606846976LL - 100)\n        ss << string(padding_length - 1, ' ')\
-    \ << \"\u221E\";\n      else if (grid[i][j] <= -152921504606846976LL + 100)\n\
-    \        ss << string(padding_length - 2, ' ') << \"-\u221E\";\n      else\n \
-    \       ss << std::right << std::setw(padding_length) << std::setfill(' ') <<\
-    \ grid[i][j];\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n}\n\nvoid\
-    \ dump_func()\n{\n  DUMPOUT << endl;\n}\ntemplate <class Head, class... Tail>\n\
-    void dump_func(Head &&head, Tail &&...tail)\n{\n  DUMPOUT << head;\n  if (sizeof...(Tail)\
-    \ > 0)\n  {\n    DUMPOUT << \", \";\n  }\n  dump_func(std::move(tail)...);\n}\n"
+    \ long\u7528)\nvoid vdump_func(vector<vector<long long>> &grid, long long inf\
+    \ = 152921504606846976LL, int padding_length = 2)\n{\n  if (grid.size() == 0)\n\
+    \    return;\n  int h = grid.size(), w = grid[0].size();\n  for (int i = 0; i\
+    \ < h; i++)\n  {\n    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n\
+    \      ss << \",\";\n      if (grid[i][j] >= inf - 100)\n        ss << string(padding_length\
+    \ - 1, ' ') << \"\u221E\";\n      else if (grid[i][j] <= -inf + 100)\n       \
+    \ ss << string(padding_length - 2, ' ') << \"-\u221E\";\n      else\n        ss\
+    \ << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];\n\
+    \    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n}\n\n// \u30B0\u30EA\u30C3\
+    \u30C9\u53EF\u8996\u5316(\u4E8C\u6B21\u5143 long double\u7528)\nvoid vdump_func(vector<vector<long\
+    \ double>> &grid, int padding_length = 8)\n{\n  if (grid.size() == 0)\n    return;\n\
+    \  int h = grid.size(), w = grid[0].size();\n  for (int i = 0; i < h; i++)\n \
+    \ {\n    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss <<\
+    \ \",\";\n      if (grid[i][j] >= 152921504606846976LL - 100)\n        ss << string(padding_length\
+    \ - 1, ' ') << \"\u221E\";\n      else if (grid[i][j] <= -152921504606846976LL\
+    \ + 100)\n        ss << string(padding_length - 2, ' ') << \"-\u221E\";\n    \
+    \  else\n        ss << std::right << std::setw(padding_length) << std::setfill('\
+    \ ') << grid[i][j];\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n\
+    }\n\nvoid dump_func()\n{\n  DUMPOUT << endl;\n}\ntemplate <class Head, class...\
+    \ Tail>\nvoid dump_func(Head &&head, Tail &&...tail)\n{\n  DUMPOUT << head;\n\
+    \  if (sizeof...(Tail) > 0)\n  {\n    DUMPOUT << \", \";\n  }\n  dump_func(std::move(tail)...);\n\
+    }\n"
   code: "#include <bits/stdc++.h>\nusing namespace std;\n\n#define DUMPOUT std::cerr\n\
     \ntemplate <class T>\nostream &operator<<(ostream &os, const vector<T> &vec)\n\
     {\n  if (vec.empty())\n    return os << \"{}\";\n  stringstream ss;\n  os << \"\
@@ -288,7 +289,7 @@ data:
     \     ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i\
     \ * w + j];\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n}\n\n// \u30B0\
     \u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E00\u6B21\u5143\u5316 long long\u7528\
-    )\nvoid vdump_func(vector<long long> &grid, int h, int w, ll inf = 152921504606846976LL,\
+    )\nvoid vdump_func(vector<long long> &grid, int h, int w, long long inf = 152921504606846976LL,\
     \ int padding_length = 2)\n{\n  for (int i = 0; i < h; i++)\n  {\n    stringstream\
     \ ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \",\";\n      if (grid[i\
     \ * w + j] >= inf - 100)\n        ss << string(padding_length - 1, ' ') << \"\u221E\
@@ -316,32 +317,33 @@ data:
     \ << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];\n\
     \      ss << \"\\e[0m\";\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n\
     \  }\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E8C\u6B21\u5143 long\
-    \ long\u7528)\nvoid vdump_func(vector<vector<long long>> &grid, ll inf = 152921504606846976LL,\
-    \ int padding_length = 2)\n{\n  if (grid.size() == 0)\n    return;\n  int h =\
-    \ grid.size(), w = grid[0].size();\n  for (int i = 0; i < h; i++)\n  {\n    stringstream\
-    \ ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \",\";\n      if (grid[i][j]\
-    \ >= inf - 100)\n        ss << string(padding_length - 1, ' ') << \"\u221E\";\n\
-    \      else if (grid[i][j] <= -inf + 100)\n        ss << string(padding_length\
-    \ - 2, ' ') << \"-\u221E\";\n      else\n        ss << std::right << std::setw(padding_length)\
-    \ << std::setfill(' ') << grid[i][j];\n    }\n    DUMPOUT << ss.str().substr(1)\
-    \ << endl;\n  }\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E8C\u6B21\
-    \u5143 long double\u7528)\nvoid vdump_func(vector<vector<long double>> &grid,\
-    \ int padding_length = 8)\n{\n  if (grid.size() == 0)\n    return;\n  int h =\
-    \ grid.size(), w = grid[0].size();\n  for (int i = 0; i < h; i++)\n  {\n    stringstream\
-    \ ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \",\";\n      if (grid[i][j]\
-    \ >= 152921504606846976LL - 100)\n        ss << string(padding_length - 1, ' ')\
-    \ << \"\u221E\";\n      else if (grid[i][j] <= -152921504606846976LL + 100)\n\
-    \        ss << string(padding_length - 2, ' ') << \"-\u221E\";\n      else\n \
-    \       ss << std::right << std::setw(padding_length) << std::setfill(' ') <<\
-    \ grid[i][j];\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n}\n\nvoid\
-    \ dump_func()\n{\n  DUMPOUT << endl;\n}\ntemplate <class Head, class... Tail>\n\
-    void dump_func(Head &&head, Tail &&...tail)\n{\n  DUMPOUT << head;\n  if (sizeof...(Tail)\
-    \ > 0)\n  {\n    DUMPOUT << \", \";\n  }\n  dump_func(std::move(tail)...);\n}"
+    \ long\u7528)\nvoid vdump_func(vector<vector<long long>> &grid, long long inf\
+    \ = 152921504606846976LL, int padding_length = 2)\n{\n  if (grid.size() == 0)\n\
+    \    return;\n  int h = grid.size(), w = grid[0].size();\n  for (int i = 0; i\
+    \ < h; i++)\n  {\n    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n\
+    \      ss << \",\";\n      if (grid[i][j] >= inf - 100)\n        ss << string(padding_length\
+    \ - 1, ' ') << \"\u221E\";\n      else if (grid[i][j] <= -inf + 100)\n       \
+    \ ss << string(padding_length - 2, ' ') << \"-\u221E\";\n      else\n        ss\
+    \ << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];\n\
+    \    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n}\n\n// \u30B0\u30EA\u30C3\
+    \u30C9\u53EF\u8996\u5316(\u4E8C\u6B21\u5143 long double\u7528)\nvoid vdump_func(vector<vector<long\
+    \ double>> &grid, int padding_length = 8)\n{\n  if (grid.size() == 0)\n    return;\n\
+    \  int h = grid.size(), w = grid[0].size();\n  for (int i = 0; i < h; i++)\n \
+    \ {\n    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss <<\
+    \ \",\";\n      if (grid[i][j] >= 152921504606846976LL - 100)\n        ss << string(padding_length\
+    \ - 1, ' ') << \"\u221E\";\n      else if (grid[i][j] <= -152921504606846976LL\
+    \ + 100)\n        ss << string(padding_length - 2, ' ') << \"-\u221E\";\n    \
+    \  else\n        ss << std::right << std::setw(padding_length) << std::setfill('\
+    \ ') << grid[i][j];\n    }\n    DUMPOUT << ss.str().substr(1) << endl;\n  }\n\
+    }\n\nvoid dump_func()\n{\n  DUMPOUT << endl;\n}\ntemplate <class Head, class...\
+    \ Tail>\nvoid dump_func(Head &&head, Tail &&...tail)\n{\n  DUMPOUT << head;\n\
+    \  if (sizeof...(Tail) > 0)\n  {\n    DUMPOUT << \", \";\n  }\n  dump_func(std::move(tail)...);\n\
+    }"
   dependsOn: []
   isVerificationFile: false
   path: cpp/include/dump.hpp
   requiredBy: []
-  timestamp: '2023-09-23 22:40:32+09:00'
+  timestamp: '2023-09-24 01:20:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: cpp/include/dump.hpp
