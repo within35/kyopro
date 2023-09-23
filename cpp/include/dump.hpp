@@ -412,7 +412,7 @@ void vdump_func(vector<string> &grid)
 }
 
 // グリッド可視化(一次元化 int用)
-void vdump_func(vector<int> &grid, int h, int w, int padding_length = 2)
+void vdump_func(vector<int> &grid, int h, int w, int inf = 1073741823, int padding_length = 2)
 {
   for (int i = 0; i < h; i++)
   {
@@ -420,9 +420,9 @@ void vdump_func(vector<int> &grid, int h, int w, int padding_length = 2)
     for (int j = 0; j < w; j++)
     {
       ss << ",";
-      if (grid[i * w + j] >= 1073741823 - 100)
+      if (grid[i * w + j] >= inf - 100)
         ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i * w + j] <= -1073741823 + 100)
+      else if (grid[i * w + j] <= -inf + 100)
         ss << string(padding_length - 2, ' ') << "-∞";
       else
         ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i * w + j];
@@ -432,7 +432,7 @@ void vdump_func(vector<int> &grid, int h, int w, int padding_length = 2)
 }
 
 // グリッド可視化(一次元化 long long用)
-void vdump_func(vector<long long> &grid, int h, int w, int padding_length = 2)
+void vdump_func(vector<long long> &grid, int h, int w, ll inf = 152921504606846976LL, int padding_length = 2)
 {
   for (int i = 0; i < h; i++)
   {
@@ -440,9 +440,9 @@ void vdump_func(vector<long long> &grid, int h, int w, int padding_length = 2)
     for (int j = 0; j < w; j++)
     {
       ss << ",";
-      if (grid[i * w + j] >= 152921504606846976LL - 100)
+      if (grid[i * w + j] >= inf - 100)
         ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i * w + j] <= -152921504606846976LL + 100)
+      else if (grid[i * w + j] <= -inf + 100)
         ss << string(padding_length - 2, ' ') << "-∞";
       else
         ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i * w + j];
@@ -452,7 +452,7 @@ void vdump_func(vector<long long> &grid, int h, int w, int padding_length = 2)
 }
 
 // グリッド可視化(二次元 int用)
-void vdump_func(vector<vector<int>> &grid, int padding_length = 2)
+void vdump_func(vector<vector<int>> &grid, int inf = 1073741823, int padding_length = 2)
 {
   if (grid.size() == 0)
     return;
@@ -463,9 +463,9 @@ void vdump_func(vector<vector<int>> &grid, int padding_length = 2)
     for (int j = 0; j < w; j++)
     {
       ss << ",";
-      if (grid[i][j] >= 1073741823 - 100)
+      if (grid[i][j] >= inf - 100)
         ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i][j] <= -1073741823 + 100)
+      else if (grid[i][j] <= -inf + 100)
         ss << string(padding_length - 2, ' ') << "-∞";
       else
         ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];
@@ -474,8 +474,8 @@ void vdump_func(vector<vector<int>> &grid, int padding_length = 2)
   }
 }
 
-// グリッド可視化(二次元 long long用)
-void vdump_func(vector<vector<long long>> &grid, int padding_length = 2)
+// 色付きグリッド可視化(二次元 int用)
+void vdump_func(vector<vector<int>> &grid, vector<vector<int>> &colors, int inf = 1073741823, int padding_length = 2)
 {
   if (grid.size() == 0)
     return;
@@ -486,9 +486,34 @@ void vdump_func(vector<vector<long long>> &grid, int padding_length = 2)
     for (int j = 0; j < w; j++)
     {
       ss << ",";
-      if (grid[i][j] >= 152921504606846976LL - 100)
+      ss << "\e[38;5;"+to_string(colors[i][j])+"m";
+      if (grid[i][j] >= inf - 100)
         ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i][j] <= -152921504606846976LL + 100)
+      else if (grid[i][j] <= -inf + 100)
+        ss << string(padding_length - 2, ' ') << "-∞";
+      else
+        ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];
+      ss << "\e[0m";
+    }
+    DUMPOUT << ss.str().substr(1) << endl;
+  }
+}
+
+// グリッド可視化(二次元 long long用)
+void vdump_func(vector<vector<long long>> &grid, ll inf = 152921504606846976LL, int padding_length = 2)
+{
+  if (grid.size() == 0)
+    return;
+  int h = grid.size(), w = grid[0].size();
+  for (int i = 0; i < h; i++)
+  {
+    stringstream ss;
+    for (int j = 0; j < w; j++)
+    {
+      ss << ",";
+      if (grid[i][j] >= inf - 100)
+        ss << string(padding_length - 1, ' ') << "∞";
+      else if (grid[i][j] <= -inf + 100)
         ss << string(padding_length - 2, ' ') << "-∞";
       else
         ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];
