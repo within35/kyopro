@@ -5,6 +5,7 @@
 # temporary directory
 /tmp
 /test
+/tools
 
 # temporary file
 main.cpp
