@@ -18,16 +18,23 @@ data:
     #else\n  DUMP(\"naive\");\n  solver.naive();\n#endif\n  return 0;\n}\n\n#else\n\
     #define _GLIBCXX_DEQUE_BUF_SIZE 64\n#ifdef Q__OPTIMIZE\n#pragma GCC target(\"\
     avx\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"unroll-loops\")\n\
-    #endif\n#include <bits/stdc++.h>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\n\
-    using namespace atcoder;\nusing mint = modint1000000007;\n// using mint = modint998244353;\n\
-    std::istream &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp;\
-    \ a = tmp; return is; }\nstd::ostream &operator<<(std::ostream& os, const mint&\
-    \ a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n#define OVERLOAD4(a,\
-    \ b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a) i = 0, i##_len\
-    \ = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a) i = 0, i##_len\
-    \ = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b) i = (a),\
-    \ i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b) i\
-    \ = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
+    #endif\n#include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
+    #include <chrono>\n#include <cmath>\n#include <complex>\n#include <deque>\n#include\
+    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <iomanip>\n\
+    #include <ios>\n#include <iostream>\n#include <limits>\n#include <list>\n#include\
+    \ <map>\n#include <memory>\n#include <numeric>\n#include <optional>\n#include\
+    \ <queue>\n#include <random>\n#include <set>\n#include <sstream>\n#include <stack>\n\
+    #include <string>\n#include <tuple>\n#include <type_traits>\n#include <unordered_map>\n\
+    #include <unordered_set>\n#include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n\
+    #include <atcoder/all>\nusing namespace atcoder;\nusing mint = modint1000000007;\n\
+    // using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
+    \ a) { long long tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
+    \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
+    #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
+    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a)\
+    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b)\
+    \ i = (a), i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b)\
+    \ i = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
     \ REP4, REP3, REP2, REP1)(__VA_ARGS__)\n#define RREP1(a)          for(decltype(a)\
     \ i = (a); i--;)\n#define RREP2(i, a)       for(decltype(a) i = (a); i--;)\n#define\
     \ RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)\n\
@@ -163,17 +170,24 @@ data:
     );\n#endif\n  DUMP(options);\n#ifndef Q__NAIVE\n  solver.solve();\n#else\n  DUMP(\"\
     naive\");\n  solver.naive();\n#endif\n  return 0;\n}\n\n#else\n#define _GLIBCXX_DEQUE_BUF_SIZE\
     \ 64\n#ifdef Q__OPTIMIZE\n#pragma GCC target(\"avx\")\n#pragma GCC optimize(\"\
-    O3\")\n#pragma GCC optimize(\"unroll-loops\")\n#endif\n#include <bits/stdc++.h>\n\
-    #ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\nusing namespace atcoder;\n\
-    using mint = modint1000000007;\n// using mint = modint998244353;\nstd::istream\
-    \ &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp; a = tmp;\
-    \ return is; }\nstd::ostream &operator<<(std::ostream& os, const mint& a) {os\
-    \ << a.val(); return os;}\n#endif\nusing namespace std;\n#define OVERLOAD4(a,\
-    \ b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a) i = 0, i##_len\
-    \ = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a) i = 0, i##_len\
-    \ = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b) i = (a),\
-    \ i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b) i\
-    \ = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
+    O3\")\n#pragma GCC optimize(\"unroll-loops\")\n#endif\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <chrono>\n#include\
+    \ <cmath>\n#include <complex>\n#include <deque>\n#include <forward_list>\n#include\
+    \ <fstream>\n#include <functional>\n#include <iomanip>\n#include <ios>\n#include\
+    \ <iostream>\n#include <limits>\n#include <list>\n#include <map>\n#include <memory>\n\
+    #include <numeric>\n#include <optional>\n#include <queue>\n#include <random>\n\
+    #include <set>\n#include <sstream>\n#include <stack>\n#include <string>\n#include\
+    \ <tuple>\n#include <type_traits>\n#include <unordered_map>\n#include <unordered_set>\n\
+    #include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include\
+    \ <atcoder/all>\nusing namespace atcoder;\nusing mint = modint1000000007;\n//\
+    \ using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
+    \ a) { long long tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
+    \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
+    #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
+    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a)\
+    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b)\
+    \ i = (a), i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b)\
+    \ i = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
     \ REP4, REP3, REP2, REP1)(__VA_ARGS__)\n#define RREP1(a)          for(decltype(a)\
     \ i = (a); i--;)\n#define RREP2(i, a)       for(decltype(a) i = (a); i--;)\n#define\
     \ RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)\n\
@@ -304,7 +318,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2023-09-17 21:05:13+09:00'
+  timestamp: '2023-10-07 08:31:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
