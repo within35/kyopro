@@ -46,7 +46,38 @@ signed main(void){
 #pragma GCC optimize("O3")
 #pragma GCC optimize("unroll-loops")
 #endif
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <complex>
+#include <deque>
+#include <forward_list>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <limits>
+#include <list>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <optional>
+#include <queue>
+#include <random>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <tuple>
+#include <type_traits>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <vector>
 #ifdef Q__INCLUDE_ATCODER_LIB
 #include <atcoder/all>
 using namespace atcoder;
