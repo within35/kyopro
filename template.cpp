@@ -148,6 +148,7 @@ template<class... A> void print_rest(){cout << ENDL;}
 template<class T,class... A> void print_rest(const T& first,const A&... rest){cout << " " << first;print_rest(rest...);}
 template<class T,class... A> void print(const T& first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);}
 template<class T,class... A> void die(const T& first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}
+template <typename ... Args> string fmt(const string& fmt, Args ... args ){size_t len = snprintf( nullptr, 0, fmt.c_str(), args ... );vector<char> buf(len + 1);snprintf(&buf[0], len + 1, fmt.c_str(), args ... );return string(&buf[0], &buf[0] + len);}
 template<class T> inline string join(const T& v,string sep=" "){if(!SZ(v))return "";stringstream ss;for(auto&& e:v)ss << sep << e;return ss.str().substr(SZ(sep));}
 V<string> split(const string &s,char sep=' ') {V<string> ret;stringstream ss(s);string buf;while(getline(ss,buf,sep))ret.push_back(buf);return ret;}
 template<class T> inline string padding(const T& v,int len,char pad=' ',bool l=false){stringstream ss;ss << (l?std::left:std::right) << setw(len) << setfill(pad) << v;return ss.str();}
