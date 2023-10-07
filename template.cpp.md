@@ -77,9 +77,12 @@ data:
     \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
     \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
     \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
-    template<class T> inline string join(const T& v,string sep=\" \"){if(!SZ(v))return\
-    \ \"\";stringstream ss;for(auto&& e:v)ss << sep << e;return ss.str().substr(SZ(sep));}\n\
-    V<string> split(const string &s,char sep=' ') {V<string> ret;stringstream ss(s);string\
+    template <typename ... Args> string fmt(const string& fmt, Args ... args ){size_t\
+    \ len = snprintf( nullptr, 0, fmt.c_str(), args ... );vector<char> buf(len + 1);snprintf(&buf[0],\
+    \ len + 1, fmt.c_str(), args ... );return string(&buf[0], &buf[0] + len);}\ntemplate<class\
+    \ T> inline string join(const T& v,string sep=\" \"){if(!SZ(v))return \"\";stringstream\
+    \ ss;for(auto&& e:v)ss << sep << e;return ss.str().substr(SZ(sep));}\nV<string>\
+    \ split(const string &s,char sep=' ') {V<string> ret;stringstream ss(s);string\
     \ buf;while(getline(ss,buf,sep))ret.push_back(buf);return ret;}\ntemplate<class\
     \ T> inline string padding(const T& v,int len,char pad=' ',bool l=false){stringstream\
     \ ss;ss << (l?std::left:std::right) << setw(len) << setfill(pad) << v;return ss.str();}\n\
@@ -230,9 +233,12 @@ data:
     \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
     \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
     \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
-    template<class T> inline string join(const T& v,string sep=\" \"){if(!SZ(v))return\
-    \ \"\";stringstream ss;for(auto&& e:v)ss << sep << e;return ss.str().substr(SZ(sep));}\n\
-    V<string> split(const string &s,char sep=' ') {V<string> ret;stringstream ss(s);string\
+    template <typename ... Args> string fmt(const string& fmt, Args ... args ){size_t\
+    \ len = snprintf( nullptr, 0, fmt.c_str(), args ... );vector<char> buf(len + 1);snprintf(&buf[0],\
+    \ len + 1, fmt.c_str(), args ... );return string(&buf[0], &buf[0] + len);}\ntemplate<class\
+    \ T> inline string join(const T& v,string sep=\" \"){if(!SZ(v))return \"\";stringstream\
+    \ ss;for(auto&& e:v)ss << sep << e;return ss.str().substr(SZ(sep));}\nV<string>\
+    \ split(const string &s,char sep=' ') {V<string> ret;stringstream ss(s);string\
     \ buf;while(getline(ss,buf,sep))ret.push_back(buf);return ret;}\ntemplate<class\
     \ T> inline string padding(const T& v,int len,char pad=' ',bool l=false){stringstream\
     \ ss;ss << (l?std::left:std::right) << setw(len) << setfill(pad) << v;return ss.str();}\n\
@@ -318,7 +324,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2023-10-07 08:31:57+09:00'
+  timestamp: '2023-10-07 11:47:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
