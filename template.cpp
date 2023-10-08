@@ -72,6 +72,7 @@ signed main(void){
 #include <sstream>
 #include <stack>
 #include <string>
+#include <thread>
 #include <tuple>
 #include <type_traits>
 #include <unordered_map>
@@ -112,7 +113,7 @@ using namespace std;
 #define INF ((1 << 30) - 1)
 #define INFL (1LL << 60)
 #define PRECISION std::setprecision(16)
-#define THE_WORLD std::this_thread::sleep_for(30s)
+#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))
 #define INT(...) int __VA_ARGS__;    input(__VA_ARGS__)
 #define LL(...)  ll __VA_ARGS__;     input(__VA_ARGS__)
 #define STR(...) string __VA_ARGS__; input(__VA_ARGS__)
