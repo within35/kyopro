@@ -82,12 +82,13 @@ signed main(void){
 #ifdef Q__INCLUDE_ATCODER_LIB
 #include <atcoder/all>
 using namespace atcoder;
-using mint = modint1000000007;
-// using mint = modint998244353;
+//using mint = modint1000000007;
+using mint = modint998244353;
 std::istream &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp; a = tmp; return is; }
 std::ostream &operator<<(std::ostream& os, const mint& a) {os << a.val(); return os;}
 #endif
 using namespace std;
+#define MOD 998244353
 #define OVERLOAD4(a, b, c, d, e, ...) e
 #define REP1(a)          for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)
 #define REP2(i, a)       for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)
