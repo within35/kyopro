@@ -24,17 +24,18 @@ data:
     #include <ios>\n#include <iostream>\n#include <limits>\n#include <list>\n#include\
     \ <map>\n#include <memory>\n#include <numeric>\n#include <optional>\n#include\
     \ <queue>\n#include <random>\n#include <set>\n#include <sstream>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <type_traits>\n#include <unordered_map>\n\
-    #include <unordered_set>\n#include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n\
-    #include <atcoder/all>\nusing namespace atcoder;\nusing mint = modint1000000007;\n\
-    // using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
-    \ a) { long long tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
-    \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
-    #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
+    #include <string>\n#include <thread>\n#include <tuple>\n#include <type_traits>\n\
+    #include <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include\
+    \ <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\nusing namespace\
+    \ atcoder;\nusing mint = modint1000000007;\n// using mint = modint998244353;\n\
+    std::istream &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp;\
+    \ a = tmp; return is; }\nstd::ostream &operator<<(std::ostream& os, const mint&\
+    \ a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n#define OVERLOAD4(a,\
+    \ b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a) i = 0, i##_len\
+    \ = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a) i = 0, i##_len\
+    \ = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b) i = (a),\
+    \ i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b) i\
+    \ = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
     \ REP4, REP3, REP2, REP1)(__VA_ARGS__)\n#define RREP1(a)          for(decltype(a)\
     \ i = (a); i--;)\n#define RREP2(i, a)       for(decltype(a) i = (a); i--;)\n#define\
     \ RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)\n\
@@ -51,12 +52,12 @@ data:
     \ (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define POW2(n)\
     \      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) & 1)\n#define\
     \ INF ((1 << 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION std::setprecision(16)\n\
-    #define THE_WORLD std::this_thread::sleep_for(30s)\n#define INT(...) int __VA_ARGS__;\
-    \    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;     input(__VA_ARGS__)\n\
-    #define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n#define LD(...)  ld __VA_ARGS__;\
-    \     input(__VA_ARGS__)\n#define VEC(type, name, size) vector<type> name(size);\
-    \ input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n#define ENDL std::endl\n\
-    #else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
+    #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n#define\
+    \ INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;\
+    \     input(__VA_ARGS__)\n#define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n#define VEC(type, name,\
+    \ size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n\
+    #define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
     #define ENDL \"\\n\"\n#endif\n#ifdef Q__LOCAL\n#include <dump.hpp>\n#define DUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl ,dump_func(__VA_ARGS__)\n#define VDUMP(...)\
@@ -180,10 +181,10 @@ data:
     \ <iostream>\n#include <limits>\n#include <list>\n#include <map>\n#include <memory>\n\
     #include <numeric>\n#include <optional>\n#include <queue>\n#include <random>\n\
     #include <set>\n#include <sstream>\n#include <stack>\n#include <string>\n#include\
-    \ <tuple>\n#include <type_traits>\n#include <unordered_map>\n#include <unordered_set>\n\
-    #include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include\
-    \ <atcoder/all>\nusing namespace atcoder;\nusing mint = modint1000000007;\n//\
-    \ using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
+    \ <thread>\n#include <tuple>\n#include <type_traits>\n#include <unordered_map>\n\
+    #include <unordered_set>\n#include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n\
+    #include <atcoder/all>\nusing namespace atcoder;\nusing mint = modint1000000007;\n\
+    // using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
     \ a) { long long tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
     \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
     #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
@@ -207,12 +208,12 @@ data:
     \ (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define POW2(n)\
     \      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) & 1)\n#define\
     \ INF ((1 << 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION std::setprecision(16)\n\
-    #define THE_WORLD std::this_thread::sleep_for(30s)\n#define INT(...) int __VA_ARGS__;\
-    \    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;     input(__VA_ARGS__)\n\
-    #define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n#define LD(...)  ld __VA_ARGS__;\
-    \     input(__VA_ARGS__)\n#define VEC(type, name, size) vector<type> name(size);\
-    \ input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n#define ENDL std::endl\n\
-    #else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
+    #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n#define\
+    \ INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;\
+    \     input(__VA_ARGS__)\n#define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n#define VEC(type, name,\
+    \ size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n\
+    #define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
     #define ENDL \"\\n\"\n#endif\n#ifdef Q__LOCAL\n#include <dump.hpp>\n#define DUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl ,dump_func(__VA_ARGS__)\n#define VDUMP(...)\
@@ -324,7 +325,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2023-10-07 11:47:45+09:00'
+  timestamp: '2023-10-08 15:52:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
