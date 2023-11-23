@@ -140,22 +140,28 @@ data:
     \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
     \ T> inline V<T> it_range(multiset<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
     \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
-    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\nconstexpr ll modpow(ll\
-    \ x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
-    \ ret;}\nconstexpr ll safe_mod(ll x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr\
-    \ ll keta(ll n, ll base = 10LL) {ll ret = 0; while(n > 0) {n /= base, ret++;}\
-    \ return ret;}\nconstexpr int pcnt(ll x) {return __builtin_popcountll(x);}\nconstexpr\
-    \ int log2f(ll x) {return 63 - __builtin_clzll(x);}\nconstexpr int log2c(ll x)\
-    \ {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\nconstexpr ll nC2(ll n) {return\
-    \ n*(n-1)/2;}\nconstexpr ld deg2rad(ll degree){return (ld)degree * M_PI/180;}\n\
-    mt19937 rnd_engine{random_device{}()};\ninline int rand(int l, int r) {uniform_int_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline ld lrand(ld l, ld r) {uniform_real_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline ld nrand(ld ave, ld var) {normal_distribution<>\
-    \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
-    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
-    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
-    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
-    \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
+    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> constexpr\
+    \ void dup_erase(V<T> &a){a.erase(unique(a.begin(), a.end()), a.end());}\ntemplate\
+    \ <class T> V<int> iota(const V<T> &a, bool greater = false) {\n    V<int> ret(a.size());\n\
+    \    iota(ret.begin(), ret.end(), 0);\n    if (greater) {\n      sort(RALL(ret),\
+    \ [&](int i, int j) {\n        if (a[i] == a[j]) return i > j;\n        return\
+    \ a[i] < a[j];\n      });\n    } else {\n      sort(ALL(ret), [&](int i, int j)\
+    \ {\n        if (a[i] == a[j]) return i < j;\n        return a[i] < a[j];\n  \
+    \    });\n    }\n    return ret;\n}\nconstexpr ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll\
+    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr ll safe_mod(ll\
+    \ x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr ll keta(ll n, ll base = 10LL)\
+    \ {ll ret = 0; while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(ll\
+    \ x) {return __builtin_popcountll(x);}\nconstexpr int log2f(ll x) {return 63 -\
+    \ __builtin_clzll(x);}\nconstexpr int log2c(ll x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
+    constexpr ll nC2(ll n) {return n*(n-1)/2;}\nconstexpr ld deg2rad(ll degree){return\
+    \ (ld)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\ninline int\
+    \ rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline ld lrand(ld l, ld r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline ld nrand(ld ave, ld var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
+    inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
+    \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
+    \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
+    \ s + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
@@ -297,22 +303,28 @@ data:
     \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
     \ T> inline V<T> it_range(multiset<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
     \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
-    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\nconstexpr ll modpow(ll\
-    \ x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
-    \ ret;}\nconstexpr ll safe_mod(ll x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr\
-    \ ll keta(ll n, ll base = 10LL) {ll ret = 0; while(n > 0) {n /= base, ret++;}\
-    \ return ret;}\nconstexpr int pcnt(ll x) {return __builtin_popcountll(x);}\nconstexpr\
-    \ int log2f(ll x) {return 63 - __builtin_clzll(x);}\nconstexpr int log2c(ll x)\
-    \ {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\nconstexpr ll nC2(ll n) {return\
-    \ n*(n-1)/2;}\nconstexpr ld deg2rad(ll degree){return (ld)degree * M_PI/180;}\n\
-    mt19937 rnd_engine{random_device{}()};\ninline int rand(int l, int r) {uniform_int_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline ld lrand(ld l, ld r) {uniform_real_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline ld nrand(ld ave, ld var) {normal_distribution<>\
-    \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
-    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
-    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
-    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
-    \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
+    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> constexpr\
+    \ void dup_erase(V<T> &a){a.erase(unique(a.begin(), a.end()), a.end());}\ntemplate\
+    \ <class T> V<int> iota(const V<T> &a, bool greater = false) {\n    V<int> ret(a.size());\n\
+    \    iota(ret.begin(), ret.end(), 0);\n    if (greater) {\n      sort(RALL(ret),\
+    \ [&](int i, int j) {\n        if (a[i] == a[j]) return i > j;\n        return\
+    \ a[i] < a[j];\n      });\n    } else {\n      sort(ALL(ret), [&](int i, int j)\
+    \ {\n        if (a[i] == a[j]) return i < j;\n        return a[i] < a[j];\n  \
+    \    });\n    }\n    return ret;\n}\nconstexpr ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll\
+    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr ll safe_mod(ll\
+    \ x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr ll keta(ll n, ll base = 10LL)\
+    \ {ll ret = 0; while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(ll\
+    \ x) {return __builtin_popcountll(x);}\nconstexpr int log2f(ll x) {return 63 -\
+    \ __builtin_clzll(x);}\nconstexpr int log2c(ll x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
+    constexpr ll nC2(ll n) {return n*(n-1)/2;}\nconstexpr ld deg2rad(ll degree){return\
+    \ (ld)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\ninline int\
+    \ rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline ld lrand(ld l, ld r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline ld nrand(ld ave, ld var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
+    inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
+    \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
+    \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
+    \ s + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
@@ -326,7 +338,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2023-10-09 00:16:47+09:00'
+  timestamp: '2023-11-23 21:13:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
