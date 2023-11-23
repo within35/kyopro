@@ -249,6 +249,23 @@ template<class T> inline V<T> it_range(multiset<T> &st, int l, int r) {
   for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);
   return ret;
 }
+template<class T> constexpr void dup_erase(V<T> &a){a.erase(unique(a.begin(), a.end()), a.end());}
+template <class T> V<int> iota(const V<T> &a, bool greater = false) {
+    V<int> ret(a.size());
+    iota(ret.begin(), ret.end(), 0);
+    if (greater) {
+      sort(RALL(ret), [&](int i, int j) {
+        if (a[i] == a[j]) return i > j;
+        return a[i] < a[j];
+      });
+    } else {
+      sort(ALL(ret), [&](int i, int j) {
+        if (a[i] == a[j]) return i < j;
+        return a[i] < a[j];
+      });
+    }
+    return ret;
+}
 constexpr ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}
 constexpr ll safe_mod(ll x, ll m) {x%=m;if(x<0)x+=m;return x;}
 constexpr ll keta(ll n, ll base = 10LL) {ll ret = 0; while(n > 0) {n /= base, ret++;} return ret;}
