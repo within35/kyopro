@@ -75,6 +75,7 @@ signed main(void){
 #include <thread>
 #include <tuple>
 #include <type_traits>
+#include <regex>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
@@ -165,7 +166,7 @@ template<class T> constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));a
 template<class T> constexpr pair<T,T> pos2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}
 template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}
 template<class T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return tA;}
-template<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret), ret.begin(), 0);return ret;}
+template<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret), ret.begin(), T(0));return ret;}
 template<class T> inline V<T> kaisa(V<T>& a){V<T> ret(a.size());adjacent_difference(ALL(a), ret.begin());return ret;}
 template<class T> inline int g_index(V<T> &s, T x) {
   if (s.empty()) return -2;
@@ -299,6 +300,7 @@ V<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {
   if (to1indexed) for(auto&& e: ret) e++;
   return ret;
 }
+map<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, 1, 0, -1};
 const int dx6[6] = {1, 0, -1, 0, 1, -1};
