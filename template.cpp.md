@@ -25,9 +25,9 @@ data:
     \ <map>\n#include <memory>\n#include <numeric>\n#include <optional>\n#include\
     \ <queue>\n#include <random>\n#include <set>\n#include <sstream>\n#include <stack>\n\
     #include <string>\n#include <thread>\n#include <tuple>\n#include <type_traits>\n\
-    #include <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include\
-    \ <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\nusing namespace\
-    \ atcoder;\n//using mint = modint1000000007;\nusing mint = modint998244353;\n\
+    #include <regex>\n#include <unordered_map>\n#include <unordered_set>\n#include\
+    \ <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\n\
+    using namespace atcoder;\n//using mint = modint1000000007;\nusing mint = modint998244353;\n\
     std::istream &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp;\
     \ a = tmp; return is; }\nstd::ostream &operator<<(std::ostream& os, const mint&\
     \ a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n#define MOD 998244353\n\
@@ -100,7 +100,7 @@ data:
     template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\ntemplate<class\
     \ T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
     \ tA;}\ntemplate<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret),\
-    \ ret.begin(), 0);return ret;}\ntemplate<class T> inline V<T> kaisa(V<T>& a){V<T>\
+    \ ret.begin(), T(0));return ret;}\ntemplate<class T> inline V<T> kaisa(V<T>& a){V<T>\
     \ ret(a.size());adjacent_difference(ALL(a), ret.begin());return ret;}\ntemplate<class\
     \ T> inline int g_index(V<T> &s, T x) {\n  if (s.empty()) return -2;\n  auto it\
     \ = upper_bound(ALL(s), x);\n  if (it == s.end()) return -1;\n  return (int)distance(s.begin(),\
@@ -167,10 +167,11 @@ data:
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
     \  V<int> ret;\n  int x = goal;\n  while(x >= 0) {\n    ret.push_back(x);\n  \
     \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
-    \ e++;\n  return ret;\n}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4]\
-    \ = {0, 1, 0, -1};\nconst int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6]\
-    \ = {0, 1, 0, -1, 1, -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst\
-    \ int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n#endif\n"
+    \ e++;\n  return ret;\n}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\n\
+    const int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int\
+    \ dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst\
+    \ int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1,\
+    \ 1, 1, -1, -1};\n#endif\n"
   code: "// #define Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n\
     #if !__INCLUDE_LEVEL__\n#include __FILE__\n\n\nstruct Solver {\n  void solve()\
     \ {\n\n  }\n\n  void naive() {\n\n  }\n} solver;\n\n\n\nsigned main(void){\n \
@@ -187,34 +188,34 @@ data:
     \ <iostream>\n#include <limits>\n#include <list>\n#include <map>\n#include <memory>\n\
     #include <numeric>\n#include <optional>\n#include <queue>\n#include <random>\n\
     #include <set>\n#include <sstream>\n#include <stack>\n#include <string>\n#include\
-    \ <thread>\n#include <tuple>\n#include <type_traits>\n#include <unordered_map>\n\
-    #include <unordered_set>\n#include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n\
-    #include <atcoder/all>\nusing namespace atcoder;\n//using mint = modint1000000007;\n\
-    using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
-    \ a) { long long tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
-    \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
-    #define MOD 998244353\n#define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)\
-    \          for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i,\
-    \ a)       for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i,\
-    \ a, b)    for(decltype(b) i = (a), i##_len = (b); i < i##_len; ++i)\n#define\
-    \ REP4(i, a, b, c) for(decltype(b) i = (a), i##_len = (b); i < i##_len; i += (c))\n\
-    #define REP(...) OVERLOAD4(__VA_ARGS__, REP4, REP3, REP2, REP1)(__VA_ARGS__)\n\
-    #define RREP1(a)          for(decltype(a) i = (a); i--;)\n#define RREP2(i, a)\
-    \       for(decltype(a) i = (a); i--;)\n#define RREP3(i, a, b)    for(decltype(a)\
-    \ i = (b), i##_len = (a); i-- > i##_len;)\n#define RREP4(i, a, b, c) for(decltype(a)\
-    \ i = (a)+((b)-(a)-1)/(c)*(c), i##_len = (a); i >= i##_len; i -= c)\n#define RREP(...)\
-    \ OVERLOAD4(__VA_ARGS__, RREP4, RREP3, RREP2, RREP1)(__VA_ARGS__)\n#define MREP(v,...)\
-    \ for(auto v:make_enum_vec({__VA_ARGS__}))\n#define QREP(q, l, r, n) for (ll q\
-    \ = 1, l = n / (q + 1) + 1, r = n / q + 1; q <= n; q = (q == n ? n + 1 : n / (n\
-    \ / (q + 1))), l = n / (q + 1) + 1, r = n / q + 1)\n#define COMB_REP(i,n,k) for\
-    \ (ll t, i = POW2(k) - 1; i < POW2(n); t=i|(i-1), i = (t+1)|(((~t & - ~t)-1) >>\
-    \ (__builtin_ctzll(i)+1)))\n#define SUBSET_ENUM_REP(i,s) for (ll i = (1LL << 60)\
-    \ - 1; i >= 0, i &= s; --i)\n#define SUBSET_INCLUDE_REP(i,n,s) for (int i = s;\
-    \ i < POW2(n); i=(++i)|s)\n#define POPONLY_REP(i,s) for (ll i=s&-s; i; i=s&(~s+(i\
-    \ << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(),\
-    \ (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define POW2(n)      (1LL <<\
-    \ ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) & 1)\n#define INF ((1 <<\
-    \ 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION std::setprecision(16)\n\
+    \ <thread>\n#include <tuple>\n#include <type_traits>\n#include <regex>\n#include\
+    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
+    #ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\nusing namespace atcoder;\n\
+    //using mint = modint1000000007;\nusing mint = modint998244353;\nstd::istream\
+    \ &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp; a = tmp;\
+    \ return is; }\nstd::ostream &operator<<(std::ostream& os, const mint& a) {os\
+    \ << a.val(); return os;}\n#endif\nusing namespace std;\n#define MOD 998244353\n\
+    #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
+    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a)\
+    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b)\
+    \ i = (a), i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b)\
+    \ i = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
+    \ REP4, REP3, REP2, REP1)(__VA_ARGS__)\n#define RREP1(a)          for(decltype(a)\
+    \ i = (a); i--;)\n#define RREP2(i, a)       for(decltype(a) i = (a); i--;)\n#define\
+    \ RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)\n\
+    #define RREP4(i, a, b, c) for(decltype(a) i = (a)+((b)-(a)-1)/(c)*(c), i##_len\
+    \ = (a); i >= i##_len; i -= c)\n#define RREP(...) OVERLOAD4(__VA_ARGS__, RREP4,\
+    \ RREP3, RREP2, RREP1)(__VA_ARGS__)\n#define MREP(v,...) for(auto v:make_enum_vec({__VA_ARGS__}))\n\
+    #define QREP(q, l, r, n) for (ll q = 1, l = n / (q + 1) + 1, r = n / q + 1; q\
+    \ <= n; q = (q == n ? n + 1 : n / (n / (q + 1))), l = n / (q + 1) + 1, r = n /\
+    \ q + 1)\n#define COMB_REP(i,n,k) for (ll t, i = POW2(k) - 1; i < POW2(n); t=i|(i-1),\
+    \ i = (t+1)|(((~t & - ~t)-1) >> (__builtin_ctzll(i)+1)))\n#define SUBSET_ENUM_REP(i,s)\
+    \ for (ll i = (1LL << 60) - 1; i >= 0, i &= s; --i)\n#define SUBSET_INCLUDE_REP(i,n,s)\
+    \ for (int i = s; i < POW2(n); i=(++i)|s)\n#define POPONLY_REP(i,s) for (ll i=s&-s;\
+    \ i; i=s&(~s+(i << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define RALL(x)\
+    \ (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define POW2(n)\
+    \      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) & 1)\n#define\
+    \ INF ((1 << 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION std::setprecision(16)\n\
     #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n#define\
     \ INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;\
     \     input(__VA_ARGS__)\n#define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n\
@@ -263,7 +264,7 @@ data:
     template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\ntemplate<class\
     \ T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
     \ tA;}\ntemplate<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret),\
-    \ ret.begin(), 0);return ret;}\ntemplate<class T> inline V<T> kaisa(V<T>& a){V<T>\
+    \ ret.begin(), T(0));return ret;}\ntemplate<class T> inline V<T> kaisa(V<T>& a){V<T>\
     \ ret(a.size());adjacent_difference(ALL(a), ret.begin());return ret;}\ntemplate<class\
     \ T> inline int g_index(V<T> &s, T x) {\n  if (s.empty()) return -2;\n  auto it\
     \ = upper_bound(ALL(s), x);\n  if (it == s.end()) return -1;\n  return (int)distance(s.begin(),\
@@ -330,15 +331,16 @@ data:
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
     \  V<int> ret;\n  int x = goal;\n  while(x >= 0) {\n    ret.push_back(x);\n  \
     \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
-    \ e++;\n  return ret;\n}\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4]\
-    \ = {0, 1, 0, -1};\nconst int dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6]\
-    \ = {0, 1, 0, -1, 1, -1};\nconst int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst\
-    \ int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n#endif"
+    \ e++;\n  return ret;\n}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\n\
+    const int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int\
+    \ dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst\
+    \ int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1,\
+    \ 1, 1, -1, -1};\n#endif"
   dependsOn: []
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2023-11-23 21:13:57+09:00'
+  timestamp: '2024-02-11 22:01:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
