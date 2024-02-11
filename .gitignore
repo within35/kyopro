@@ -10,6 +10,8 @@
 # temporary file
 main.cpp
 main.py
+clean.php
+template.py
 
 # old file
 *.old
