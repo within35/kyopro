@@ -442,6 +442,41 @@ void vdump_func(vector<string> &grid)
     DUMPOUT << e << endl;
 }
 
+// セグメント可視化
+void vdump_func(map<int,vector<long long>> &mp, long long inf = 1073741823, int padding_length = 3)
+{
+  if (mp.empty()) {
+    DUMPOUT << "{}" << endl;
+    return;
+  }
+
+  int maxDepth = 0;
+  for (auto [depth,e] : mp) if (maxDepth < depth) maxDepth = depth;
+
+  stringstream ss;
+  for (auto [depth,vec] : mp)
+  {
+    ss << "\n" << depth << "|";
+    for (auto ele: vec) {
+      int requireSpace = (maxDepth - depth) + 1;
+      string str = to_string(ele);
+      int width = SZ(str);
+      if (ele >= inf - 100) {
+        str = "∞";
+        width = 1;
+       } else if (ele <= -inf + 100) {
+        str = "-∞";
+        width = 2;
+       }
+      int leftSpace = (((padding_length) << requireSpace) - width - 1) / 2;
+      int rightSpace =  (((padding_length) << requireSpace) - width - 1) - leftSpace;
+      ss << string(leftSpace, ' ') << str << string(rightSpace, ' ') << "|";
+
+    }
+  }
+  DUMPOUT << ss.str().substr(1) << endl;
+}
+
 // グリッド可視化(一次元化 int用)
 void vdump_func(vector<int> &grid, int h, int w, int inf = 1073741823, int padding_length = 2)
 {
