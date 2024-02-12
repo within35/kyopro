@@ -121,11 +121,24 @@ data:
     \nvoid vdump_func(long long bits)\n{\n  bitset<64> bt(bits);\n  DUMPOUT << bt.to_string()\
     \ << endl;\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u6587\u5B57\u5217\
     \u7528)\nvoid vdump_func(vector<string> &grid)\n{\n  for (auto &&e : grid)\n \
-    \   DUMPOUT << e << endl;\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316\
-    (\u4E00\u6B21\u5143\u5316 int\u7528)\nvoid vdump_func(vector<int> &grid, int h,\
-    \ int w, int inf = 1073741823, int padding_length = 2)\n{\n  for (int i = 0; i\
-    \ < h; i++)\n  {\n    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n\
-    \      ss << \",\";\n      if (grid[i * w + j] >= inf - 100)\n        ss << string(padding_length\
+    \   DUMPOUT << e << endl;\n}\n\n// \u30BB\u30B0\u30E1\u30F3\u30C8\u53EF\u8996\u5316\
+    \nvoid vdump_func(map<int,vector<long long>> &mp, long long inf = 1073741823,\
+    \ int padding_length = 3)\n{\n  if (mp.empty()) {\n    DUMPOUT << \"{}\" << endl;\n\
+    \    return;\n  }\n\n  int maxDepth = 0;\n  for (auto [depth,e] : mp) if (maxDepth\
+    \ < depth) maxDepth = depth;\n\n  stringstream ss;\n  for (auto [depth,vec] :\
+    \ mp)\n  {\n    ss << \"\\n\" << depth << \"|\";\n    for (auto ele: vec) {\n\
+    \      int requireSpace = (maxDepth - depth) + 1;\n      string str = to_string(ele);\n\
+    \      int width = SZ(str);\n      if (ele >= inf - 100) {\n        str = \"\u221E\
+    \";\n        width = 1;\n       } else if (ele <= -inf + 100) {\n        str =\
+    \ \"-\u221E\";\n        width = 2;\n       }\n      int leftSpace = (((padding_length)\
+    \ << requireSpace) - width - 1) / 2;\n      int rightSpace =  (((padding_length)\
+    \ << requireSpace) - width - 1) - leftSpace;\n      ss << string(leftSpace, '\
+    \ ') << str << string(rightSpace, ' ') << \"|\";\n\n    }\n  }\n  DUMPOUT << ss.str().substr(1)\
+    \ << endl;\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E00\u6B21\u5143\
+    \u5316 int\u7528)\nvoid vdump_func(vector<int> &grid, int h, int w, int inf =\
+    \ 1073741823, int padding_length = 2)\n{\n  for (int i = 0; i < h; i++)\n  {\n\
+    \    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \"\
+    ,\";\n      if (grid[i * w + j] >= inf - 100)\n        ss << string(padding_length\
     \ - 1, ' ') << \"\u221E\";\n      else if (grid[i * w + j] <= -inf + 100)\n  \
     \      ss << string(padding_length - 2, ' ') << \"-\u221E\";\n      else\n   \
     \     ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i\
@@ -294,11 +307,24 @@ data:
     \nvoid vdump_func(long long bits)\n{\n  bitset<64> bt(bits);\n  DUMPOUT << bt.to_string()\
     \ << endl;\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u6587\u5B57\u5217\
     \u7528)\nvoid vdump_func(vector<string> &grid)\n{\n  for (auto &&e : grid)\n \
-    \   DUMPOUT << e << endl;\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316\
-    (\u4E00\u6B21\u5143\u5316 int\u7528)\nvoid vdump_func(vector<int> &grid, int h,\
-    \ int w, int inf = 1073741823, int padding_length = 2)\n{\n  for (int i = 0; i\
-    \ < h; i++)\n  {\n    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n\
-    \      ss << \",\";\n      if (grid[i * w + j] >= inf - 100)\n        ss << string(padding_length\
+    \   DUMPOUT << e << endl;\n}\n\n// \u30BB\u30B0\u30E1\u30F3\u30C8\u53EF\u8996\u5316\
+    \nvoid vdump_func(map<int,vector<long long>> &mp, long long inf = 1073741823,\
+    \ int padding_length = 3)\n{\n  if (mp.empty()) {\n    DUMPOUT << \"{}\" << endl;\n\
+    \    return;\n  }\n\n  int maxDepth = 0;\n  for (auto [depth,e] : mp) if (maxDepth\
+    \ < depth) maxDepth = depth;\n\n  stringstream ss;\n  for (auto [depth,vec] :\
+    \ mp)\n  {\n    ss << \"\\n\" << depth << \"|\";\n    for (auto ele: vec) {\n\
+    \      int requireSpace = (maxDepth - depth) + 1;\n      string str = to_string(ele);\n\
+    \      int width = SZ(str);\n      if (ele >= inf - 100) {\n        str = \"\u221E\
+    \";\n        width = 1;\n       } else if (ele <= -inf + 100) {\n        str =\
+    \ \"-\u221E\";\n        width = 2;\n       }\n      int leftSpace = (((padding_length)\
+    \ << requireSpace) - width - 1) / 2;\n      int rightSpace =  (((padding_length)\
+    \ << requireSpace) - width - 1) - leftSpace;\n      ss << string(leftSpace, '\
+    \ ') << str << string(rightSpace, ' ') << \"|\";\n\n    }\n  }\n  DUMPOUT << ss.str().substr(1)\
+    \ << endl;\n}\n\n// \u30B0\u30EA\u30C3\u30C9\u53EF\u8996\u5316(\u4E00\u6B21\u5143\
+    \u5316 int\u7528)\nvoid vdump_func(vector<int> &grid, int h, int w, int inf =\
+    \ 1073741823, int padding_length = 2)\n{\n  for (int i = 0; i < h; i++)\n  {\n\
+    \    stringstream ss;\n    for (int j = 0; j < w; j++)\n    {\n      ss << \"\
+    ,\";\n      if (grid[i * w + j] >= inf - 100)\n        ss << string(padding_length\
     \ - 1, ' ') << \"\u221E\";\n      else if (grid[i * w + j] <= -inf + 100)\n  \
     \      ss << string(padding_length - 2, ' ') << \"-\u221E\";\n      else\n   \
     \     ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i\
@@ -358,7 +384,7 @@ data:
   isVerificationFile: false
   path: cpp/include/dump.hpp
   requiredBy: []
-  timestamp: '2023-10-07 08:31:57+09:00'
+  timestamp: '2024-02-12 23:48:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: cpp/include/dump.hpp
