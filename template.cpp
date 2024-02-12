@@ -1,8 +1,7 @@
 // #define Q__OPTIMIZE
 // #define Q__INCLUDE_ATCODER_LIB
 // #define Q__INTERACTIVE
-#if !__INCLUDE_LEVEL__
-#include __FILE__
+#ifdef INCLUDED_MAIN
 
 
 struct Solver {
@@ -307,4 +306,12 @@ const int dx6[6] = {1, 0, -1, 0, 1, -1};
 const int dy6[6] = {0, 1, 0, -1, 1, -1};
 const int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};
+#ifdef Q__LOCAL
+#define FILENAME __FILE__
+#else
+#define FILENAME __FILE__
+// #define FILENAME "code.cpp" // AOJ
+#endif
+#define INCLUDED_MAIN
+#include FILENAME
 #endif
