@@ -18,6 +18,8 @@ template.py
 
 # build file
 *.out
+Info.plist
+a.out.yml
 
 # log file
 geckodriver.log
