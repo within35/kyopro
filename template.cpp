@@ -41,7 +41,10 @@ signed main(void){
 #else
 #define _GLIBCXX_DEQUE_BUF_SIZE 64
 #ifdef Q__OPTIMIZE
+#pragma optimize("", on)
+#ifndef Q__LOCAL
 #pragma GCC target("avx")
+#endif
 #pragma GCC optimize("O3")
 #pragma GCC optimize("unroll-loops")
 #endif
@@ -115,7 +118,6 @@ using namespace std;
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
-#define INF ((1 << 30) - 1)
 #define INFL (1LL << 60)
 #define PRECISION std::setprecision(16)
 #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))
@@ -143,6 +145,7 @@ using ld   = long double;
 using ll   = long long;
 using lint = long long;
 #define int int64_t
+const int64_t INF = numeric_limits<int64_t>::max() / 2;
 template<class T> using V=vector<T>;
 template<class T> using VV=vector<vector<T>>;
 template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;
@@ -304,6 +307,8 @@ V<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {
   if (to1indexed) for(auto&& e: ret) e++;
   return ret;
 }
+string tolower(string s) {for(auto&& e: s) e = tolower(e); return s;}
+string toupper(string s) {for(auto&& e: s) e = toupper(e); return s;}
 map<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, 1, 0, -1};
