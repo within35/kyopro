@@ -165,6 +165,24 @@ ostream &operator<<(ostream &os, const vector<pair<T, U>> &vec)
   os << ss.str().substr(1) << "}";
   return os;
 }
+template <class T, class U>
+ostream &operator<<(ostream &os, const vector<vector<pair<T, U>>> &vec)
+{
+  if (vec.empty())
+    return os << "{}";
+  stringstream ss;
+  os << "{";
+  for(auto eachVec: vec)
+  {
+    for (auto itr : eachVec)
+    {
+      ss << "," << itr;
+    }
+  }
+
+  os << ss.str().substr(1) << "}";
+  return os;
+}
 
 template <class T, class U, class V>
 ostream &operator<<(ostream &os, const tuple<T, U, V> &vec)
