@@ -12,6 +12,7 @@ main.cpp
 main.py
 clean.php
 template.py
+problem.html
 
 # old file
 *.old
@@ -20,6 +21,7 @@ template.py
 *.out
 Info.plist
 a.out.yml
+*.pyc
 
 # log file
 geckodriver.log
