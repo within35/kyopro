@@ -478,14 +478,14 @@ void vdump_func(map<int,vector<long long>> &mp, long long inf = 1073741823, int 
     for (auto ele: vec) {
       int requireSpace = (maxDepth - depth) + 1;
       string str = to_string(ele);
-      int width = SZ(str);
+      int width = str.size();
       if (ele >= inf - 100) {
         str = "∞";
         width = 1;
-       } else if (ele <= -inf + 100) {
+      } else if (ele <= -inf + 100) {
         str = "-∞";
         width = 2;
-       }
+      }
       int leftSpace = (((padding_length) << requireSpace) - width - 1) / 2;
       int rightSpace =  (((padding_length) << requireSpace) - width - 1) - leftSpace;
       ss << string(leftSpace, ' ') << str << string(rightSpace, ' ') << "|";
@@ -607,7 +607,7 @@ void vdump_func(vector<vector<long long>> &grid, long long inf = 152921504606846
 }
 
 // グリッド可視化(二次元 long double用)
-void vdump_func(vector<vector<long double>> &grid, int padding_length = 8)
+void vdump_func(vector<vector<long double>> &grid, int padding_length = 8, int precision = 1000)
 {
   if (grid.size() == 0)
     return;
@@ -623,7 +623,7 @@ void vdump_func(vector<vector<long double>> &grid, int padding_length = 8)
       else if (grid[i][j] <= -152921504606846976LL + 100)
         ss << string(padding_length - 2, ' ') << "-∞";
       else
-        ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];
+        ss << std::right << std::setw(padding_length) << std::setfill(' ') << roundl(grid[i][j] * precision) / precision;
     }
     DUMPOUT << ss.str().substr(1) << endl;
   }
