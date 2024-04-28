@@ -316,6 +316,16 @@ const int dx6[6] = {1, 0, -1, 0, 1, -1};
 const int dy6[6] = {0, 1, 0, -1, 1, -1};
 const int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};
+class Timer{
+  chrono::system_clock::time_point start;
+public:
+  Timer() : start(chrono::system_clock::now()) {}
+  double count(){
+    chrono::duration<double> duration = chrono::system_clock::now() - start;
+    return duration.count();
+  }
+  bool is_timeout(double x){return (this -> count()) >= x;}
+};
 #ifdef Q__LOCAL
 #define FILENAME __FILE__
 #else
