@@ -9,8 +9,14 @@ data:
   - name: .
     pages:
     - icon: ':warning:'
+      path: snippets.py
+      title: snippets.py
+    - icon: ':warning:'
       path: template.cpp
       title: template.cpp
+    - icon: ':warning:'
+      path: tree_display.py
+      title: tree_display.py
   verificationCategories:
   - name: .
     pages:

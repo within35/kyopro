@@ -16,68 +16,69 @@ data:
     );\n#endif\n#ifdef Q__INCLUDE_ATCODER_LIB\n  options.push_back(\"INCLUDE_ATCODER_LIB\"\
     );\n#endif\n  DUMP(options);\n#ifndef Q__NAIVE\n  solver.solve();\n#else\n  DUMP(\"\
     naive\");\n  solver.naive();\n#endif\n  return 0;\n}\n\n#else\n#define _GLIBCXX_DEQUE_BUF_SIZE\
-    \ 64\n#ifdef Q__OPTIMIZE\n#pragma GCC target(\"avx\")\n#pragma GCC optimize(\"\
-    O3\")\n#pragma GCC optimize(\"unroll-loops\")\n#endif\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <chrono>\n#include\
-    \ <cmath>\n#include <complex>\n#include <deque>\n#include <forward_list>\n#include\
-    \ <fstream>\n#include <functional>\n#include <iomanip>\n#include <ios>\n#include\
-    \ <iostream>\n#include <limits>\n#include <list>\n#include <map>\n#include <memory>\n\
-    #include <numeric>\n#include <optional>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <string>\n#include\
-    \ <thread>\n#include <tuple>\n#include <type_traits>\n#include <regex>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    #ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\nusing namespace atcoder;\n\
-    //using mint = modint1000000007;\nusing mint = modint998244353;\nstd::istream\
-    \ &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp; a = tmp;\
-    \ return is; }\nstd::ostream &operator<<(std::ostream& os, const mint& a) {os\
-    \ << a.val(); return os;}\n#endif\nusing namespace std;\n#define MOD 998244353\n\
-    #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
-    \ REP4, REP3, REP2, REP1)(__VA_ARGS__)\n#define RREP1(a)          for(decltype(a)\
-    \ i = (a); i--;)\n#define RREP2(i, a)       for(decltype(a) i = (a); i--;)\n#define\
-    \ RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)\n\
-    #define RREP4(i, a, b, c) for(decltype(a) i = (a)+((b)-(a)-1)/(c)*(c), i##_len\
-    \ = (a); i >= i##_len; i -= c)\n#define RREP(...) OVERLOAD4(__VA_ARGS__, RREP4,\
-    \ RREP3, RREP2, RREP1)(__VA_ARGS__)\n#define MREP(v,...) for(auto v:make_enum_vec({__VA_ARGS__}))\n\
-    #define QREP(q, l, r, n) for (ll q = 1, l = n / (q + 1) + 1, r = n / q + 1; q\
-    \ <= n; q = (q == n ? n + 1 : n / (n / (q + 1))), l = n / (q + 1) + 1, r = n /\
-    \ q + 1)\n#define COMB_REP(i,n,k) for (ll t, i = POW2(k) - 1; i < POW2(n); t=i|(i-1),\
-    \ i = (t+1)|(((~t & - ~t)-1) >> (__builtin_ctzll(i)+1)))\n#define SUBSET_ENUM_REP(i,s)\
-    \ for (ll i = (1LL << 60) - 1; i >= 0, i &= s; --i)\n#define SUBSET_INCLUDE_REP(i,n,s)\
-    \ for (int i = s; i < POW2(n); i=(++i)|s)\n#define POPONLY_REP(i,s) for (ll i=s&-s;\
-    \ i; i=s&(~s+(i << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define RALL(x)\
-    \ (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define POW2(n)\
-    \      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) & 1)\n#define\
-    \ INF ((1 << 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION std::setprecision(16)\n\
-    #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n#define\
-    \ INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;\
-    \     input(__VA_ARGS__)\n#define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n\
-    #define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n#define VEC(type, name,\
-    \ size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n\
-    #define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
+    \ 64\n#ifdef Q__OPTIMIZE\n#pragma optimize(\"\", on)\n#ifndef Q__LOCAL\n#pragma\
+    \ GCC target(\"avx\")\n#endif\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"\
+    unroll-loops\")\n#endif\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <chrono>\n#include <cmath>\n#include <complex>\n\
+    #include <deque>\n#include <forward_list>\n#include <fstream>\n#include <functional>\n\
+    #include <iomanip>\n#include <ios>\n#include <iostream>\n#include <limits>\n#include\
+    \ <list>\n#include <map>\n#include <memory>\n#include <numeric>\n#include <optional>\n\
+    #include <optional>\n#include <queue>\n#include <random>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <string>\n#include <thread>\n\
+    #include <tuple>\n#include <type_traits>\n#include <unordered_map>\n#include <unordered_set>\n\
+    #include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include\
+    \ <atcoder/all>\nusing namespace atcoder;\n//using mint = modint1000000007;\n\
+    using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
+    \ a) { int64_t tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
+    \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
+    #define MOD 998244353\n#define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)\
+    \          for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i,\
+    \ a)       for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i,\
+    \ a, b)    for(decltype(b) i = (a), i##_len = (b); i < i##_len; ++i)\n#define\
+    \ REP4(i, a, b, c) for(decltype(b) i = (a), i##_len = (b); i < i##_len; i += (c))\n\
+    #define REP(...) OVERLOAD4(__VA_ARGS__, REP4, REP3, REP2, REP1)(__VA_ARGS__)\n\
+    #define RREP1(a)          for(decltype(a) i = (a); i--;)\n#define RREP2(i, a)\
+    \       for(decltype(a) i = (a); i--;)\n#define RREP3(i, a, b)    for(decltype(a)\
+    \ i = (b), i##_len = (a); i-- > i##_len;)\n#define RREP4(i, a, b, c) for(decltype(a)\
+    \ i = (a)+((b)-(a)-1)/(c)*(c), i##_len = (a); i >= i##_len; i -= c)\n#define RREP(...)\
+    \ OVERLOAD4(__VA_ARGS__, RREP4, RREP3, RREP2, RREP1)(__VA_ARGS__)\n#define MREP(v,...)\
+    \ for(auto v:make_enum_vec({__VA_ARGS__}))\n#define QREP(q, l, r, n) for (int64_t\
+    \ q = 1, l = n / (q + 1) + 1, r = n / q + 1; q <= n; q = (q == n ? n + 1 : n /\
+    \ (n / (q + 1))), l = n / (q + 1) + 1, r = n / q + 1)\n#define COMB_REP(i,n,k)\
+    \ for (int64_t t, i = POW2(k) - 1; i < POW2(n); t=i|(i-1), i = (t+1)|(((~t & -\
+    \ ~t)-1) >> (__builtin_ctzll(i)+1)))\n#define SUBSET_ENUM_REP(i,s) for (int64_t\
+    \ i = (1LL << 60) - 1; i >= 0, i &= s; --i)\n#define SUBSET_INCLUDE_REP(i,n,s)\
+    \ for (int64_t i = s; i < POW2(n); i=(++i)|s)\n#define POPONLY_REP(i,s) for (int64_t\
+    \ i=s&-s; i; i=s&(~s+(i << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define\
+    \ RALL(x) (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define\
+    \ POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) &\
+    \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define INFL\
+    \ (1LL << 60)\n#define PRECISION std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
+    #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define LONG(...) int64_t\
+    \ __VA_ARGS__;   input(__VA_ARGS__)\n#define STR(...)  string __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
+    #define NO_SYNC_STD\n#define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
     #define ENDL \"\\n\"\n#endif\n#ifdef Q__LOCAL\n#include <dump.hpp>\n#define DUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl ,dump_func(__VA_ARGS__)\n#define VDUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl, vdump_func(__VA_ARGS__)\n#else\n\
-    #define DUMP(...)\n#define VDUMP(...)\n#endif\nusing ll=long long;\nusing ull=unsigned\
-    \ long long;\nusing ld=long double;\ntemplate<class T> using V=vector<T>;\ntemplate<class\
-    \ T> using VV=vector<vector<T>>;\ntemplate<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\n\
-    template<class T> istream &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >>\
-    \ e;return is;}\ntemplate<class T> istream &operator>>(istream &is,complex<T>\
-    \ &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class T,class\
-    \ U> istream &operator>>(istream &is,pair<T,U> &v){is >> v.first >> v.second;return\
-    \ is;}\ntemplate<class T,size_t n> istream &operator>>(istream &is,array<T,n>\
-    \ &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A> void input(A&&...\
-    \ args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout <<\
-    \ ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const A&...\
-    \ rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
-    \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
-    \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
-    \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
+    #define DUMP(...)\n#define VDUMP(...)\n#endif\nusing ull  = unsigned long long;\n\
+    using ld   = long double;\nusing ll   = long long;\nusing lint = long long;\n\
+    #define int int64_t\nconst int64_t INF = numeric_limits<int64_t>::max() / 2;\n\
+    template<class T> using V=vector<T>;\ntemplate<class T> using VV=vector<vector<T>>;\n\
+    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\ntemplate<class\
+    \ T> istream &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\n\
+    template<class T> istream &operator>>(istream &is,complex<T> &v){T x,y; is >>\
+    \ x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class T,class U> istream &operator>>(istream\
+    \ &is,pair<T,U> &v){is >> v.first >> v.second;return is;}\ntemplate<class T,size_t\
+    \ n> istream &operator>>(istream &is,array<T,n> &v){for(auto&& e:v)is >> e;return\
+    \ is;}\ntemplate<class... A> void input(A&&... args){(cin >> ... >> args);}\n\
+    template<class... A> void print_rest(){cout << ENDL;}\ntemplate<class T,class...\
+    \ A> void print_rest(const T& first,const A&... rest){cout << \" \" << first;print_rest(rest...);}\n\
+    template<class T,class... A> void print(const T& first,const A&... rest){cout\
+    \ << fixed << PRECISION << first;print_rest(rest...);}\ntemplate<class T,class...\
+    \ A> void die(const T& first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
     template <typename ... Args> string fmt(const string& fmt, Args ... args ){size_t\
     \ len = snprintf( nullptr, 0, fmt.c_str(), args ... );vector<char> buf(len + 1);snprintf(&buf[0],\
     \ len + 1, fmt.c_str(), args ... );return string(&buf[0], &buf[0] + len);}\ntemplate<class\
@@ -147,17 +148,19 @@ data:
     \ [&](int i, int j) {\n        if (a[i] == a[j]) return i > j;\n        return\
     \ a[i] < a[j];\n      });\n    } else {\n      sort(ALL(ret), [&](int i, int j)\
     \ {\n        if (a[i] == a[j]) return i < j;\n        return a[i] < a[j];\n  \
-    \    });\n    }\n    return ret;\n}\nconstexpr ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll\
-    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr ll safe_mod(ll\
-    \ x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr ll keta(ll n, ll base = 10LL)\
-    \ {ll ret = 0; while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(ll\
-    \ x) {return __builtin_popcountll(x);}\nconstexpr int log2f(ll x) {return 63 -\
-    \ __builtin_clzll(x);}\nconstexpr int log2c(ll x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
-    constexpr ll nC2(ll n) {return n*(n-1)/2;}\nconstexpr ld deg2rad(ll degree){return\
-    \ (ld)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\ninline int\
-    \ rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline ld lrand(ld l, ld r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline ld nrand(ld ave, ld var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
+    \    });\n    }\n    return ret;\n}\nconstexpr int64_t modpow(int64_t x,int64_t\
+    \ n,int64_t m=1152921504606846976LL){int64_t ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
+    \ ret;}\nconstexpr int64_t safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return\
+    \ x;}\nconstexpr int64_t keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0;\
+    \ while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x)\
+    \ {return __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63\
+    \ - __builtin_clzll(x);}\nconstexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
+    constexpr int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
+    \ degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
+    inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
+    \ ret(l, r);return ret(rnd_engine);}\ninline long double nrand(long double ave,\
+    \ long double var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
     inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
     \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
     \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
@@ -167,13 +170,19 @@ data:
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
     \  V<int> ret;\n  int x = goal;\n  while(x >= 0) {\n    ret.push_back(x);\n  \
     \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
-    \ e++;\n  return ret;\n}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\n\
-    const int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int\
-    \ dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst\
-    \ int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1,\
-    \ 1, 1, -1, -1};\n#ifdef Q__LOCAL\n#define FILENAME __FILE__\n#else\n#define FILENAME\
-    \ __FILE__\n// #define FILENAME \"code.cpp\" // AOJ\n#endif\n#define INCLUDED_MAIN\n\
-    #include FILENAME\n#endif\n"
+    \ e++;\n  return ret;\n}\nstring tolower(string s) {for(auto&& e: s) e = tolower(e);\
+    \ return s;}\nstring toupper(string s) {for(auto&& e: s) e = toupper(e); return\
+    \ s;}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\nconst int dx4[4]\
+    \ = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int dx6[6] = {1,\
+    \ 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst int dx8[8]\
+    \ = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n\
+    class Timer{\n  chrono::system_clock::time_point start;\npublic:\n  Timer() :\
+    \ start(chrono::system_clock::now()) {}\n  double count(){\n    chrono::duration<double>\
+    \ duration = chrono::system_clock::now() - start;\n    return duration.count();\n\
+    \  }\n  bool is_timeout(double x){return (this -> count()) >= x;}\n};\n#ifdef\
+    \ Q__LOCAL\n#define FILENAME __FILE__\n#else\n#define FILENAME __FILE__\n// #define\
+    \ FILENAME \"code.cpp\" // AOJ\n#endif\n#define INCLUDED_MAIN\n#include FILENAME\n\
+    #endif\n"
   code: "// #define Q__OPTIMIZE\n// #define Q__INCLUDE_ATCODER_LIB\n// #define Q__INTERACTIVE\n\
     #ifdef INCLUDED_MAIN\n\n\nstruct Solver {\n  void solve() {\n\n  }\n\n  void naive()\
     \ {\n\n  }\n} solver;\n\n\n\nsigned main(void){\n  NO_SYNC_STD;\n  V<string> options;\n\
@@ -182,67 +191,69 @@ data:
     \  options.push_back(\"INCLUDE_ATCODER_LIB\");\n#endif\n  DUMP(options);\n#ifndef\
     \ Q__NAIVE\n  solver.solve();\n#else\n  DUMP(\"naive\");\n  solver.naive();\n\
     #endif\n  return 0;\n}\n\n#else\n#define _GLIBCXX_DEQUE_BUF_SIZE 64\n#ifdef Q__OPTIMIZE\n\
-    #pragma GCC target(\"avx\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"\
-    unroll-loops\")\n#endif\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <chrono>\n#include <cmath>\n#include <complex>\n\
-    #include <deque>\n#include <forward_list>\n#include <fstream>\n#include <functional>\n\
-    #include <iomanip>\n#include <ios>\n#include <iostream>\n#include <limits>\n#include\
-    \ <list>\n#include <map>\n#include <memory>\n#include <numeric>\n#include <optional>\n\
-    #include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n#include\
-    \ <stack>\n#include <string>\n#include <thread>\n#include <tuple>\n#include <type_traits>\n\
-    #include <regex>\n#include <unordered_map>\n#include <unordered_set>\n#include\
-    \ <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include <atcoder/all>\n\
-    using namespace atcoder;\n//using mint = modint1000000007;\nusing mint = modint998244353;\n\
-    std::istream &operator>>(std::istream& is, mint& a) { long long tmp; is >> tmp;\
-    \ a = tmp; return is; }\nstd::ostream &operator<<(std::ostream& os, const mint&\
-    \ a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n#define MOD 998244353\n\
-    #define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)          for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i, a)       for(decltype(a)\
-    \ i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i, a, b)    for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; ++i)\n#define REP4(i, a, b, c) for(decltype(b)\
-    \ i = (a), i##_len = (b); i < i##_len; i += (c))\n#define REP(...) OVERLOAD4(__VA_ARGS__,\
-    \ REP4, REP3, REP2, REP1)(__VA_ARGS__)\n#define RREP1(a)          for(decltype(a)\
-    \ i = (a); i--;)\n#define RREP2(i, a)       for(decltype(a) i = (a); i--;)\n#define\
-    \ RREP3(i, a, b)    for(decltype(a) i = (b), i##_len = (a); i-- > i##_len;)\n\
-    #define RREP4(i, a, b, c) for(decltype(a) i = (a)+((b)-(a)-1)/(c)*(c), i##_len\
-    \ = (a); i >= i##_len; i -= c)\n#define RREP(...) OVERLOAD4(__VA_ARGS__, RREP4,\
-    \ RREP3, RREP2, RREP1)(__VA_ARGS__)\n#define MREP(v,...) for(auto v:make_enum_vec({__VA_ARGS__}))\n\
-    #define QREP(q, l, r, n) for (ll q = 1, l = n / (q + 1) + 1, r = n / q + 1; q\
-    \ <= n; q = (q == n ? n + 1 : n / (n / (q + 1))), l = n / (q + 1) + 1, r = n /\
-    \ q + 1)\n#define COMB_REP(i,n,k) for (ll t, i = POW2(k) - 1; i < POW2(n); t=i|(i-1),\
-    \ i = (t+1)|(((~t & - ~t)-1) >> (__builtin_ctzll(i)+1)))\n#define SUBSET_ENUM_REP(i,s)\
-    \ for (ll i = (1LL << 60) - 1; i >= 0, i &= s; --i)\n#define SUBSET_INCLUDE_REP(i,n,s)\
-    \ for (int i = s; i < POW2(n); i=(++i)|s)\n#define POPONLY_REP(i,s) for (ll i=s&-s;\
-    \ i; i=s&(~s+(i << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define RALL(x)\
-    \ (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define POW2(n)\
-    \      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) & 1)\n#define\
-    \ INF ((1 << 30) - 1)\n#define INFL (1LL << 60)\n#define PRECISION std::setprecision(16)\n\
-    #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n#define\
-    \ INT(...) int __VA_ARGS__;    input(__VA_ARGS__)\n#define LL(...)  ll __VA_ARGS__;\
-    \     input(__VA_ARGS__)\n#define STR(...) string __VA_ARGS__; input(__VA_ARGS__)\n\
-    #define LD(...)  ld __VA_ARGS__;     input(__VA_ARGS__)\n#define VEC(type, name,\
-    \ size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n#define NO_SYNC_STD\n\
-    #define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
+    #pragma optimize(\"\", on)\n#ifndef Q__LOCAL\n#pragma GCC target(\"avx\")\n#endif\n\
+    #pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"unroll-loops\")\n#endif\n\
+    #include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
+    #include <chrono>\n#include <cmath>\n#include <complex>\n#include <deque>\n#include\
+    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <iomanip>\n\
+    #include <ios>\n#include <iostream>\n#include <limits>\n#include <list>\n#include\
+    \ <map>\n#include <memory>\n#include <numeric>\n#include <optional>\n#include\
+    \ <optional>\n#include <queue>\n#include <random>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <string>\n#include <thread>\n\
+    #include <tuple>\n#include <type_traits>\n#include <unordered_map>\n#include <unordered_set>\n\
+    #include <utility>\n#include <vector>\n#ifdef Q__INCLUDE_ATCODER_LIB\n#include\
+    \ <atcoder/all>\nusing namespace atcoder;\n//using mint = modint1000000007;\n\
+    using mint = modint998244353;\nstd::istream &operator>>(std::istream& is, mint&\
+    \ a) { int64_t tmp; is >> tmp; a = tmp; return is; }\nstd::ostream &operator<<(std::ostream&\
+    \ os, const mint& a) {os << a.val(); return os;}\n#endif\nusing namespace std;\n\
+    #define MOD 998244353\n#define OVERLOAD4(a, b, c, d, e, ...) e\n#define REP1(a)\
+    \          for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP2(i,\
+    \ a)       for(decltype(a) i = 0, i##_len = (a); i < i##_len; ++i)\n#define REP3(i,\
+    \ a, b)    for(decltype(b) i = (a), i##_len = (b); i < i##_len; ++i)\n#define\
+    \ REP4(i, a, b, c) for(decltype(b) i = (a), i##_len = (b); i < i##_len; i += (c))\n\
+    #define REP(...) OVERLOAD4(__VA_ARGS__, REP4, REP3, REP2, REP1)(__VA_ARGS__)\n\
+    #define RREP1(a)          for(decltype(a) i = (a); i--;)\n#define RREP2(i, a)\
+    \       for(decltype(a) i = (a); i--;)\n#define RREP3(i, a, b)    for(decltype(a)\
+    \ i = (b), i##_len = (a); i-- > i##_len;)\n#define RREP4(i, a, b, c) for(decltype(a)\
+    \ i = (a)+((b)-(a)-1)/(c)*(c), i##_len = (a); i >= i##_len; i -= c)\n#define RREP(...)\
+    \ OVERLOAD4(__VA_ARGS__, RREP4, RREP3, RREP2, RREP1)(__VA_ARGS__)\n#define MREP(v,...)\
+    \ for(auto v:make_enum_vec({__VA_ARGS__}))\n#define QREP(q, l, r, n) for (int64_t\
+    \ q = 1, l = n / (q + 1) + 1, r = n / q + 1; q <= n; q = (q == n ? n + 1 : n /\
+    \ (n / (q + 1))), l = n / (q + 1) + 1, r = n / q + 1)\n#define COMB_REP(i,n,k)\
+    \ for (int64_t t, i = POW2(k) - 1; i < POW2(n); t=i|(i-1), i = (t+1)|(((~t & -\
+    \ ~t)-1) >> (__builtin_ctzll(i)+1)))\n#define SUBSET_ENUM_REP(i,s) for (int64_t\
+    \ i = (1LL << 60) - 1; i >= 0, i &= s; --i)\n#define SUBSET_INCLUDE_REP(i,n,s)\
+    \ for (int64_t i = s; i < POW2(n); i=(++i)|s)\n#define POPONLY_REP(i,s) for (int64_t\
+    \ i=s&-s; i; i=s&(~s+(i << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define\
+    \ RALL(x) (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define\
+    \ POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) &\
+    \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define INFL\
+    \ (1LL << 60)\n#define PRECISION std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
+    #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define LONG(...) int64_t\
+    \ __VA_ARGS__;   input(__VA_ARGS__)\n#define STR(...)  string __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
+    #define NO_SYNC_STD\n#define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
     #define ENDL \"\\n\"\n#endif\n#ifdef Q__LOCAL\n#include <dump.hpp>\n#define DUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl ,dump_func(__VA_ARGS__)\n#define VDUMP(...)\
     \ DUMPOUT << \"  \" << string(#__VA_ARGS__) << \": \" << \"[\" << to_string(__LINE__)\
     \ << \":\" << __FUNCTION__ << \"]\" << endl, vdump_func(__VA_ARGS__)\n#else\n\
-    #define DUMP(...)\n#define VDUMP(...)\n#endif\nusing ll=long long;\nusing ull=unsigned\
-    \ long long;\nusing ld=long double;\ntemplate<class T> using V=vector<T>;\ntemplate<class\
-    \ T> using VV=vector<vector<T>>;\ntemplate<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\n\
-    template<class T> istream &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >>\
-    \ e;return is;}\ntemplate<class T> istream &operator>>(istream &is,complex<T>\
-    \ &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class T,class\
-    \ U> istream &operator>>(istream &is,pair<T,U> &v){is >> v.first >> v.second;return\
-    \ is;}\ntemplate<class T,size_t n> istream &operator>>(istream &is,array<T,n>\
-    \ &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A> void input(A&&...\
-    \ args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout <<\
-    \ ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const A&...\
-    \ rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
-    \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
-    \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
-    \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
+    #define DUMP(...)\n#define VDUMP(...)\n#endif\nusing ull  = unsigned long long;\n\
+    using ld   = long double;\nusing ll   = long long;\nusing lint = long long;\n\
+    #define int int64_t\nconst int64_t INF = numeric_limits<int64_t>::max() / 2;\n\
+    template<class T> using V=vector<T>;\ntemplate<class T> using VV=vector<vector<T>>;\n\
+    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\ntemplate<class\
+    \ T> istream &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\n\
+    template<class T> istream &operator>>(istream &is,complex<T> &v){T x,y; is >>\
+    \ x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class T,class U> istream &operator>>(istream\
+    \ &is,pair<T,U> &v){is >> v.first >> v.second;return is;}\ntemplate<class T,size_t\
+    \ n> istream &operator>>(istream &is,array<T,n> &v){for(auto&& e:v)is >> e;return\
+    \ is;}\ntemplate<class... A> void input(A&&... args){(cin >> ... >> args);}\n\
+    template<class... A> void print_rest(){cout << ENDL;}\ntemplate<class T,class...\
+    \ A> void print_rest(const T& first,const A&... rest){cout << \" \" << first;print_rest(rest...);}\n\
+    template<class T,class... A> void print(const T& first,const A&... rest){cout\
+    \ << fixed << PRECISION << first;print_rest(rest...);}\ntemplate<class T,class...\
+    \ A> void die(const T& first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
     template <typename ... Args> string fmt(const string& fmt, Args ... args ){size_t\
     \ len = snprintf( nullptr, 0, fmt.c_str(), args ... );vector<char> buf(len + 1);snprintf(&buf[0],\
     \ len + 1, fmt.c_str(), args ... );return string(&buf[0], &buf[0] + len);}\ntemplate<class\
@@ -312,17 +323,19 @@ data:
     \ [&](int i, int j) {\n        if (a[i] == a[j]) return i > j;\n        return\
     \ a[i] < a[j];\n      });\n    } else {\n      sort(ALL(ret), [&](int i, int j)\
     \ {\n        if (a[i] == a[j]) return i < j;\n        return a[i] < a[j];\n  \
-    \    });\n    }\n    return ret;\n}\nconstexpr ll modpow(ll x,ll n,ll m=1152921504606846976LL){ll\
-    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr ll safe_mod(ll\
-    \ x, ll m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr ll keta(ll n, ll base = 10LL)\
-    \ {ll ret = 0; while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(ll\
-    \ x) {return __builtin_popcountll(x);}\nconstexpr int log2f(ll x) {return 63 -\
-    \ __builtin_clzll(x);}\nconstexpr int log2c(ll x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
-    constexpr ll nC2(ll n) {return n*(n-1)/2;}\nconstexpr ld deg2rad(ll degree){return\
-    \ (ld)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\ninline int\
-    \ rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline ld lrand(ld l, ld r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline ld nrand(ld ave, ld var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
+    \    });\n    }\n    return ret;\n}\nconstexpr int64_t modpow(int64_t x,int64_t\
+    \ n,int64_t m=1152921504606846976LL){int64_t ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
+    \ ret;}\nconstexpr int64_t safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return\
+    \ x;}\nconstexpr int64_t keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0;\
+    \ while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x)\
+    \ {return __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63\
+    \ - __builtin_clzll(x);}\nconstexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
+    constexpr int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
+    \ degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
+    inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
+    \ ret(l, r);return ret(rnd_engine);}\ninline long double nrand(long double ave,\
+    \ long double var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
     inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
     \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
     \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
@@ -332,18 +345,24 @@ data:
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
     \  V<int> ret;\n  int x = goal;\n  while(x >= 0) {\n    ret.push_back(x);\n  \
     \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
-    \ e++;\n  return ret;\n}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\n\
-    const int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int\
-    \ dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst\
-    \ int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1,\
-    \ 1, 1, -1, -1};\n#ifdef Q__LOCAL\n#define FILENAME __FILE__\n#else\n#define FILENAME\
-    \ __FILE__\n// #define FILENAME \"code.cpp\" // AOJ\n#endif\n#define INCLUDED_MAIN\n\
-    #include FILENAME\n#endif"
+    \ e++;\n  return ret;\n}\nstring tolower(string s) {for(auto&& e: s) e = tolower(e);\
+    \ return s;}\nstring toupper(string s) {for(auto&& e: s) e = toupper(e); return\
+    \ s;}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\nconst int dx4[4]\
+    \ = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int dx6[6] = {1,\
+    \ 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst int dx8[8]\
+    \ = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n\
+    class Timer{\n  chrono::system_clock::time_point start;\npublic:\n  Timer() :\
+    \ start(chrono::system_clock::now()) {}\n  double count(){\n    chrono::duration<double>\
+    \ duration = chrono::system_clock::now() - start;\n    return duration.count();\n\
+    \  }\n  bool is_timeout(double x){return (this -> count()) >= x;}\n};\n#ifdef\
+    \ Q__LOCAL\n#define FILENAME __FILE__\n#else\n#define FILENAME __FILE__\n// #define\
+    \ FILENAME \"code.cpp\" // AOJ\n#endif\n#define INCLUDED_MAIN\n#include FILENAME\n\
+    #endif"
   dependsOn: []
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2024-02-12 23:47:12+09:00'
+  timestamp: '2024-04-28 16:25:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
