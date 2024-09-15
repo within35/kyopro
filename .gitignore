@@ -6,6 +6,7 @@
 /tmp
 /test
 /tools
+/python
 
 # temporary file
 main.cpp
