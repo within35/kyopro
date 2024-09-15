@@ -33,6 +33,7 @@
 using namespace std;
 
 #define DUMPOUT std::cerr
+#define INT64_INFINITY 152921504606846976
 
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &vec)
@@ -46,7 +47,7 @@ ostream &operator<<(ostream &os, const vector<T> &vec)
   os << ss.str().substr(1) << "}";
   return os;
 }
-ostream &operator<<(ostream &os, const vector<int> &vec)
+ostream &operator<<(ostream &os, const vector<int64_t> &vec)
 {
   if (vec.empty())
     return os << "{}";
@@ -55,28 +56,9 @@ ostream &operator<<(ostream &os, const vector<int> &vec)
   for (auto &e : vec)
   {
     ss << ",";
-    if (e >= 1073741823 - 100)
+    if (e >= INT64_INFINITY - 100)
       ss << "∞";
-    else if (e <= -1073741823 + 100)
-      ss << "-∞";
-    else
-      ss << e;
-  }
-  os << ss.str().substr(1) << "}";
-  return os;
-}
-ostream &operator<<(ostream &os, const vector<long long> &vec)
-{
-  if (vec.empty())
-    return os << "{}";
-  stringstream ss;
-  os << "{";
-  for (auto &e : vec)
-  {
-    ss << ",";
-    if (e >= 152921504606846976 - 100)
-      ss << "∞";
-    else if (e <= -1152921504606846976 + 100)
+    else if (e <= -INT64_INFINITY + 100)
       ss << "-∞";
     else
       ss << e;
@@ -98,7 +80,7 @@ ostream &operator<<(ostream &os, const array<T, n> &vec)
   return os;
 }
 template <size_t n>
-ostream &operator<<(ostream &os, const array<long long, n> &vec)
+ostream &operator<<(ostream &os, const array<int64_t, n> &vec)
 {
   if (vec.empty())
     return os << "{}";
@@ -107,9 +89,9 @@ ostream &operator<<(ostream &os, const array<long long, n> &vec)
   for (auto &e : vec)
   {
     ss << ",";
-    if (e >= 152921504606846976 - 100)
+    if (e >= INT64_INFINITY - 100)
       ss << "∞";
-    else if (e <= -1152921504606846976 + 100)
+    else if (e <= -INT64_INFINITY + 100)
       ss << "-∞";
     else
       ss << e;
@@ -439,15 +421,8 @@ void vdump_func(char bits)
   DUMPOUT << bt.to_string() << endl;
 }
 
-// 32bit可視化
-void vdump_func(int bits)
-{
-  bitset<32> bt(bits);
-  DUMPOUT << bt.to_string() << endl;
-}
-
 // 64bit可視化
-void vdump_func(long long bits)
+void vdump_func(int64_t bits)
 {
   bitset<64> bt(bits);
   DUMPOUT << bt.to_string() << endl;
@@ -461,33 +436,30 @@ void vdump_func(vector<string> &grid)
 }
 
 // セグメント可視化
-void vdump_func(map<int,vector<long long>> &mp, long long inf = 1073741823, int padding_length = 3)
+void vdump_func(map<int64_t,vector<string>> &mp, int64_t inf = INT64_INFINITY, int64_t padding_length = 3)
 {
   if (mp.empty()) {
     DUMPOUT << "{}" << endl;
     return;
   }
 
-  int maxDepth = 0;
-  for (auto [depth,e] : mp) if (maxDepth < depth) maxDepth = depth;
+  int64_t maxDepth = 0;
+  for (auto [depth,vec] : mp) {
+    if (maxDepth < depth) maxDepth = depth;
+    for (string str: vec) {
+      if (padding_length < str.size()) padding_length = str.size();
+    }
+  }
 
   stringstream ss;
   for (auto [depth,vec] : mp)
   {
     ss << "\n" << depth << "|";
-    for (auto ele: vec) {
-      int requireSpace = (maxDepth - depth) + 1;
-      string str = to_string(ele);
-      int width = str.size();
-      if (ele >= inf - 100) {
-        str = "∞";
-        width = 1;
-      } else if (ele <= -inf + 100) {
-        str = "-∞";
-        width = 2;
-      }
-      int leftSpace = (((padding_length) << requireSpace) - width - 1) / 2;
-      int rightSpace =  (((padding_length) << requireSpace) - width - 1) - leftSpace;
+    for (string str: vec) {
+      int64_t requireSpace = (maxDepth - depth) + 1;
+      int64_t width = str.size();
+      int64_t leftSpace = (((padding_length) << requireSpace) - width - 1) / 2;
+      int64_t rightSpace =  (((padding_length) << requireSpace) - width - 1) - leftSpace;
       ss << string(leftSpace, ' ') << str << string(rightSpace, ' ') << "|";
 
     }
@@ -495,13 +467,14 @@ void vdump_func(map<int,vector<long long>> &mp, long long inf = 1073741823, int 
   DUMPOUT << ss.str().substr(1) << endl;
 }
 
-// グリッド可視化(一次元化 int用)
-void vdump_func(vector<int> &grid, int h, int w, int inf = 1073741823, int padding_length = 2)
+
+// グリッド可視化(一次元化 int64_t用)
+void vdump_func(vector<int64_t> &grid, int64_t h, int64_t w, int64_t inf = INT64_INFINITY, int64_t padding_length = 2)
 {
-  for (int i = 0; i < h; i++)
+  for (int64_t i = 0; i < h; i++)
   {
     stringstream ss;
-    for (int j = 0; j < w; j++)
+    for (int64_t j = 0; j < w; j++)
     {
       ss << ",";
       if (grid[i * w + j] >= inf - 100)
@@ -515,84 +488,16 @@ void vdump_func(vector<int> &grid, int h, int w, int inf = 1073741823, int paddi
   }
 }
 
-// グリッド可視化(一次元化 long long用)
-void vdump_func(vector<long long> &grid, int h, int w, long long inf = 152921504606846976LL, int padding_length = 2)
-{
-  for (int i = 0; i < h; i++)
-  {
-    stringstream ss;
-    for (int j = 0; j < w; j++)
-    {
-      ss << ",";
-      if (grid[i * w + j] >= inf - 100)
-        ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i * w + j] <= -inf + 100)
-        ss << string(padding_length - 2, ' ') << "-∞";
-      else
-        ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i * w + j];
-    }
-    DUMPOUT << ss.str().substr(1) << endl;
-  }
-}
-
-// グリッド可視化(二次元 int用)
-void vdump_func(vector<vector<int>> &grid, int inf = 1073741823, int padding_length = 2)
+// グリッド可視化(二次元 int64_t用)
+void vdump_func(vector<vector<int64_t>> &grid, int64_t inf = INT64_INFINITY, int64_t padding_length = 2)
 {
   if (grid.size() == 0)
     return;
-  int h = grid.size(), w = grid[0].size();
-  for (int i = 0; i < h; i++)
+  int64_t h = grid.size(), w = grid[0].size();
+  for (int64_t i = 0; i < h; i++)
   {
     stringstream ss;
-    for (int j = 0; j < w; j++)
-    {
-      ss << ",";
-      if (grid[i][j] >= inf - 100)
-        ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i][j] <= -inf + 100)
-        ss << string(padding_length - 2, ' ') << "-∞";
-      else
-        ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];
-    }
-    DUMPOUT << ss.str().substr(1) << endl;
-  }
-}
-
-// 色付きグリッド可視化(二次元 int用)
-void vdump_func(vector<vector<int>> &grid, vector<vector<int>> &colors, int inf = 1073741823, int padding_length = 2)
-{
-  if (grid.size() == 0)
-    return;
-  int h = grid.size(), w = grid[0].size();
-  for (int i = 0; i < h; i++)
-  {
-    stringstream ss;
-    for (int j = 0; j < w; j++)
-    {
-      ss << ",";
-      ss << "\e[38;5;"+to_string(colors[i][j])+"m";
-      if (grid[i][j] >= inf - 100)
-        ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i][j] <= -inf + 100)
-        ss << string(padding_length - 2, ' ') << "-∞";
-      else
-        ss << std::right << std::setw(padding_length) << std::setfill(' ') << grid[i][j];
-      ss << "\e[0m";
-    }
-    DUMPOUT << ss.str().substr(1) << endl;
-  }
-}
-
-// グリッド可視化(二次元 long long用)
-void vdump_func(vector<vector<long long>> &grid, long long inf = 152921504606846976LL, int padding_length = 2)
-{
-  if (grid.size() == 0)
-    return;
-  int h = grid.size(), w = grid[0].size();
-  for (int i = 0; i < h; i++)
-  {
-    stringstream ss;
-    for (int j = 0; j < w; j++)
+    for (int64_t j = 0; j < w; j++)
     {
       ss << ",";
       if (grid[i][j] >= inf - 100)
@@ -607,20 +512,20 @@ void vdump_func(vector<vector<long long>> &grid, long long inf = 152921504606846
 }
 
 // グリッド可視化(二次元 long double用)
-void vdump_func(vector<vector<long double>> &grid, int padding_length = 8, int precision = 1000)
+void vdump_func(vector<vector<long double>> &grid, int64_t padding_length = 8, int64_t precision = 1000)
 {
   if (grid.size() == 0)
     return;
-  int h = grid.size(), w = grid[0].size();
-  for (int i = 0; i < h; i++)
+  int64_t h = grid.size(), w = grid[0].size();
+  for (int64_t i = 0; i < h; i++)
   {
     stringstream ss;
-    for (int j = 0; j < w; j++)
+    for (int64_t j = 0; j < w; j++)
     {
       ss << ",";
-      if (grid[i][j] >= 152921504606846976LL - 100)
+      if (grid[i][j] >= INT64_INFINITY - 100)
         ss << string(padding_length - 1, ' ') << "∞";
-      else if (grid[i][j] <= -152921504606846976LL + 100)
+      else if (grid[i][j] <= -INT64_INFINITY + 100)
         ss << string(padding_length - 2, ' ') << "-∞";
       else
         ss << std::right << std::setw(padding_length) << std::setfill(' ') << roundl(grid[i][j] * precision) / precision;
