@@ -199,6 +199,30 @@ template<class T> inline int le_index(V<T> &s, T x) {
   if (it == s.begin()) return -1;
   return (int)distance(s.begin(), prev(it));
 }
+template<class T, class U> inline pair<typename map<T,U>::iterator,bool> g_it(map<T,U> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.upper_bound(x);
+  if (it == s.end()) return {it, false};
+  return {it, true};
+}
+template<class T, class U> inline pair<typename map<T,U>::iterator,bool> ge_it(map<T,U> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.lower_bound(x);
+  if (it == s.end()) return {it, false};
+  return {it, true};
+}
+template<class T, class U> inline pair<typename map<T,U>::iterator,bool> l_it(map<T,U> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.lower_bound(x);
+  if (it == s.begin()) return {it, false};
+  return {prev(it), true};
+}
+template<class T, class U> inline pair<typename map<T,U>::iterator,bool> le_it(map<T,U> &s, T x) {
+  if (s.empty()) return {s.end(), false};
+  auto it = s.upper_bound(x);
+  if (it == s.begin()) return {it, false};
+  return {prev(it), true};
+}
 template<class T> inline pair<typename set<T>::iterator,bool> g_it(set<T> &s, T x) {
   if (s.empty()) return {s.end(), false};
   auto it = s.upper_bound(x);
@@ -309,6 +333,8 @@ V<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {
 }
 string tolower(string s) {for(auto&& e: s) e = tolower(e); return s;}
 string toupper(string s) {for(auto&& e: s) e = toupper(e); return s;}
+string rtrim(const string &s, string delimiter){size_t end = s.find_last_not_of(delimiter);return (end == string::npos) ? "" : s.substr(0, end + 1);}
+string ltrim(const string &s, string delimiter){size_t start = s.find_first_not_of(delimiter);return (start == string::npos) ? "" : s.substr(start);}
 map<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, 1, 0, -1};
