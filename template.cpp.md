@@ -54,7 +54,7 @@ data:
     \ POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) &\
     \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define INFL\
     \ (1LL << 60)\n#define PRECISION std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
-    #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define LONG(...) int64_t\
+    #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define CHAR(...) char\
     \ __VA_ARGS__;   input(__VA_ARGS__)\n#define STR(...)  string __VA_ARGS__; input(__VA_ARGS__)\n\
     #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
     #define NO_SYNC_STD\n#define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
@@ -112,50 +112,63 @@ data:
     \ x);\n  if (it == s.begin()) return -1;\n  return (int)distance(s.begin(), prev(it));\n\
     }\ntemplate<class T> inline int le_index(V<T> &s, T x) {\n  if (s.empty()) return\
     \ -2;\n  auto it = upper_bound(ALL(s), x);\n  if (it == s.begin()) return -1;\n\
-    \  return (int)distance(s.begin(), prev(it));\n}\ntemplate<class T> inline pair<typename\
-    \ set<T>::iterator,bool> g_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(),\
-    \ false};\n  auto it = s.upper_bound(x);\n  if (it == s.end()) return {it, false};\n\
-    \  return {it, true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool>\
-    \ ge_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it\
-    \ = s.lower_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
-    \ true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool> l_it(set<T>\
-    \ &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
-    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline pair<typename set<T>::iterator,bool> le_it(set<T> &s, T x) {\n  if\
-    \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
-    \ == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline V<T> it_range(set<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
-    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
-    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> inline\
-    \ pair<typename multiset<T>::iterator,bool> g_it(multiset<T> &s, T x) {\n  if\
+    \  return (int)distance(s.begin(), prev(it));\n}\ntemplate<class T, class U> inline\
+    \ pair<typename map<T,U>::iterator,bool> g_it(map<T,U> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it == s.end())\
+    \ return {it, false};\n  return {it, true};\n}\ntemplate<class T, class U> inline\
+    \ pair<typename map<T,U>::iterator,bool> ge_it(map<T,U> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.lower_bound(x);\n  if (it == s.end())\
+    \ return {it, false};\n  return {it, true};\n}\ntemplate<class T, class U> inline\
+    \ pair<typename map<T,U>::iterator,bool> l_it(map<T,U> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.lower_bound(x);\n  if (it == s.begin())\
+    \ return {it, false};\n  return {prev(it), true};\n}\ntemplate<class T, class\
+    \ U> inline pair<typename map<T,U>::iterator,bool> le_it(map<T,U> &s, T x) {\n\
+    \  if (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if\
+    \ (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline pair<typename set<T>::iterator,bool> g_it(set<T> &s, T x) {\n  if\
     \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
     \ == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class T>\
-    \ inline pair<typename multiset<T>::iterator,bool> ge_it(multiset<T> &s, T x)\
-    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
-    \  if (it == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class\
-    \ T> inline pair<typename multiset<T>::iterator,bool> l_it(multiset<T> &s, T x)\
-    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
-    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline pair<typename multiset<T>::iterator,bool> le_it(multiset<T> &s, T\
-    \ x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n\
-    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline V<T> it_range(multiset<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
-    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
-    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> constexpr\
-    \ void dup_erase(V<T> &a){a.erase(unique(a.begin(), a.end()), a.end());}\ntemplate\
-    \ <class T> V<int> iota(const V<T> &a, bool greater = false) {\n    V<int> ret(a.size());\n\
-    \    iota(ret.begin(), ret.end(), 0);\n    if (greater) {\n      sort(RALL(ret),\
-    \ [&](int i, int j) {\n        if (a[i] == a[j]) return i > j;\n        return\
-    \ a[i] < a[j];\n      });\n    } else {\n      sort(ALL(ret), [&](int i, int j)\
-    \ {\n        if (a[i] == a[j]) return i < j;\n        return a[i] < a[j];\n  \
-    \    });\n    }\n    return ret;\n}\nconstexpr int64_t modpow(int64_t x,int64_t\
-    \ n,int64_t m=1152921504606846976LL){int64_t ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
-    \ ret;}\nconstexpr int64_t safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return\
-    \ x;}\nconstexpr int64_t keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0;\
-    \ while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x)\
-    \ {return __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63\
-    \ - __builtin_clzll(x);}\nconstexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
-    constexpr int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
+    \ inline pair<typename set<T>::iterator,bool> ge_it(set<T> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.lower_bound(x);\n  if (it == s.end())\
+    \ return {it, false};\n  return {it, true};\n}\ntemplate<class T> inline pair<typename\
+    \ set<T>::iterator,bool> l_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(),\
+    \ false};\n  auto it = s.lower_bound(x);\n  if (it == s.begin()) return {it, false};\n\
+    \  return {prev(it), true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool>\
+    \ le_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it\
+    \ = s.upper_bound(x);\n  if (it == s.begin()) return {it, false};\n  return {prev(it),\
+    \ true};\n}\ntemplate<class T> inline V<T> it_range(set<T> &st, int l, int r)\
+    \ {\n  auto startIt = st.lower_bound(l); auto endIt = st.upper_bound(r); V<T>\
+    \ ret;\n  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);\n\
+    \  return ret;\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ g_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.upper_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
+    \ true};\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ ge_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.lower_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
+    \ true};\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ l_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.lower_bound(x);\n  if (it == s.begin()) return {it, false};\n  return\
+    \ {prev(it), true};\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ le_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.upper_bound(x);\n  if (it == s.begin()) return {it, false};\n  return\
+    \ {prev(it), true};\n}\ntemplate<class T> inline V<T> it_range(multiset<T> &st,\
+    \ int l, int r) {\n  auto startIt = st.lower_bound(l); auto endIt = st.upper_bound(r);\
+    \ V<T> ret;\n  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);\n\
+    \  return ret;\n}\ntemplate<class T> constexpr void dup_erase(V<T> &a){a.erase(unique(a.begin(),\
+    \ a.end()), a.end());}\ntemplate <class T> V<int> iota(const V<T> &a, bool greater\
+    \ = false) {\n    V<int> ret(a.size());\n    iota(ret.begin(), ret.end(), 0);\n\
+    \    if (greater) {\n      sort(RALL(ret), [&](int i, int j) {\n        if (a[i]\
+    \ == a[j]) return i > j;\n        return a[i] < a[j];\n      });\n    } else {\n\
+    \      sort(ALL(ret), [&](int i, int j) {\n        if (a[i] == a[j]) return i\
+    \ < j;\n        return a[i] < a[j];\n      });\n    }\n    return ret;\n}\nconstexpr\
+    \ int64_t modpow(int64_t x,int64_t n,int64_t m=1152921504606846976LL){int64_t\
+    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr int64_t\
+    \ safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr int64_t\
+    \ keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0; while(n > 0) {n /= base,\
+    \ ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}\n\
+    constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\nconstexpr int\
+    \ log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\nconstexpr\
+    \ int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
     \ degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
     inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
     inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
@@ -172,12 +185,15 @@ data:
     \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
     \ e++;\n  return ret;\n}\nstring tolower(string s) {for(auto&& e: s) e = tolower(e);\
     \ return s;}\nstring toupper(string s) {for(auto&& e: s) e = toupper(e); return\
-    \ s;}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\nconst int dx4[4]\
-    \ = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int dx6[6] = {1,\
-    \ 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst int dx8[8]\
-    \ = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n\
-    class Timer{\n  chrono::system_clock::time_point start;\npublic:\n  Timer() :\
-    \ start(chrono::system_clock::now()) {}\n  double count(){\n    chrono::duration<double>\
+    \ s;}\nstring rtrim(const string &s, string delimiter){size_t end = s.find_last_not_of(delimiter);return\
+    \ (end == string::npos) ? \"\" : s.substr(0, end + 1);}\nstring ltrim(const string\
+    \ &s, string delimiter){size_t start = s.find_first_not_of(delimiter);return (start\
+    \ == string::npos) ? \"\" : s.substr(start);}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\n\
+    const int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int\
+    \ dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst\
+    \ int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1,\
+    \ 1, 1, -1, -1};\nclass Timer{\n  chrono::system_clock::time_point start;\npublic:\n\
+    \  Timer() : start(chrono::system_clock::now()) {}\n  double count(){\n    chrono::duration<double>\
     \ duration = chrono::system_clock::now() - start;\n    return duration.count();\n\
     \  }\n  bool is_timeout(double x){return (this -> count()) >= x;}\n};\n#ifdef\
     \ Q__LOCAL\n#define FILENAME __FILE__\n#else\n#define FILENAME __FILE__\n// #define\
@@ -229,7 +245,7 @@ data:
     \ POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) &\
     \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define INFL\
     \ (1LL << 60)\n#define PRECISION std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
-    #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define LONG(...) int64_t\
+    #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define CHAR(...) char\
     \ __VA_ARGS__;   input(__VA_ARGS__)\n#define STR(...)  string __VA_ARGS__; input(__VA_ARGS__)\n\
     #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
     #define NO_SYNC_STD\n#define ENDL std::endl\n#else\n#define NO_SYNC_STD std::cin.tie(nullptr);ios::sync_with_stdio(false)\n\
@@ -287,50 +303,63 @@ data:
     \ x);\n  if (it == s.begin()) return -1;\n  return (int)distance(s.begin(), prev(it));\n\
     }\ntemplate<class T> inline int le_index(V<T> &s, T x) {\n  if (s.empty()) return\
     \ -2;\n  auto it = upper_bound(ALL(s), x);\n  if (it == s.begin()) return -1;\n\
-    \  return (int)distance(s.begin(), prev(it));\n}\ntemplate<class T> inline pair<typename\
-    \ set<T>::iterator,bool> g_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(),\
-    \ false};\n  auto it = s.upper_bound(x);\n  if (it == s.end()) return {it, false};\n\
-    \  return {it, true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool>\
-    \ ge_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it\
-    \ = s.lower_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
-    \ true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool> l_it(set<T>\
-    \ &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
-    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline pair<typename set<T>::iterator,bool> le_it(set<T> &s, T x) {\n  if\
-    \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
-    \ == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline V<T> it_range(set<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
-    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
-    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> inline\
-    \ pair<typename multiset<T>::iterator,bool> g_it(multiset<T> &s, T x) {\n  if\
+    \  return (int)distance(s.begin(), prev(it));\n}\ntemplate<class T, class U> inline\
+    \ pair<typename map<T,U>::iterator,bool> g_it(map<T,U> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it == s.end())\
+    \ return {it, false};\n  return {it, true};\n}\ntemplate<class T, class U> inline\
+    \ pair<typename map<T,U>::iterator,bool> ge_it(map<T,U> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.lower_bound(x);\n  if (it == s.end())\
+    \ return {it, false};\n  return {it, true};\n}\ntemplate<class T, class U> inline\
+    \ pair<typename map<T,U>::iterator,bool> l_it(map<T,U> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.lower_bound(x);\n  if (it == s.begin())\
+    \ return {it, false};\n  return {prev(it), true};\n}\ntemplate<class T, class\
+    \ U> inline pair<typename map<T,U>::iterator,bool> le_it(map<T,U> &s, T x) {\n\
+    \  if (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if\
+    \ (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
+    \ T> inline pair<typename set<T>::iterator,bool> g_it(set<T> &s, T x) {\n  if\
     \ (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n  if (it\
     \ == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class T>\
-    \ inline pair<typename multiset<T>::iterator,bool> ge_it(multiset<T> &s, T x)\
-    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
-    \  if (it == s.end()) return {it, false};\n  return {it, true};\n}\ntemplate<class\
-    \ T> inline pair<typename multiset<T>::iterator,bool> l_it(multiset<T> &s, T x)\
-    \ {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.lower_bound(x);\n\
-    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline pair<typename multiset<T>::iterator,bool> le_it(multiset<T> &s, T\
-    \ x) {\n  if (s.empty()) return {s.end(), false};\n  auto it = s.upper_bound(x);\n\
-    \  if (it == s.begin()) return {it, false};\n  return {prev(it), true};\n}\ntemplate<class\
-    \ T> inline V<T> it_range(multiset<T> &st, int l, int r) {\n  auto startIt = st.lower_bound(l);\
-    \ auto endIt = st.upper_bound(r); V<T> ret;\n  for(auto itr = startIt; itr !=\
-    \ endIt; itr++) ret.emplace_back(*itr);\n  return ret;\n}\ntemplate<class T> constexpr\
-    \ void dup_erase(V<T> &a){a.erase(unique(a.begin(), a.end()), a.end());}\ntemplate\
-    \ <class T> V<int> iota(const V<T> &a, bool greater = false) {\n    V<int> ret(a.size());\n\
-    \    iota(ret.begin(), ret.end(), 0);\n    if (greater) {\n      sort(RALL(ret),\
-    \ [&](int i, int j) {\n        if (a[i] == a[j]) return i > j;\n        return\
-    \ a[i] < a[j];\n      });\n    } else {\n      sort(ALL(ret), [&](int i, int j)\
-    \ {\n        if (a[i] == a[j]) return i < j;\n        return a[i] < a[j];\n  \
-    \    });\n    }\n    return ret;\n}\nconstexpr int64_t modpow(int64_t x,int64_t\
-    \ n,int64_t m=1152921504606846976LL){int64_t ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
-    \ ret;}\nconstexpr int64_t safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return\
-    \ x;}\nconstexpr int64_t keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0;\
-    \ while(n > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x)\
-    \ {return __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63\
-    \ - __builtin_clzll(x);}\nconstexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
-    constexpr int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
+    \ inline pair<typename set<T>::iterator,bool> ge_it(set<T> &s, T x) {\n  if (s.empty())\
+    \ return {s.end(), false};\n  auto it = s.lower_bound(x);\n  if (it == s.end())\
+    \ return {it, false};\n  return {it, true};\n}\ntemplate<class T> inline pair<typename\
+    \ set<T>::iterator,bool> l_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(),\
+    \ false};\n  auto it = s.lower_bound(x);\n  if (it == s.begin()) return {it, false};\n\
+    \  return {prev(it), true};\n}\ntemplate<class T> inline pair<typename set<T>::iterator,bool>\
+    \ le_it(set<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto it\
+    \ = s.upper_bound(x);\n  if (it == s.begin()) return {it, false};\n  return {prev(it),\
+    \ true};\n}\ntemplate<class T> inline V<T> it_range(set<T> &st, int l, int r)\
+    \ {\n  auto startIt = st.lower_bound(l); auto endIt = st.upper_bound(r); V<T>\
+    \ ret;\n  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);\n\
+    \  return ret;\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ g_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.upper_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
+    \ true};\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ ge_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.lower_bound(x);\n  if (it == s.end()) return {it, false};\n  return {it,\
+    \ true};\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ l_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.lower_bound(x);\n  if (it == s.begin()) return {it, false};\n  return\
+    \ {prev(it), true};\n}\ntemplate<class T> inline pair<typename multiset<T>::iterator,bool>\
+    \ le_it(multiset<T> &s, T x) {\n  if (s.empty()) return {s.end(), false};\n  auto\
+    \ it = s.upper_bound(x);\n  if (it == s.begin()) return {it, false};\n  return\
+    \ {prev(it), true};\n}\ntemplate<class T> inline V<T> it_range(multiset<T> &st,\
+    \ int l, int r) {\n  auto startIt = st.lower_bound(l); auto endIt = st.upper_bound(r);\
+    \ V<T> ret;\n  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);\n\
+    \  return ret;\n}\ntemplate<class T> constexpr void dup_erase(V<T> &a){a.erase(unique(a.begin(),\
+    \ a.end()), a.end());}\ntemplate <class T> V<int> iota(const V<T> &a, bool greater\
+    \ = false) {\n    V<int> ret(a.size());\n    iota(ret.begin(), ret.end(), 0);\n\
+    \    if (greater) {\n      sort(RALL(ret), [&](int i, int j) {\n        if (a[i]\
+    \ == a[j]) return i > j;\n        return a[i] < a[j];\n      });\n    } else {\n\
+    \      sort(ALL(ret), [&](int i, int j) {\n        if (a[i] == a[j]) return i\
+    \ < j;\n        return a[i] < a[j];\n      });\n    }\n    return ret;\n}\nconstexpr\
+    \ int64_t modpow(int64_t x,int64_t n,int64_t m=1152921504606846976LL){int64_t\
+    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr int64_t\
+    \ safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr int64_t\
+    \ keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0; while(n > 0) {n /= base,\
+    \ ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}\n\
+    constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\nconstexpr int\
+    \ log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\nconstexpr\
+    \ int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
     \ degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
     inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
     inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
@@ -347,12 +376,15 @@ data:
     \  x = to[x];\n  }\n  reverse(ALL(ret));\n  if (to1indexed) for(auto&& e: ret)\
     \ e++;\n  return ret;\n}\nstring tolower(string s) {for(auto&& e: s) e = tolower(e);\
     \ return s;}\nstring toupper(string s) {for(auto&& e: s) e = toupper(e); return\
-    \ s;}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\nconst int dx4[4]\
-    \ = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int dx6[6] = {1,\
-    \ 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst int dx8[8]\
-    \ = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n\
-    class Timer{\n  chrono::system_clock::time_point start;\npublic:\n  Timer() :\
-    \ start(chrono::system_clock::now()) {}\n  double count(){\n    chrono::duration<double>\
+    \ s;}\nstring rtrim(const string &s, string delimiter){size_t end = s.find_last_not_of(delimiter);return\
+    \ (end == string::npos) ? \"\" : s.substr(0, end + 1);}\nstring ltrim(const string\
+    \ &s, string delimiter){size_t start = s.find_first_not_of(delimiter);return (start\
+    \ == string::npos) ? \"\" : s.substr(start);}\nmap<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};\n\
+    const int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, 1, 0, -1};\nconst int\
+    \ dx6[6] = {1, 0, -1, 0, 1, -1};\nconst int dy6[6] = {0, 1, 0, -1, 1, -1};\nconst\
+    \ int dx8[8] = {1, 0, -1, 0, 1, -1, -1, 1};\nconst int dy8[8] = {0, 1, 0, -1,\
+    \ 1, 1, -1, -1};\nclass Timer{\n  chrono::system_clock::time_point start;\npublic:\n\
+    \  Timer() : start(chrono::system_clock::now()) {}\n  double count(){\n    chrono::duration<double>\
     \ duration = chrono::system_clock::now() - start;\n    return duration.count();\n\
     \  }\n  bool is_timeout(double x){return (this -> count()) >= x;}\n};\n#ifdef\
     \ Q__LOCAL\n#define FILENAME __FILE__\n#else\n#define FILENAME __FILE__\n// #define\
@@ -362,7 +394,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2024-04-28 16:25:29+09:00'
+  timestamp: '2024-09-15 13:13:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
