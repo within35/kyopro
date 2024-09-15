@@ -122,7 +122,7 @@ using namespace std;
 #define PRECISION std::setprecision(16)
 #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))
 #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)
-#define LONG(...) int64_t __VA_ARGS__;   input(__VA_ARGS__)
+#define CHAR(...) char __VA_ARGS__;   input(__VA_ARGS__)
 #define STR(...)  string __VA_ARGS__; input(__VA_ARGS__)
 #define VEC(type, name, size) vector<type> name(size); input(name)
 #ifdef Q__INTERACTIVE
