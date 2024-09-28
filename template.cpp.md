@@ -67,18 +67,26 @@ data:
     using ld   = long double;\nusing ll   = long long;\nusing lint = long long;\n\
     #define int int64_t\nconst int64_t INF = numeric_limits<int64_t>::max() / 2;\n\
     template<class T> using V=vector<T>;\ntemplate<class T> using VV=vector<vector<T>>;\n\
-    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\ntemplate<class\
-    \ T> istream &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\n\
-    template<class T> istream &operator>>(istream &is,complex<T> &v){T x,y; is >>\
-    \ x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class T,class U> istream &operator>>(istream\
-    \ &is,pair<T,U> &v){is >> v.first >> v.second;return is;}\ntemplate<class T,size_t\
-    \ n> istream &operator>>(istream &is,array<T,n> &v){for(auto&& e:v)is >> e;return\
-    \ is;}\ntemplate<class... A> void input(A&&... args){(cin >> ... >> args);}\n\
-    template<class... A> void print_rest(){cout << ENDL;}\ntemplate<class T,class...\
-    \ A> void print_rest(const T& first,const A&... rest){cout << \" \" << first;print_rest(rest...);}\n\
-    template<class T,class... A> void print(const T& first,const A&... rest){cout\
-    \ << fixed << PRECISION << first;print_rest(rest...);}\ntemplate<class T,class...\
-    \ A> void die(const T& first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
+    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\nstd::ostream &operator<<(std::ostream\
+    \ &dest, __int128_t value) {\n  std::ostream::sentry s(dest);\n  assert(s);\n\
+    \  __uint128_t tmp = value < 0 ? -value : value;\n  char buffer[128], *d = std::end(buffer);\n\
+    \  const string s0123456789 = \"0123456789\";\n  do { --d; *d = s0123456789[tmp\
+    \ % 10]; tmp /= 10; } while (tmp != 0);\n  if (value < 0) { --d; *d = '-'; }\n\
+    \  int len = std::end(buffer) - d;\n  if (dest.rdbuf()->sputn(d, len) != len)\
+    \ dest.setstate(std::ios_base::badbit);\n  return dest;\n}\n__int128_t parse(string\
+    \ &s) { __int128_t res = 0; REP(i,SZ(s)) if ('0' <= s[i] && s[i] <= '9') res =\
+    \ 10 * res + s[i] - '0'; return res; }\ntemplate<class T> istream &operator>>(istream\
+    \ &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class T> istream &operator>>(istream\
+    \ &is,complex<T> &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class\
+    \ T,class U> istream &operator>>(istream &is,pair<T,U> &v){is >> v.first >> v.second;return\
+    \ is;}\ntemplate<class T,size_t n> istream &operator>>(istream &is,array<T,n>\
+    \ &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A> void input(A&&...\
+    \ args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout <<\
+    \ ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const A&...\
+    \ rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
+    \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
+    \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
+    \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
     template <typename ... Args> string fmt(const string& fmt, Args ... args ){size_t\
     \ len = snprintf( nullptr, 0, fmt.c_str(), args ... );vector<char> buf(len + 1);snprintf(&buf[0],\
     \ len + 1, fmt.c_str(), args ... );return string(&buf[0], &buf[0] + len);}\ntemplate<class\
@@ -156,28 +164,28 @@ data:
     \ V<T> ret;\n  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);\n\
     \  return ret;\n}\ntemplate<class T> constexpr void dup_erase(V<T> &a){a.erase(unique(a.begin(),\
     \ a.end()), a.end());}\ntemplate <class T> V<int> iota(const V<T> &a, bool greater\
-    \ = false) {\n    V<int> ret(a.size());\n    iota(ret.begin(), ret.end(), 0);\n\
-    \    if (greater) {\n      sort(RALL(ret), [&](int i, int j) {\n        if (a[i]\
-    \ == a[j]) return i > j;\n        return a[i] < a[j];\n      });\n    } else {\n\
-    \      sort(ALL(ret), [&](int i, int j) {\n        if (a[i] == a[j]) return i\
-    \ < j;\n        return a[i] < a[j];\n      });\n    }\n    return ret;\n}\nconstexpr\
-    \ int64_t modpow(int64_t x,int64_t n,int64_t m=1152921504606846976LL){int64_t\
-    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr int64_t\
-    \ safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr int64_t\
-    \ keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0; while(n > 0) {n /= base,\
-    \ ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}\n\
-    constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\nconstexpr int\
-    \ log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\nconstexpr\
-    \ int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
-    \ degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
-    inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline long double nrand(long double ave,\
-    \ long double var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
-    inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
-    \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
-    \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
-    \ s + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
+    \ = false) {\n  V<int> ret(a.size());\n  iota(ret.begin(), ret.end(), 0);\n  if\
+    \ (greater) {\n    sort(RALL(ret), [&](int i, int j) {\n      if (a[i] == a[j])\
+    \ return i > j;\n      return a[i] < a[j];\n    });\n  } else {\n    sort(ALL(ret),\
+    \ [&](int i, int j) {\n      if (a[i] == a[j]) return i < j;\n      return a[i]\
+    \ < a[j];\n    });\n  }\n  return ret;\n}\ntemplate<class T> constexpr T modpow(T\
+    \ x,T n,T m=1152921504606846976LL){T ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
+    \ ret;}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
+    \ x;}\ntemplate<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n\
+    \ > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return\
+    \ __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\n\
+    constexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
+    template<class T> constexpr T nC2(T n) {return n*(n-1)/2;}\ntemplate<class T>\
+    \ constexpr long double deg2rad(T degree){return (long double)degree * M_PI/180;}\n\
+    mt19937 rnd_engine{random_device{}()};\ninline int rand(int l, int r) {uniform_int_distribution<>\
+    \ ret(l, r);return ret(rnd_engine);}\ninline long double lrand(long double l,\
+    \ long double r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline long double nrand(long double ave, long double var) {normal_distribution<>\
+    \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
+    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
+    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
+    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
+    \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
@@ -258,18 +266,26 @@ data:
     using ld   = long double;\nusing ll   = long long;\nusing lint = long long;\n\
     #define int int64_t\nconst int64_t INF = numeric_limits<int64_t>::max() / 2;\n\
     template<class T> using V=vector<T>;\ntemplate<class T> using VV=vector<vector<T>>;\n\
-    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\ntemplate<class\
-    \ T> istream &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\n\
-    template<class T> istream &operator>>(istream &is,complex<T> &v){T x,y; is >>\
-    \ x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class T,class U> istream &operator>>(istream\
-    \ &is,pair<T,U> &v){is >> v.first >> v.second;return is;}\ntemplate<class T,size_t\
-    \ n> istream &operator>>(istream &is,array<T,n> &v){for(auto&& e:v)is >> e;return\
-    \ is;}\ntemplate<class... A> void input(A&&... args){(cin >> ... >> args);}\n\
-    template<class... A> void print_rest(){cout << ENDL;}\ntemplate<class T,class...\
-    \ A> void print_rest(const T& first,const A&... rest){cout << \" \" << first;print_rest(rest...);}\n\
-    template<class T,class... A> void print(const T& first,const A&... rest){cout\
-    \ << fixed << PRECISION << first;print_rest(rest...);}\ntemplate<class T,class...\
-    \ A> void die(const T& first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
+    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\nstd::ostream &operator<<(std::ostream\
+    \ &dest, __int128_t value) {\n  std::ostream::sentry s(dest);\n  assert(s);\n\
+    \  __uint128_t tmp = value < 0 ? -value : value;\n  char buffer[128], *d = std::end(buffer);\n\
+    \  const string s0123456789 = \"0123456789\";\n  do { --d; *d = s0123456789[tmp\
+    \ % 10]; tmp /= 10; } while (tmp != 0);\n  if (value < 0) { --d; *d = '-'; }\n\
+    \  int len = std::end(buffer) - d;\n  if (dest.rdbuf()->sputn(d, len) != len)\
+    \ dest.setstate(std::ios_base::badbit);\n  return dest;\n}\n__int128_t parse(string\
+    \ &s) { __int128_t res = 0; REP(i,SZ(s)) if ('0' <= s[i] && s[i] <= '9') res =\
+    \ 10 * res + s[i] - '0'; return res; }\ntemplate<class T> istream &operator>>(istream\
+    \ &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class T> istream &operator>>(istream\
+    \ &is,complex<T> &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class\
+    \ T,class U> istream &operator>>(istream &is,pair<T,U> &v){is >> v.first >> v.second;return\
+    \ is;}\ntemplate<class T,size_t n> istream &operator>>(istream &is,array<T,n>\
+    \ &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A> void input(A&&...\
+    \ args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout <<\
+    \ ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const A&...\
+    \ rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
+    \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
+    \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
+    \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
     template <typename ... Args> string fmt(const string& fmt, Args ... args ){size_t\
     \ len = snprintf( nullptr, 0, fmt.c_str(), args ... );vector<char> buf(len + 1);snprintf(&buf[0],\
     \ len + 1, fmt.c_str(), args ... );return string(&buf[0], &buf[0] + len);}\ntemplate<class\
@@ -347,28 +363,28 @@ data:
     \ V<T> ret;\n  for(auto itr = startIt; itr != endIt; itr++) ret.emplace_back(*itr);\n\
     \  return ret;\n}\ntemplate<class T> constexpr void dup_erase(V<T> &a){a.erase(unique(a.begin(),\
     \ a.end()), a.end());}\ntemplate <class T> V<int> iota(const V<T> &a, bool greater\
-    \ = false) {\n    V<int> ret(a.size());\n    iota(ret.begin(), ret.end(), 0);\n\
-    \    if (greater) {\n      sort(RALL(ret), [&](int i, int j) {\n        if (a[i]\
-    \ == a[j]) return i > j;\n        return a[i] < a[j];\n      });\n    } else {\n\
-    \      sort(ALL(ret), [&](int i, int j) {\n        if (a[i] == a[j]) return i\
-    \ < j;\n        return a[i] < a[j];\n      });\n    }\n    return ret;\n}\nconstexpr\
-    \ int64_t modpow(int64_t x,int64_t n,int64_t m=1152921504606846976LL){int64_t\
-    \ ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}\nconstexpr int64_t\
-    \ safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return x;}\nconstexpr int64_t\
-    \ keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0; while(n > 0) {n /= base,\
-    \ ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}\n\
-    constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\nconstexpr int\
-    \ log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\nconstexpr\
-    \ int64_t nC2(int64_t n) {return n*(n-1)/2;}\nconstexpr long double deg2rad(int64_t\
-    \ degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
-    inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline long double nrand(long double ave,\
-    \ long double var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
-    inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
-    \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
-    \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
-    \ s + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
+    \ = false) {\n  V<int> ret(a.size());\n  iota(ret.begin(), ret.end(), 0);\n  if\
+    \ (greater) {\n    sort(RALL(ret), [&](int i, int j) {\n      if (a[i] == a[j])\
+    \ return i > j;\n      return a[i] < a[j];\n    });\n  } else {\n    sort(ALL(ret),\
+    \ [&](int i, int j) {\n      if (a[i] == a[j]) return i < j;\n      return a[i]\
+    \ < a[j];\n    });\n  }\n  return ret;\n}\ntemplate<class T> constexpr T modpow(T\
+    \ x,T n,T m=1152921504606846976LL){T ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
+    \ ret;}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
+    \ x;}\ntemplate<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n\
+    \ > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return\
+    \ __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\n\
+    constexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
+    template<class T> constexpr T nC2(T n) {return n*(n-1)/2;}\ntemplate<class T>\
+    \ constexpr long double deg2rad(T degree){return (long double)degree * M_PI/180;}\n\
+    mt19937 rnd_engine{random_device{}()};\ninline int rand(int l, int r) {uniform_int_distribution<>\
+    \ ret(l, r);return ret(rnd_engine);}\ninline long double lrand(long double l,\
+    \ long double r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline long double nrand(long double ave, long double var) {normal_distribution<>\
+    \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
+    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
+    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
+    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
+    \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
@@ -394,7 +410,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2024-09-15 13:13:12+09:00'
+  timestamp: '2024-09-28 23:42:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
