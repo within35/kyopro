@@ -149,6 +149,19 @@ const int64_t INF = numeric_limits<int64_t>::max() / 2;
 template<class T> using V=vector<T>;
 template<class T> using VV=vector<vector<T>>;
 template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;
+std::ostream &operator<<(std::ostream &dest, __int128_t value) {
+  std::ostream::sentry s(dest);
+  assert(s);
+  __uint128_t tmp = value < 0 ? -value : value;
+  char buffer[128], *d = std::end(buffer);
+  const string s0123456789 = "0123456789";
+  do { --d; *d = s0123456789[tmp % 10]; tmp /= 10; } while (tmp != 0);
+  if (value < 0) { --d; *d = '-'; }
+  int len = std::end(buffer) - d;
+  if (dest.rdbuf()->sputn(d, len) != len) dest.setstate(std::ios_base::badbit);
+  return dest;
+}
+__int128_t parse(string &s) { __int128_t res = 0; REP(i,SZ(s)) if ('0' <= s[i] && s[i] <= '9') res = 10 * res + s[i] - '0'; return res; }
 template<class T> istream &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >> e;return is;}
 template<class T> istream &operator>>(istream &is,complex<T> &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return is;}
 template<class T,class U> istream &operator>>(istream &is,pair<T,U> &v){is >> v.first >> v.second;return is;}
@@ -283,29 +296,29 @@ template<class T> inline V<T> it_range(multiset<T> &st, int l, int r) {
 }
 template<class T> constexpr void dup_erase(V<T> &a){a.erase(unique(a.begin(), a.end()), a.end());}
 template <class T> V<int> iota(const V<T> &a, bool greater = false) {
-    V<int> ret(a.size());
-    iota(ret.begin(), ret.end(), 0);
-    if (greater) {
-      sort(RALL(ret), [&](int i, int j) {
-        if (a[i] == a[j]) return i > j;
-        return a[i] < a[j];
-      });
-    } else {
-      sort(ALL(ret), [&](int i, int j) {
-        if (a[i] == a[j]) return i < j;
-        return a[i] < a[j];
-      });
-    }
-    return ret;
+  V<int> ret(a.size());
+  iota(ret.begin(), ret.end(), 0);
+  if (greater) {
+    sort(RALL(ret), [&](int i, int j) {
+      if (a[i] == a[j]) return i > j;
+      return a[i] < a[j];
+    });
+  } else {
+    sort(ALL(ret), [&](int i, int j) {
+      if (a[i] == a[j]) return i < j;
+      return a[i] < a[j];
+    });
+  }
+  return ret;
 }
-constexpr int64_t modpow(int64_t x,int64_t n,int64_t m=1152921504606846976LL){int64_t ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}
-constexpr int64_t safe_mod(int64_t x, int64_t m) {x%=m;if(x<0)x+=m;return x;}
-constexpr int64_t keta(int64_t n, int64_t base = 10LL) {int64_t ret = 0; while(n > 0) {n /= base, ret++;} return ret;}
+template<class T> constexpr T modpow(T x,T n,T m=1152921504606846976LL){T ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}
+template<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return x;}
+template<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n > 0) {n /= base, ret++;} return ret;}
 constexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}
 constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}
 constexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}
-constexpr int64_t nC2(int64_t n) {return n*(n-1)/2;}
-constexpr long double deg2rad(int64_t degree){return (long double)degree * M_PI/180;}
+template<class T> constexpr T nC2(T n) {return n*(n-1)/2;}
+template<class T> constexpr long double deg2rad(T degree){return (long double)degree * M_PI/180;}
 mt19937 rnd_engine{random_device{}()};
 inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}
 inline long double lrand(long double l, long double r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}
