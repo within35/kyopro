@@ -342,6 +342,7 @@ template<class T> constexpr T modpow(T x,T n,T m=0){
   return ret;
 }
 template<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return x;}
+template<class T> constexpr T safe_add(T x, T y, T limit = INF) {T z;if (__builtin_add_overflow(x,y,&z)) return limit;return z;}
 template<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n > 0) {n /= base, ret++;} return ret;}
 constexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}
 constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}
