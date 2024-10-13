@@ -7,7 +7,7 @@
 /test
 /tools
 /python
-
+/heuristic
 # temporary file
 main.cpp
 main.py
