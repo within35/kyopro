@@ -118,7 +118,6 @@ using namespace std;
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
-#define INFL (1LL << 60)
 #define PRECISION std::setprecision(16)
 #define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))
 #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)
@@ -145,7 +144,9 @@ using ld   = long double;
 using ll   = long long;
 using lint = long long;
 #define int int64_t
-const int64_t INF = numeric_limits<int64_t>::max() / 2;
+constexpr int64_t INF = numeric_limits<int64_t>::max() / 2;
+constexpr int64_t INFL = numeric_limits<int64_t>::max() / 2;
+constexpr double EPS = numeric_limits<double>::epsilon();
 template<class T> using V=vector<T>;
 template<class T> using VV=vector<vector<T>>;
 template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;
@@ -179,7 +180,7 @@ template<class T> V<T> make_vec(size_t n,T a){return V<T>(n,a);}
 template<class... Ts> auto make_vec(size_t n,Ts... ts){return V<decltype(make_vec(ts...))>(n,make_vec(ts...));}
 template<class T> inline bool chmax(T& a,T b){if(a<b){a=b;return 1;} return 0;}
 template<class T> inline bool chmin(T& a,T b){if(a>b){a=b;return 1;} return 0;}
-template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto mid=ng+(ok-ng)/2;if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}
+template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto mid=midpoint(ng,ok);if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}
 template<class T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}
 template<class T> constexpr bool between(T a,T x,T b){return(a<=x&&x<b);}
 template<class T> constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return y*w+x;}
@@ -311,7 +312,35 @@ template <class T> V<int> iota(const V<T> &a, bool greater = false) {
   }
   return ret;
 }
-template<class T> constexpr T modpow(T x,T n,T m=1152921504606846976LL){T ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return ret;}
+template<class T> constexpr T modpow(T x,T n,T m=0){
+  T ret=1;
+  if (n == 0) return ret;
+  assert(n > 0);
+  if (m == 0) {
+    while(true) {
+      if(n&1) ret=ret*x;
+      T y;
+      n >>= 1;
+      if (n <= 0) break;
+      if (__builtin_mul_overflow(x,x,&y)) {
+        DUMP(x,x*x); assert(false);
+      }
+      x = y;
+    }
+  } else {
+    while(true) {
+      if(n&1) ret=ret*x%m;
+      T y;
+      n >>= 1;
+      if (n <= 0) break;
+      if (__builtin_mul_overflow(x,x,&y)) {
+        DUMP(x,x*x); assert(false);
+      }
+      x = y%m;
+    }
+  }
+  return ret;
+}
 template<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return x;}
 template<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n > 0) {n /= base, ret++;} return ret;}
 constexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}
