@@ -178,21 +178,22 @@ data:
     \      if (n <= 0) break;\n      if (__builtin_mul_overflow(x,x,&y)) {\n     \
     \   DUMP(x,x*x); assert(false);\n      }\n      x = y%m;\n    }\n  }\n  return\
     \ ret;\n}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
-    \ x;}\ntemplate<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n\
-    \ > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return\
-    \ __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\n\
-    constexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
-    template<class T> constexpr T nC2(T n) {return n*(n-1)/2;}\ntemplate<class T>\
-    \ constexpr long double deg2rad(T degree){return (long double)degree * M_PI/180;}\n\
-    mt19937 rnd_engine{random_device{}()};\ninline int rand(int l, int r) {uniform_int_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline long double lrand(long double l,\
-    \ long double r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline long double nrand(long double ave, long double var) {normal_distribution<>\
-    \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
-    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
-    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
-    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
-    \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
+    \ x;}\ntemplate<class T> constexpr T safe_add(T x, T y, T limit = INF) {T z;if\
+    \ (__builtin_add_overflow(x,y,&z)) return limit;return z;}\ntemplate<class T>\
+    \ constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n > 0) {n /= base, ret++;}\
+    \ return ret;}\nconstexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}\n\
+    constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\nconstexpr int\
+    \ log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\ntemplate<class\
+    \ T> constexpr T nC2(T n) {return n*(n-1)/2;}\ntemplate<class T> constexpr long\
+    \ double deg2rad(T degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
+    inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
+    \ ret(l, r);return ret(rnd_engine);}\ninline long double nrand(long double ave,\
+    \ long double var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
+    inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
+    \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
+    \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
+    \ s + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
@@ -384,21 +385,22 @@ data:
     \      if (n <= 0) break;\n      if (__builtin_mul_overflow(x,x,&y)) {\n     \
     \   DUMP(x,x*x); assert(false);\n      }\n      x = y%m;\n    }\n  }\n  return\
     \ ret;\n}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
-    \ x;}\ntemplate<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n\
-    \ > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return\
-    \ __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\n\
-    constexpr int log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\n\
-    template<class T> constexpr T nC2(T n) {return n*(n-1)/2;}\ntemplate<class T>\
-    \ constexpr long double deg2rad(T degree){return (long double)degree * M_PI/180;}\n\
-    mt19937 rnd_engine{random_device{}()};\ninline int rand(int l, int r) {uniform_int_distribution<>\
-    \ ret(l, r);return ret(rnd_engine);}\ninline long double lrand(long double l,\
-    \ long double r) {uniform_real_distribution<> ret(l, r);return ret(rnd_engine);}\n\
-    inline long double nrand(long double ave, long double var) {normal_distribution<>\
-    \ ret(ave, var);return ret(rnd_engine);}\ninline void yes(bool cond) {cout <<\
-    \ (cond?\"Yes\":\"No\") << ENDL;}\ninline bool is_palindrome(const string& s){return\
-    \ equal(ALL(s), s.rbegin());}\ninline string make_palindrome(const string& s,\
-    \ bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return s\
-    \ + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
+    \ x;}\ntemplate<class T> constexpr T safe_add(T x, T y, T limit = INF) {T z;if\
+    \ (__builtin_add_overflow(x,y,&z)) return limit;return z;}\ntemplate<class T>\
+    \ constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n > 0) {n /= base, ret++;}\
+    \ return ret;}\nconstexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}\n\
+    constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\nconstexpr int\
+    \ log2c(int64_t x) {return (x==1LL)?0:(64-__builtin_clzll(x-1LL));}\ntemplate<class\
+    \ T> constexpr T nC2(T n) {return n*(n-1)/2;}\ntemplate<class T> constexpr long\
+    \ double deg2rad(T degree){return (long double)degree * M_PI/180;}\nmt19937 rnd_engine{random_device{}()};\n\
+    inline int rand(int l, int r) {uniform_int_distribution<> ret(l, r);return ret(rnd_engine);}\n\
+    inline long double lrand(long double l, long double r) {uniform_real_distribution<>\
+    \ ret(l, r);return ret(rnd_engine);}\ninline long double nrand(long double ave,\
+    \ long double var) {normal_distribution<> ret(ave, var);return ret(rnd_engine);}\n\
+    inline void yes(bool cond) {cout << (cond?\"Yes\":\"No\") << ENDL;}\ninline bool\
+    \ is_palindrome(const string& s){return equal(ALL(s), s.rbegin());}\ninline string\
+    \ make_palindrome(const string& s, bool odd = true) {string t = s.substr(0, SZ(s)-odd);reverse(ALL(t));return\
+    \ s + t;}\nVV<int> make_enum_vec(V<int> v){\n  if(v.empty()) return VV<int>(1,V<int>());\n\
     \  int n=v.back(); v.pop_back();\n  VV<int> ret,tmp=make_enum_vec(v);\n  for(auto\
     \ e:tmp)for(int i=0;i<n;++i){ret.push_back(e);ret.back().push_back(i);}\n  return\
     \ ret;\n}\nV<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {\n\
@@ -424,7 +426,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2024-10-13 12:31:12+09:00'
+  timestamp: '2024-10-13 13:33:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
