@@ -52,8 +52,8 @@ data:
     \ i=s&-s; i; i=s&(~s+(i << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define\
     \ RALL(x) (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define\
     \ POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) &\
-    \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define INFL\
-    \ (1LL << 60)\n#define PRECISION std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
+    \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define PRECISION\
+    \ std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
     #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define CHAR(...) char\
     \ __VA_ARGS__;   input(__VA_ARGS__)\n#define STR(...)  string __VA_ARGS__; input(__VA_ARGS__)\n\
     #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
@@ -65,25 +65,26 @@ data:
     \ << \":\" << __FUNCTION__ << \"]\" << endl, vdump_func(__VA_ARGS__)\n#else\n\
     #define DUMP(...)\n#define VDUMP(...)\n#endif\nusing ull  = unsigned long long;\n\
     using ld   = long double;\nusing ll   = long long;\nusing lint = long long;\n\
-    #define int int64_t\nconst int64_t INF = numeric_limits<int64_t>::max() / 2;\n\
-    template<class T> using V=vector<T>;\ntemplate<class T> using VV=vector<vector<T>>;\n\
-    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\nstd::ostream &operator<<(std::ostream\
-    \ &dest, __int128_t value) {\n  std::ostream::sentry s(dest);\n  assert(s);\n\
-    \  __uint128_t tmp = value < 0 ? -value : value;\n  char buffer[128], *d = std::end(buffer);\n\
-    \  const string s0123456789 = \"0123456789\";\n  do { --d; *d = s0123456789[tmp\
-    \ % 10]; tmp /= 10; } while (tmp != 0);\n  if (value < 0) { --d; *d = '-'; }\n\
-    \  int len = std::end(buffer) - d;\n  if (dest.rdbuf()->sputn(d, len) != len)\
-    \ dest.setstate(std::ios_base::badbit);\n  return dest;\n}\n__int128_t parse(string\
-    \ &s) { __int128_t res = 0; REP(i,SZ(s)) if ('0' <= s[i] && s[i] <= '9') res =\
-    \ 10 * res + s[i] - '0'; return res; }\ntemplate<class T> istream &operator>>(istream\
-    \ &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class T> istream &operator>>(istream\
-    \ &is,complex<T> &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class\
-    \ T,class U> istream &operator>>(istream &is,pair<T,U> &v){is >> v.first >> v.second;return\
-    \ is;}\ntemplate<class T,size_t n> istream &operator>>(istream &is,array<T,n>\
-    \ &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A> void input(A&&...\
-    \ args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout <<\
-    \ ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const A&...\
-    \ rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
+    #define int int64_t\nconstexpr int64_t INF = numeric_limits<int64_t>::max() /\
+    \ 2;\nconstexpr int64_t INFL = numeric_limits<int64_t>::max() / 2;\nconstexpr\
+    \ double EPS = numeric_limits<double>::epsilon();\ntemplate<class T> using V=vector<T>;\n\
+    template<class T> using VV=vector<vector<T>>;\ntemplate<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\n\
+    std::ostream &operator<<(std::ostream &dest, __int128_t value) {\n  std::ostream::sentry\
+    \ s(dest);\n  assert(s);\n  __uint128_t tmp = value < 0 ? -value : value;\n  char\
+    \ buffer[128], *d = std::end(buffer);\n  const string s0123456789 = \"0123456789\"\
+    ;\n  do { --d; *d = s0123456789[tmp % 10]; tmp /= 10; } while (tmp != 0);\n  if\
+    \ (value < 0) { --d; *d = '-'; }\n  int len = std::end(buffer) - d;\n  if (dest.rdbuf()->sputn(d,\
+    \ len) != len) dest.setstate(std::ios_base::badbit);\n  return dest;\n}\n__int128_t\
+    \ parse(string &s) { __int128_t res = 0; REP(i,SZ(s)) if ('0' <= s[i] && s[i]\
+    \ <= '9') res = 10 * res + s[i] - '0'; return res; }\ntemplate<class T> istream\
+    \ &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class\
+    \ T> istream &operator>>(istream &is,complex<T> &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return\
+    \ is;}\ntemplate<class T,class U> istream &operator>>(istream &is,pair<T,U> &v){is\
+    \ >> v.first >> v.second;return is;}\ntemplate<class T,size_t n> istream &operator>>(istream\
+    \ &is,array<T,n> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A>\
+    \ void input(A&&... args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout\
+    \ << ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const\
+    \ A&... rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
     \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
     \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
     \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
@@ -101,10 +102,10 @@ data:
     template<class T> inline bool chmax(T& a,T b){if(a<b){a=b;return 1;} return 0;}\n\
     template<class T> inline bool chmin(T& a,T b){if(a>b){a=b;return 1;} return 0;}\n\
     template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto\
-    \ mid=ng+(ok-ng)/2;if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}\ntemplate<class\
-    \ T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}\ntemplate<class T> constexpr\
-    \ bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T> constexpr T\
-    \ pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
+    \ mid=midpoint(ng,ok);if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}\n\
+    template<class T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}\ntemplate<class\
+    \ T> constexpr bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T>\
+    \ constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
     \ y*w+x;}\ntemplate<class T> constexpr pair<T,T> pos2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}\n\
     template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\ntemplate<class\
     \ T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
@@ -169,8 +170,14 @@ data:
     \ return i > j;\n      return a[i] < a[j];\n    });\n  } else {\n    sort(ALL(ret),\
     \ [&](int i, int j) {\n      if (a[i] == a[j]) return i < j;\n      return a[i]\
     \ < a[j];\n    });\n  }\n  return ret;\n}\ntemplate<class T> constexpr T modpow(T\
-    \ x,T n,T m=1152921504606846976LL){T ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
-    \ ret;}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
+    \ x,T n,T m=0){\n  T ret=1;\n  if (n == 0) return ret;\n  assert(n > 0);\n  if\
+    \ (m == 0) {\n    while(true) {\n      if(n&1) ret=ret*x;\n      T y;\n      n\
+    \ >>= 1;\n      if (n <= 0) break;\n      if (__builtin_mul_overflow(x,x,&y))\
+    \ {\n        DUMP(x,x*x); assert(false);\n      }\n      x = y;\n    }\n  } else\
+    \ {\n    while(true) {\n      if(n&1) ret=ret*x%m;\n      T y;\n      n >>= 1;\n\
+    \      if (n <= 0) break;\n      if (__builtin_mul_overflow(x,x,&y)) {\n     \
+    \   DUMP(x,x*x); assert(false);\n      }\n      x = y%m;\n    }\n  }\n  return\
+    \ ret;\n}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
     \ x;}\ntemplate<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n\
     \ > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return\
     \ __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\n\
@@ -251,8 +258,8 @@ data:
     \ i=s&-s; i; i=s&(~s+(i << 1)))\n#define ALL(x)  (x).begin(), (x).end()\n#define\
     \ RALL(x) (x).rbegin(), (x).rend()\n#define SZ(x)   ((int)(x).size())\n#define\
     \ POW2(n)      (1LL << ((int)(n)))\n#define GET1BIT(x,n) (((x) >> (int)(n)) &\
-    \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define INFL\
-    \ (1LL << 60)\n#define PRECISION std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
+    \ 1)\n#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n#define PRECISION\
+    \ std::setprecision(16)\n#define SLEEP(n) std::this_thread::sleep_for(std::chrono::seconds(n))\n\
     #define INT(...)  int __VA_ARGS__;    input(__VA_ARGS__)\n#define CHAR(...) char\
     \ __VA_ARGS__;   input(__VA_ARGS__)\n#define STR(...)  string __VA_ARGS__; input(__VA_ARGS__)\n\
     #define VEC(type, name, size) vector<type> name(size); input(name)\n#ifdef Q__INTERACTIVE\n\
@@ -264,25 +271,26 @@ data:
     \ << \":\" << __FUNCTION__ << \"]\" << endl, vdump_func(__VA_ARGS__)\n#else\n\
     #define DUMP(...)\n#define VDUMP(...)\n#endif\nusing ull  = unsigned long long;\n\
     using ld   = long double;\nusing ll   = long long;\nusing lint = long long;\n\
-    #define int int64_t\nconst int64_t INF = numeric_limits<int64_t>::max() / 2;\n\
-    template<class T> using V=vector<T>;\ntemplate<class T> using VV=vector<vector<T>>;\n\
-    template<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\nstd::ostream &operator<<(std::ostream\
-    \ &dest, __int128_t value) {\n  std::ostream::sentry s(dest);\n  assert(s);\n\
-    \  __uint128_t tmp = value < 0 ? -value : value;\n  char buffer[128], *d = std::end(buffer);\n\
-    \  const string s0123456789 = \"0123456789\";\n  do { --d; *d = s0123456789[tmp\
-    \ % 10]; tmp /= 10; } while (tmp != 0);\n  if (value < 0) { --d; *d = '-'; }\n\
-    \  int len = std::end(buffer) - d;\n  if (dest.rdbuf()->sputn(d, len) != len)\
-    \ dest.setstate(std::ios_base::badbit);\n  return dest;\n}\n__int128_t parse(string\
-    \ &s) { __int128_t res = 0; REP(i,SZ(s)) if ('0' <= s[i] && s[i] <= '9') res =\
-    \ 10 * res + s[i] - '0'; return res; }\ntemplate<class T> istream &operator>>(istream\
-    \ &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class T> istream &operator>>(istream\
-    \ &is,complex<T> &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return is;}\ntemplate<class\
-    \ T,class U> istream &operator>>(istream &is,pair<T,U> &v){is >> v.first >> v.second;return\
-    \ is;}\ntemplate<class T,size_t n> istream &operator>>(istream &is,array<T,n>\
-    \ &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A> void input(A&&...\
-    \ args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout <<\
-    \ ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const A&...\
-    \ rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
+    #define int int64_t\nconstexpr int64_t INF = numeric_limits<int64_t>::max() /\
+    \ 2;\nconstexpr int64_t INFL = numeric_limits<int64_t>::max() / 2;\nconstexpr\
+    \ double EPS = numeric_limits<double>::epsilon();\ntemplate<class T> using V=vector<T>;\n\
+    template<class T> using VV=vector<vector<T>>;\ntemplate<class T> using PQ=priority_queue<T,V<T>,greater<T>>;\n\
+    std::ostream &operator<<(std::ostream &dest, __int128_t value) {\n  std::ostream::sentry\
+    \ s(dest);\n  assert(s);\n  __uint128_t tmp = value < 0 ? -value : value;\n  char\
+    \ buffer[128], *d = std::end(buffer);\n  const string s0123456789 = \"0123456789\"\
+    ;\n  do { --d; *d = s0123456789[tmp % 10]; tmp /= 10; } while (tmp != 0);\n  if\
+    \ (value < 0) { --d; *d = '-'; }\n  int len = std::end(buffer) - d;\n  if (dest.rdbuf()->sputn(d,\
+    \ len) != len) dest.setstate(std::ios_base::badbit);\n  return dest;\n}\n__int128_t\
+    \ parse(string &s) { __int128_t res = 0; REP(i,SZ(s)) if ('0' <= s[i] && s[i]\
+    \ <= '9') res = 10 * res + s[i] - '0'; return res; }\ntemplate<class T> istream\
+    \ &operator>>(istream &is,V<T> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class\
+    \ T> istream &operator>>(istream &is,complex<T> &v){T x,y; is >> x >> y;v.real(x);v.imag(y);return\
+    \ is;}\ntemplate<class T,class U> istream &operator>>(istream &is,pair<T,U> &v){is\
+    \ >> v.first >> v.second;return is;}\ntemplate<class T,size_t n> istream &operator>>(istream\
+    \ &is,array<T,n> &v){for(auto&& e:v)is >> e;return is;}\ntemplate<class... A>\
+    \ void input(A&&... args){(cin >> ... >> args);}\ntemplate<class... A> void print_rest(){cout\
+    \ << ENDL;}\ntemplate<class T,class... A> void print_rest(const T& first,const\
+    \ A&... rest){cout << \" \" << first;print_rest(rest...);}\ntemplate<class T,class...\
     \ A> void print(const T& first,const A&... rest){cout << fixed << PRECISION <<\
     \ first;print_rest(rest...);}\ntemplate<class T,class... A> void die(const T&\
     \ first,const A&... rest){cout << fixed << PRECISION << first;print_rest(rest...);exit(0);}\n\
@@ -300,10 +308,10 @@ data:
     template<class T> inline bool chmax(T& a,T b){if(a<b){a=b;return 1;} return 0;}\n\
     template<class T> inline bool chmin(T& a,T b){if(a>b){a=b;return 1;} return 0;}\n\
     template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto\
-    \ mid=ng+(ok-ng)/2;if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}\ntemplate<class\
-    \ T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}\ntemplate<class T> constexpr\
-    \ bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T> constexpr T\
-    \ pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
+    \ mid=midpoint(ng,ok);if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}\n\
+    template<class T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}\ntemplate<class\
+    \ T> constexpr bool between(T a,T x,T b){return(a<=x&&x<b);}\ntemplate<class T>\
+    \ constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return\
     \ y*w+x;}\ntemplate<class T> constexpr pair<T,T> pos2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}\n\
     template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}\ntemplate<class\
     \ T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return\
@@ -368,8 +376,14 @@ data:
     \ return i > j;\n      return a[i] < a[j];\n    });\n  } else {\n    sort(ALL(ret),\
     \ [&](int i, int j) {\n      if (a[i] == a[j]) return i < j;\n      return a[i]\
     \ < a[j];\n    });\n  }\n  return ret;\n}\ntemplate<class T> constexpr T modpow(T\
-    \ x,T n,T m=1152921504606846976LL){T ret=1;for(;n>0;x=x*x%m,n>>=1)if(n&1)ret=ret*x%m;return\
-    \ ret;}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
+    \ x,T n,T m=0){\n  T ret=1;\n  if (n == 0) return ret;\n  assert(n > 0);\n  if\
+    \ (m == 0) {\n    while(true) {\n      if(n&1) ret=ret*x;\n      T y;\n      n\
+    \ >>= 1;\n      if (n <= 0) break;\n      if (__builtin_mul_overflow(x,x,&y))\
+    \ {\n        DUMP(x,x*x); assert(false);\n      }\n      x = y;\n    }\n  } else\
+    \ {\n    while(true) {\n      if(n&1) ret=ret*x%m;\n      T y;\n      n >>= 1;\n\
+    \      if (n <= 0) break;\n      if (__builtin_mul_overflow(x,x,&y)) {\n     \
+    \   DUMP(x,x*x); assert(false);\n      }\n      x = y%m;\n    }\n  }\n  return\
+    \ ret;\n}\ntemplate<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return\
     \ x;}\ntemplate<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n\
     \ > 0) {n /= base, ret++;} return ret;}\nconstexpr int pcnt(int64_t x) {return\
     \ __builtin_popcountll(x);}\nconstexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}\n\
@@ -410,7 +424,7 @@ data:
   isVerificationFile: false
   path: template.cpp
   requiredBy: []
-  timestamp: '2024-09-28 23:42:14+09:00'
+  timestamp: '2024-10-13 12:31:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template.cpp
