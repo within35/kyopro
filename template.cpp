@@ -183,8 +183,8 @@ template<class T> inline bool chmin(T& a,T b){if(a>b){a=b;return 1;} return 0;}
 template<class T,class F> pair<T,T> binarysearch(T ng,T ok,T eps,F f,bool sign=false){while(abs(ng-ok)>eps){auto mid=midpoint(ng,ok);if(sign^f(mid)){ok=mid;}else{ng=mid;}}return{ng,ok};}
 template<class T> constexpr T cdiv(T x,T y){return (x+y-1)/y;}
 template<class T> constexpr bool between(T a,T x,T b){return(a<=x&&x<b);}
-template<class T> constexpr T pos1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return y*w+x;}
-template<class T> constexpr pair<T,T> pos2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}
+template<class T> constexpr T to_1d(T y,T x,T h,T w){assert(between(T(0),y,h));assert(between(T(0),x,w));return y*w+x;}
+template<class T> constexpr pair<T,T> to_2d(T p,T h,T w){T y=p/w,x=p-y*w;assert(between(T(0),y,h));assert(between(T(0),x,w));return{y,x};}
 template<class T> constexpr T sign(T n) {return (n > 0) - (n < 0);}
 template<class T> inline V<T> transposed(V<T>& A){int h=SZ(A),w=SZ(A[0]);V<T> tA(w);REP(i,h)REP(j,w)tA[j].push_back(A[i][j]);return tA;}
 template<class T> inline V<T> ruiseki(V<T>& a){auto ret = a; ret.push_back(T(0));exclusive_scan(ALL(ret), ret.begin(), T(0));return ret;}
@@ -319,23 +319,17 @@ template<class T> constexpr T modpow(T x,T n,T m=0){
   if (m == 0) {
     while(true) {
       if(n&1) ret=ret*x;
-      T y;
-      n >>= 1;
+      T y; n >>= 1;
       if (n <= 0) break;
-      if (__builtin_mul_overflow(x,x,&y)) {
-        DUMP(x,x*x); assert(false);
-      }
+      if (__builtin_mul_overflow(x,x,&y)) {DUMP(x,x*x); assert(false);}
       x = y;
     }
   } else {
     while(true) {
       if(n&1) ret=ret*x%m;
-      T y;
-      n >>= 1;
+      T y; n >>= 1;
       if (n <= 0) break;
-      if (__builtin_mul_overflow(x,x,&y)) {
-        DUMP(x,x*x); assert(false);
-      }
+      if (__builtin_mul_overflow(x,x,&y)) {DUMP(x,x*x); assert(false);}
       x = y%m;
     }
   }
@@ -343,6 +337,7 @@ template<class T> constexpr T modpow(T x,T n,T m=0){
 }
 template<class T> constexpr T safe_mod(T x, T m) {x%=m;if(x<0)x+=m;return x;}
 template<class T> constexpr T safe_add(T x, T y, T limit = INF) {T z;if (__builtin_add_overflow(x,y,&z)) return limit;return z;}
+template<class T> constexpr T safe_mul(T x, T y, T limit = INF) {T z;if (__builtin_mul_overflow(x,y,&z)) return limit;return z;}
 template<class T> constexpr T keta(T n, T base = 10LL) {T ret = 0; while(n > 0) {n /= base, ret++;} return ret;}
 constexpr int pcnt(int64_t x) {return __builtin_popcountll(x);}
 constexpr int log2f(int64_t x) {return 63 - __builtin_clzll(x);}
@@ -374,8 +369,21 @@ V<int> restore_path(V<int>& to, int goal, bool to1indexed = true) {
   if (to1indexed) for(auto&& e: ret) e++;
   return ret;
 }
-string tolower(string s) {for(auto&& e: s) e = tolower(e); return s;}
-string toupper(string s) {for(auto&& e: s) e = toupper(e); return s;}
+pair<int,int> restore_fraction(int n, int mod) {
+  if (n >= mod) assert(false);
+  if (n*n*2 <= mod) assert(false);
+  pair<int,int> v = {mod, 0};
+  pair<int,int> w = {n, 1};
+  while (w.first * w.first * 2 > mod) {
+    int q = v.first / w.first;
+    pair<int,int> z = {v.first - q * w.first, v.second - q * w.second};
+    v = w; w = z;
+  }
+  if (w.second < 0) w.first *= -1, w.second *= -1;
+  return w;
+}
+string to_lower(string s) {for(auto&& e: s) e = tolower(e); return s;}
+string to_upper(string s) {for(auto&& e: s) e = toupper(e); return s;}
 string rtrim(const string &s, string delimiter){size_t end = s.find_last_not_of(delimiter);return (end == string::npos) ? "" : s.substr(0, end + 1);}
 string ltrim(const string &s, string delimiter){size_t start = s.find_first_not_of(delimiter);return (start == string::npos) ? "" : s.substr(start);}
 map<char,int> RULD = {{'R',0},{'U',1},{'L',2},{'D',3}};
